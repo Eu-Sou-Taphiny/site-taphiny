@@ -1,0 +1,168 @@
+{
+  "seo": {
+    "titulo": "Visão Sistêmica e Constelação Familiar | Taphiny",
+    "descricao": "Visão Sistêmica e terapia sistêmica com Taphiny: um caminho que dialoga com a constelação familiar para reconhecer padrões transgeracionais e restaurar a ordem."
+  },
+  "hero": {
+    "marca": "TAPHINY",
+    "subtitulo": "Mentora Sistêmica",
+    "titulo": "De quem é a vida que você está vivendo?",
+    "paragrafo": "Talvez existam escolhas, medos e bloqueios que nunca tenham começado em você. A Visão Sistêmica é um caminho de investigação profunda para reconhecer padrões invisíveis, restaurar a ordem e permitir que a vida volte a seguir o seu fluxo natural.",
+    "frase": "\"Quando cada pessoa ocupa o seu lugar, a vida encontra espaço para seguir.\"",
+    "cta": "Quero começar uma conversa"
+  },
+  "provocacao": {
+    "rotulo": "O que carregamos",
+    "titulo": "Há histórias que continuam vivendo através de nós",
+    "paragrafo1": "Nem tudo aquilo que carregamos começou em nós. Às vezes repetimos relacionamentos, adiamos sonhos, sentimos culpa sem compreender a origem, encontramos dificuldade para prosperar ou assumimos responsabilidades que nunca foram nossas. Não porque nos falta força, mas porque pertencemos.",
+    "paragrafo2": "Existe uma inteligência profunda nos vínculos familiares que pode nos manter ligados a histórias antigas. Quando essas dinâmicas são reconhecidas, algo começa a se reorganizar. Não porque apagamos o passado, mas porque deixamos de carregá-lo sozinhos."
+  },
+  "visao": {
+    "rotulo": "A abordagem",
+    "titulo": "O que é Visão Sistêmica?",
+    "definicao": "A Visão Sistêmica é uma abordagem terapêutica que enxerga cada pessoa dentro dos sistemas a que pertence — família, vínculos e história. Ela dialoga diretamente com a prática da constelação familiar e parte de um princípio simples: nem tudo o que vivemos começou em nós. Reconhecer os padrões herdados ao longo das gerações é o caminho para restaurar a ordem dos vínculos e permitir que a vida volte a fluir.",
+    "paragrafo": "A Visão Sistêmica considera que ninguém existe isoladamente. Somos parte de uma rede de relações construída muito antes do nosso nascimento. Família, pertencimento, vínculos e histórias influenciam a forma como nos relacionamos com o amor, o dinheiro, a carreira e a própria vida.",
+    "pilares": [
+      { "titulo": "Pertencer", "texto": "Reconhecer a origem." },
+      { "titulo": "Ordenar", "texto": "Restaurar lugares e devolver pesos que não são seus." },
+      { "titulo": "Fluir", "texto": "Permitir que a vida volte a seguir seu movimento natural." }
+    ]
+  },
+  "quemConduz": {
+    "foto": "",
+    "video": "",
+    "videoCapa": "",
+    "rotulo": "Quem conduz",
+    "titulo": "Durante muito tempo, eu acreditava que consciência bastava.",
+    "paragrafo1": "Sempre fui uma pessoa prática. Gostava de estudar, traçar metas, construir projetos e buscar resultados. Por fora, a vida parecia caminhar. Mas existia uma sensação difícil de explicar, como se tudo aquilo que eu construía nunca pudesse ser realmente meu.",
+    "paragrafo2": "Foi quando encontrei a Visão Sistêmica. Compreendi que nem tudo aquilo que vivemos começa em nós. Existem histórias que permanecem vivas através das gerações, lealdades invisíveis, responsabilidades assumidas por amor e lugares ocupados sem perceber.",
+    "paragrafo3": "Hoje conduzo pessoas que, assim como eu um dia, compreenderam muita coisa pela razão, mas ainda vivem as mesmas repetições. Meu trabalho é criar um espaço seguro para que aquilo que permaneceu invisível possa finalmente ser visto, respeitado e integrado.",
+    "frase": "“Por amor, aprendemos quem precisávamos ser; por consciência, lembramos quem sempre fomos.”"
+  },
+  "comparacao": {
+    "titulo": "Psicoterapia e Visão Sistêmica",
+    "subtitulo": "Não são caminhos opostos. São abordagens complementares.",
+    "col1Titulo": "Psicoterapia",
+    "col1": [
+      "Compreende a experiência individual.",
+      "Favorece autoconhecimento e elaboração emocional.",
+      "Trabalha pensamentos, emoções e comportamentos."
+    ],
+    "col2Titulo": "Visão Sistêmica",
+    "col2": [
+      "Observa a pessoa dentro dos sistemas aos quais pertence.",
+      "Revela lealdades invisíveis e dinâmicas familiares.",
+      "Busca restaurar a ordem dos vínculos."
+    ],
+    "fecho": "Enquanto a psicoterapia amplia a consciência sobre a experiência individual, a Visão Sistêmica convida a olhar para o terreno onde essa experiência foi construída."
+  },
+  "jornadas": {
+    "titulo": "As Jornadas",
+    "subtitulo": "Da primeira olhada até o mergulho profundo nas raízes.",
+    "meditacoes": {
+      "rotulo": "Porta de entrada",
+      "titulo": "Meditações guiadas",
+      "texto": "Práticas para começar a sentir o método antes de qualquer sessão. Incluídas como cortesia nas jornadas Essência e Raízes.",
+      "cta": "Acessar as meditações"
+    },
+    "cards": [
+      {
+        "num": "i",
+        "titulo": "Sessão Sistêmica",
+        "rotulo": "Olhar",
+        "texto": "Um encontro direcionado para um tema específico: uma decisão, um relacionamento, carreira, dinheiro ou um padrão recorrente. Ideal para quem busca clareza sobre um momento.",
+        "preco": "R$ 450",
+        "precoNota": "por encontro",
+        "cta": "Agendar uma sessão",
+        "mensagem": "Olá, Taphiny! Gostaria de agendar uma Sessão Sistêmica (Olhar)."
+      },
+      {
+        "num": "ii",
+        "titulo": "Jornada Essência",
+        "rotulo": "Reencontrar a si",
+        "texto": "Quatro encontros para reorganizar o eixo interno, fortalecer o lugar de adulto e construir uma vida mais alinhada com quem realmente é. Para quem deseja iniciar uma transformação consistente.",
+        "preco": "Quatro encontros",
+        "precoNota": "· valor sob conversa",
+        "cta": "Conversar sobre a jornada",
+        "mensagem": "Olá, Taphiny! Gostaria de conversar sobre a Jornada Essência."
+      },
+      {
+        "num": "iii",
+        "titulo": "Jornada Raízes",
+        "rotulo": "Compreender de onde tudo veio",
+        "texto": "Sete encontros de investigação profunda das dinâmicas familiares e dos padrões transgeracionais. Porque compreender a própria origem não é viver no passado. É recuperar a força necessária para construir o futuro.",
+        "preco": "Sete encontros",
+        "precoNota": "· valor sob conversa",
+        "cta": "Conversar sobre a jornada",
+        "mensagem": "Olá, Taphiny! Gostaria de conversar sobre a Jornada Raízes."
+      }
+    ]
+  },
+  "paraQuem": {
+    "titulo": "Para quem é este trabalho",
+    "col1Titulo": "É para você se",
+    "col1": [
+      "Você percebe padrões repetitivos.",
+      "Sente que compreender já não é suficiente.",
+      "Deseja ocupar o próprio lugar.",
+      "Está disposto a viver uma transformação profunda."
+    ],
+    "col2Titulo": "Ainda não é o momento se",
+    "col2": [
+      "Você busca soluções imediatas.",
+      "Espera que alguém faça o caminho por você.",
+      "Não deseja olhar para a própria história com responsabilidade."
+    ]
+  },
+  "faq": {
+    "rotulo": "Perguntas frequentes",
+    "titulo": "Visão Sistêmica, terapia sistêmica e constelação familiar",
+    "itens": [
+      {
+        "pergunta": "O que é Visão Sistêmica?",
+        "resposta": "A Visão Sistêmica é uma abordagem terapêutica que enxerga a pessoa dentro dos sistemas a que pertence — família, vínculos e história. Ela parte do princípio de que nem tudo o que vivemos começou em nós: muitos padrões, lealdades e bloqueios são herdados ao longo das gerações. O trabalho reconhece essas dinâmicas para restaurar a ordem dos vínculos e permitir que a vida volte a fluir."
+      },
+      {
+        "pergunta": "Visão Sistêmica é a mesma coisa que constelação familiar?",
+        "resposta": "São práticas irmãs, da mesma raiz. A constelação familiar é uma das ferramentas mais conhecidas da abordagem sistêmica, geralmente feita em grupo, enquanto a Visão Sistêmica é o olhar mais amplo que fundamenta esse trabalho e pode ser conduzido também de forma individual. Quem busca constelação familiar encontra aqui esse mesmo princípio, aplicado de maneira profunda e personalizada."
+      },
+      {
+        "pergunta": "Qual a diferença entre psicoterapia e Visão Sistêmica?",
+        "resposta": "Não são caminhos opostos, e sim complementares. A psicoterapia amplia a consciência sobre a experiência individual — pensamentos, emoções e comportamentos. A Visão Sistêmica observa a pessoa dentro dos sistemas a que pertence, revelando lealdades invisíveis e dinâmicas familiares para restaurar a ordem dos vínculos."
+      },
+      {
+        "pergunta": "Como funciona uma sessão?",
+        "resposta": "Cada encontro é individual e direcionado a um tema específico: uma decisão, um relacionamento, a carreira, o dinheiro ou um padrão que se repete. Em um espaço seguro, aquilo que permaneceu invisível é reconhecido, respeitado e reorganizado. A Sessão Sistêmica (Olhar) parte de R$ 450 por encontro, e há também jornadas mais profundas, como a Essência e a Raízes."
+      },
+      {
+        "pergunta": "Para quem é indicado?",
+        "resposta": "É indicado para quem percebe padrões que se repetem, sente que compreender já não basta e deseja ocupar o próprio lugar com mais leveza. Também se aplica a empresas familiares, relação entre sócios e liderança. Não é indicado para quem busca soluções imediatas ou espera que o caminho seja feito por outra pessoa."
+      }
+    ]
+  },
+  "empresas": {
+    "rotulo": "Corporativo",
+    "titulo": "Também para empresas e eventos",
+    "paragrafo": "A Visão Sistêmica se aplica a empresas familiares, relação entre sócios, liderança e equipes, além de workshops e palestras sobre pertencimento, cultura e prosperidade.",
+    "cta": "Falar sobre um trabalho para empresas",
+    "mensagem": "Olá, Taphiny! Gostaria de falar sobre um trabalho de Visão Sistêmica para empresas e eventos."
+  },
+  "convite": {
+    "rotulo": "O convite",
+    "titulo": "A vida que é sua continua esperando por você.",
+    "paragrafo": "Talvez ela nunca tenha deixado de existir. Talvez apenas tenha ficado escondida sob histórias que precisavam ser vistas. O primeiro passo não é mudar tudo. É começar a olhar. Com respeito. Com delicadeza. E no seu tempo.",
+    "cta": "Quero começar uma conversa",
+    "frase": "\"A vida não muda apenas pelas decisões que tomamos. Ela muda quando aquilo que opera silenciosamente no inconsciente encontra, finalmente, o seu lugar.\""
+  },
+  "footer": {
+    "instagramTexto": "Instagram - @eu.sou.taphiny",
+    "instagramUrl": "https://instagram.com/eu.sou.taphiny",
+    "copyright": "© 2026 Taphiny · Visão Sistêmica · Mentoria Sistêmica"
+  },
+  "config": {
+    "musica": "",
+    "whatsapp": "5511925027759",
+    "mensagemConversa": "Olá, Taphiny! Cheguei pelo seu site e gostaria de começar uma conversa sobre a Visão Sistêmica.",
+    "mensagemMeditacoes": "Olá, Taphiny! Gostaria de acessar as meditações guiadas."
+  }
+}

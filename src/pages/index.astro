@@ -1,0 +1,792 @@
+---
+import site from '../content/site.json';
+const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, footer, config } = site;
+const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(msg)}`;
+---
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{seo.titulo}</title>
+<meta name="description" content={seo.descricao}>
+<meta name="author" content="Taphiny">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="keywords" content="visão sistêmica, terapia sistêmica, constelação familiar, terapia sistêmica para empresas familiares, padrões familiares transgeracionais, mentoria sistêmica">
+<link rel="canonical" href="https://www.eusoutaphiny.com.br/">
+<meta name="theme-color" content="#521416">
+
+<!-- Google Search Console: verificado por registro TXT no DNS (propriedade de domínio). -->
+
+<!-- Open Graph (WhatsApp, Instagram, Facebook, LinkedIn) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Taphiny — Visão Sistêmica">
+<meta property="og:title" content={seo.titulo}>
+<meta property="og:description" content="Um caminho de terapia sistêmica que dialoga com a constelação familiar para reconhecer padrões transgeracionais e restaurar a ordem da vida.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://www.eusoutaphiny.com.br/">
+<meta property="og:image" content="https://www.eusoutaphiny.com.br/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Selo da Taphiny — Visão Sistêmica e Constelação Familiar">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={seo.titulo}>
+<meta name="twitter:description" content="Terapia sistêmica que dialoga com a constelação familiar para reconhecer padrões transgeracionais e restaurar a ordem da vida.">
+<meta name="twitter:image" content="https://www.eusoutaphiny.com.br/assets/og-image.png">
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+<!-- Fontes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/assets/selo.webp">
+
+<style is:global>
+  :root{
+    --creme:#F6F1EA; --rosa:#DCC4BB; --areia:#BFA79A; --marrom:#521416;
+    --bordeaux:#6A3F4B; --terracota:#A56E5F; --ouro:#B7905B; --ouroc:#D9B67A;
+    --marrom-escuro:#3A0D0F;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--marrom); -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden; }
+  img{ display:block; max-width:100%; }
+  a{ color:var(--ouro); }
+  a:hover{ color:var(--ouroc); }
+  :focus-visible{ outline:2px solid var(--ouroc); outline-offset:3px; border-radius:2px; }
+  ::selection{ background:var(--ouro); color:var(--creme); }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+  .tp-corp:hover{ background:var(--marrom) !important; color:var(--ouroc) !important; border-color:var(--marrom) !important; }
+  .tp-btn{ transition:opacity .4s; }
+  .tp-btn:hover{ opacity:.85; }
+</style>
+
+<!-- DADOS ESTRUTURADOS (schema.org / JSON-LD) -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "WebSite", "@id": "https://www.eusoutaphiny.com.br/#website", "url": "https://www.eusoutaphiny.com.br/", "name": "Taphiny — Visão Sistêmica", "description": "Visão Sistêmica, terapia sistêmica e constelação familiar com Taphiny.", "inLanguage": "pt-BR", "publisher": { "@id": "https://www.eusoutaphiny.com.br/#business" }, "potentialAction": { "@type": "SearchAction", "target": { "@type": "EntryPoint", "urlTemplate": "https://www.eusoutaphiny.com.br/?s={search_term_string}" }, "query-input": "required name=search_term_string" } },
+    { "@type": "Person", "@id": "https://www.eusoutaphiny.com.br/#taphiny", "name": "Taphiny", "jobTitle": "Mentora Sistêmica", "description": "Terapeuta e mentora sistêmica. Conduz processos de Visão Sistêmica e constelação familiar para reconhecer padrões familiares transgeracionais, restaurar a ordem dos vínculos e permitir que a vida volte a fluir.", "knowsAbout": ["Visão Sistêmica", "Terapia Sistêmica", "Constelação Familiar", "Padrões familiares transgeracionais", "Empresas familiares"], "url": "https://www.eusoutaphiny.com.br/", "worksFor": { "@id": "https://www.eusoutaphiny.com.br/#business" }, "sameAs": ["https://instagram.com/eu.sou.taphiny"] },
+    { "@type": "ProfessionalService", "@id": "https://www.eusoutaphiny.com.br/#business", "name": "Taphiny — Visão Sistêmica", "description": "Terapia sistêmica e Visão Sistêmica, abordagem que dialoga com a constelação familiar para reconhecer padrões familiares transgeracionais e restaurar a ordem dos vínculos. Atendimento a pessoas, empresas familiares e eventos.", "url": "https://www.eusoutaphiny.com.br/", "image": "https://www.eusoutaphiny.com.br/assets/og-image.png", "logo": "https://www.eusoutaphiny.com.br/assets/favicon-512.png", "founder": { "@id": "https://www.eusoutaphiny.com.br/#taphiny" }, "priceRange": "$$", "areaServed": "BR", "availableLanguage": "Portuguese", "knowsLanguage": "pt-BR", "keywords": "visão sistêmica, terapia sistêmica, constelação familiar, terapia sistêmica para empresas familiares, padrões familiares transgeracionais", "sameAs": ["https://instagram.com/eu.sou.taphiny"], "makesOffer": [ { "@type": "Offer", "itemOffered": { "@id": "https://www.eusoutaphiny.com.br/#servico-sessao" }, "price": "450", "priceCurrency": "BRL" }, { "@type": "Offer", "itemOffered": { "@id": "https://www.eusoutaphiny.com.br/#servico-essencia" } }, { "@type": "Offer", "itemOffered": { "@id": "https://www.eusoutaphiny.com.br/#servico-raizes" } }, { "@type": "Offer", "itemOffered": { "@id": "https://www.eusoutaphiny.com.br/#servico-negocios" } }, { "@type": "Offer", "itemOffered": { "@id": "https://www.eusoutaphiny.com.br/#servico-workshops" } } ] },
+    { "@type": "Service", "@id": "https://www.eusoutaphiny.com.br/#servico-sessao", "name": "Sessão Sistêmica (Olhar)", "serviceType": "Terapia Sistêmica", "description": "Encontro individual direcionado a um tema específico — uma decisão, um relacionamento, carreira, dinheiro ou um padrão que se repete. Ideal para quem busca clareza sobre um momento.", "provider": { "@id": "https://www.eusoutaphiny.com.br/#business" }, "areaServed": "BR", "offers": { "@type": "Offer", "price": "450", "priceCurrency": "BRL" } },
+    { "@type": "Service", "@id": "https://www.eusoutaphiny.com.br/#servico-essencia", "name": "Jornada Essência", "serviceType": "Terapia Sistêmica", "description": "Quatro encontros para reorganizar o eixo interno, fortalecer o lugar de adulto e construir uma vida mais alinhada com quem realmente se é.", "provider": { "@id": "https://www.eusoutaphiny.com.br/#business" }, "areaServed": "BR" },
+    { "@type": "Service", "@id": "https://www.eusoutaphiny.com.br/#servico-raizes", "name": "Jornada Raízes", "serviceType": "Constelação Familiar", "description": "Sete encontros de investigação profunda das dinâmicas familiares e dos padrões transgeracionais, no espírito da constelação familiar, para recuperar a força necessária para construir o futuro.", "provider": { "@id": "https://www.eusoutaphiny.com.br/#business" }, "areaServed": "BR" },
+    { "@type": "Service", "@id": "https://www.eusoutaphiny.com.br/#servico-negocios", "name": "Terapias para Negócios", "serviceType": "Terapia Sistêmica para empresas familiares", "description": "Visão Sistêmica aplicada a empresas familiares, relação entre sócios, liderança e equipes, trabalhando pertencimento, cultura e prosperidade.", "provider": { "@id": "https://www.eusoutaphiny.com.br/#business" }, "areaServed": "BR" },
+    { "@type": "Service", "@id": "https://www.eusoutaphiny.com.br/#servico-workshops", "name": "Workshops & Palestras", "serviceType": "Terapia Sistêmica", "description": "Workshops e palestras sobre Visão Sistêmica, pertencimento, cultura e prosperidade para empresas e eventos.", "provider": { "@id": "https://www.eusoutaphiny.com.br/#business" }, "areaServed": "BR" },
+    { "@type": "FAQPage", "@id": "https://www.eusoutaphiny.com.br/#faq", "mainEntity": [
+      { "@type": "Question", "name": "O que é Visão Sistêmica?", "acceptedAnswer": { "@type": "Answer", "text": "A Visão Sistêmica é uma abordagem terapêutica que enxerga a pessoa dentro dos sistemas a que pertence — família, vínculos e história. Ela parte do princípio de que nem tudo o que vivemos começou em nós: muitos padrões, lealdades e bloqueios são herdados ao longo das gerações. O trabalho reconhece essas dinâmicas para restaurar a ordem dos vínculos e permitir que a vida volte a fluir." } },
+      { "@type": "Question", "name": "Visão Sistêmica é a mesma coisa que constelação familiar?", "acceptedAnswer": { "@type": "Answer", "text": "São práticas irmãs, da mesma raiz. A constelação familiar é uma das ferramentas mais conhecidas da abordagem sistêmica, geralmente feita em grupo, enquanto a Visão Sistêmica é o olhar mais amplo que fundamenta esse trabalho e pode ser conduzido também de forma individual. Quem busca constelação familiar encontra aqui esse mesmo princípio, aplicado de maneira profunda e personalizada." } },
+      { "@type": "Question", "name": "Qual a diferença entre psicoterapia e Visão Sistêmica?", "acceptedAnswer": { "@type": "Answer", "text": "Não são caminhos opostos, e sim complementares. A psicoterapia amplia a consciência sobre a experiência individual — pensamentos, emoções e comportamentos. A Visão Sistêmica observa a pessoa dentro dos sistemas a que pertence, revelando lealdades invisíveis e dinâmicas familiares para restaurar a ordem dos vínculos." } },
+      { "@type": "Question", "name": "Como funciona uma sessão?", "acceptedAnswer": { "@type": "Answer", "text": "Cada encontro é individual e direcionado a um tema específico: uma decisão, um relacionamento, a carreira, o dinheiro ou um padrão que se repete. Em um espaço seguro, aquilo que permaneceu invisível é reconhecido, respeitado e reorganizado. A Sessão Sistêmica (Olhar) parte de R$ 450 por encontro, e há também jornadas mais profundas, como a Essência e a Raízes." } },
+      { "@type": "Question", "name": "Para quem é indicado?", "acceptedAnswer": { "@type": "Answer", "text": "É indicado para quem percebe padrões que se repetem, sente que compreender já não basta e deseja ocupar o próprio lugar com mais leveza. Também se aplica a empresas familiares, relação entre sócios e liderança. Não é indicado para quem busca soluções imediatas ou espera que o caminho seja feito por outra pessoa." } }
+    ] },
+    { "@type": "BreadcrumbList", "@id": "https://www.eusoutaphiny.com.br/#breadcrumb", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.eusoutaphiny.com.br/" },
+      { "@type": "ListItem", "position": 2, "name": "Visão Sistêmica", "item": "https://www.eusoutaphiny.com.br/#visao-sistemica" },
+      { "@type": "ListItem", "position": 3, "name": "As Jornadas", "item": "https://www.eusoutaphiny.com.br/#jornadas" },
+      { "@type": "ListItem", "position": 4, "name": "Perguntas Frequentes", "item": "https://www.eusoutaphiny.com.br/#faq" }
+    ] }
+  ]
+}
+</script>
+
+<!-- Google Analytics 4 -->
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-H58M107G7T"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H58M107G7T');
+</script>
+</head>
+<body>
+
+<div id="tp-page" style="position:relative; font-family:'Montserrat',sans-serif; color:var(--marrom);">
+
+  <!-- ÁRVORE ASSINATURA: sol/lua → tronco de ouro líquido → raízes -->
+  <svg id="tp-tree-svg" aria-hidden="true" preserveAspectRatio="none"
+       style="position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none;">
+    <defs>
+      <linearGradient id="tp-gold" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1000">
+        <stop offset="0"    stop-color="#EBCE8A"></stop>
+        <stop offset="0.38" stop-color="#D3A257"></stop>
+        <stop offset="0.72" stop-color="#B47C43"></stop>
+        <stop offset="1"    stop-color="#8E5A31"></stop>
+      </linearGradient>
+      <linearGradient id="tp-gold-bright" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1000">
+        <stop offset="0" stop-color="#F6E4B4"></stop>
+        <stop offset="1" stop-color="#D9B67A"></stop>
+      </linearGradient>
+      <radialGradient id="tp-bloom-glow" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0"   stop-color="#E7C57F" stop-opacity="0.55"></stop>
+        <stop offset="0.6" stop-color="#B7905B" stop-opacity="0.18"></stop>
+        <stop offset="1"   stop-color="#B7905B" stop-opacity="0"></stop>
+      </radialGradient>
+      <clipPath id="tp-tree-clip" clipPathUnits="userSpaceOnUse">
+        <rect id="tp-tree-clip-rect" x="0" y="0" width="8000" height="0"></rect>
+      </clipPath>
+    </defs>
+    <g clip-path="url(#tp-tree-clip)">
+      <circle id="tp-bloom-halo" fill="url(#tp-bloom-glow)" cx="0" cy="0" r="0" opacity="0.9"></circle>
+      <path id="tp-trunk-ribbon" fill="url(#tp-gold)" d="" opacity="0.07"></path>
+      <path id="tp-trunk-edge"   fill="none" stroke="url(#tp-gold)" stroke-linecap="round" opacity="0.16" d=""></path>
+      <g    id="tp-fibers"       fill="none" stroke="url(#tp-gold)" stroke-linecap="round"></g>
+      <path id="tp-vein"         fill="none" stroke="url(#tp-gold)" stroke-linecap="round" opacity="0.4" d=""></path>
+      <g    id="tp-tendrils"     fill="url(#tp-gold)" opacity="0.6"></g>
+      <g    id="tp-beads"        fill="#C79A5A"></g>
+      <g id="tp-roots"      fill="url(#tp-gold)"  opacity="0.72"></g>
+      <g id="tp-root-veins" fill="none" stroke="url(#tp-gold-bright)" stroke-linecap="round" opacity="0.4"></g>
+      <g id="tp-rootnodes"  fill="#E7C57F" opacity="0.85"></g>
+    </g>
+  </svg>
+
+  <img id="tp-sunmoon" src="/assets/sol-lua.webp" alt="" aria-hidden="true" width="204" height="204" decoding="async"
+       style="position:absolute; z-index:1; pointer-events:none; width:clamp(78px,19vw,128px); height:auto; left:86%; top:30px; transform:translateX(-50%); opacity:0.94;">
+  <img id="tp-boy" src="/assets/menino.webp" alt="" aria-hidden="true" width="303" height="976" loading="lazy" decoding="async"
+       style="position:absolute; z-index:1; pointer-events:none; width:clamp(22px,5.2vw,36px); height:auto; left:0; top:0; transform:translate(-50%,-95%); opacity:0;">
+
+  <!-- 1) HERO -->
+  <header id="inicio" data-screen-label="Hero" style="min-height:100vh; background:var(--marrom); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:96px 30px 80px;">
+    <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;">
+    <img src="/assets/selo.webp" alt="Selo da Taphiny — Visão Sistêmica e Constelação Familiar" width="118" height="118" fetchpriority="high" decoding="async" style="width:118px; height:118px; border-radius:50%; margin-bottom:38px;">
+    <div style="font-family:'Playfair Display',serif; font-weight:400; font-size:26px; letter-spacing:0.42em; color:var(--rosa); padding-left:0.42em;">{hero.marca}</div>
+    <div style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:10px; letter-spacing:0.42em; text-transform:uppercase; color:var(--ouro); margin-top:16px;">{hero.subtitulo}</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:400; font-size:34px; line-height:1.25; color:var(--creme); max-width:600px; margin-top:52px; text-wrap:balance;">{hero.titulo}</h1>
+    <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); max-width:440px; margin-top:30px; text-wrap:pretty;">{hero.paragrafo}</p>
+    <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:17px; line-height:1.7; color:var(--ouroc); max-width:400px; margin-top:34px; text-wrap:pretty;">{hero.frase}</p>
+    <a href={wa(config.mensagemConversa)} target="_blank" rel="noopener" class="tp-btn" style="display:inline-block; margin-top:48px; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:17px 38px;">{hero.cta}</a>
+    <div style="margin-top:70px; width:1px; height:52px; background:linear-gradient(var(--ouro),transparent);"></div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+  <!-- 2) A PROVOCAÇÃO -->
+  <section id="o-que-carregamos" data-screen-label="Provocacao" style="background:var(--creme); padding:110px 30px;">
+    <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:36px;">{provocacao.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); max-width:480px; margin-bottom:40px; text-wrap:balance;">{provocacao.titulo}</h2>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); margin-bottom:26px; text-wrap:pretty;">{provocacao.paragrafo1}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); text-wrap:pretty;">{provocacao.paragrafo2}</p>
+    </div>
+  </section>
+
+  <!-- 3) A ABORDAGEM -->
+  <section id="visao-sistemica" data-screen-label="Abordagem" style="background:var(--rosa); padding:110px 30px;">
+    <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); margin-bottom:24px;">{visao.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); max-width:520px; margin-bottom:28px; text-wrap:balance;">{visao.titulo}</h2>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:26px; text-wrap:pretty;">{visao.definicao}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:64px; text-wrap:pretty;">{visao.paragrafo}</p>
+      <div style="display:flex; flex-direction:column; gap:40px;">
+        {visao.pilares.map((p) => (
+        <div>
+          <div style="font-family:'Playfair Display',serif; font-size:22px; color:var(--bordeaux); margin-bottom:10px;">{p.titulo}</div>
+          <div style="width:32px; height:1px; background:var(--areia); margin-bottom:14px;"></div>
+          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--marrom);">{p.texto}</p>
+        </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4) QUEM CONDUZ -->
+  <article id="quem-conduz" data-screen-label="QuemConduz" style="background:var(--bordeaux); padding:110px 30px;">
+    <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
+      <figure id="tp-retrato" style="margin:0 0 48px; width:100%; aspect-ratio:4/5; border:1px solid var(--ouro); overflow:hidden; position:relative; background-color:#3A0D0F;">
+        {quemConduz.video ? (
+          <video src={quemConduz.video} poster={quemConduz.videoCapa || undefined} controls playsinline preload="metadata" style="width:100%; height:100%; object-fit:cover; display:block; background:#3A0D0F;"></video>
+        ) : quemConduz.foto ? (
+          <img src={quemConduz.foto} alt="Taphiny, Mentora Sistêmica" style="width:100%; height:100%; object-fit:cover; display:block;">
+        ) : (
+          <div id="tp-retrato-ph" style="position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center; padding:20px; background-image:repeating-linear-gradient(135deg, rgba(215,182,122,0.12) 0px, rgba(215,182,122,0.12) 1px, transparent 1px, transparent 12px);">
+            <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ouroc);">foto ou vídeo · 4:5</span>
+          </div>
+        )}
+      </figure>
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouroc); margin-bottom:28px;">{quemConduz.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:25px; line-height:1.45; color:var(--creme); margin-bottom:30px; text-wrap:pretty;">{quemConduz.titulo}</h2>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;">{quemConduz.paragrafo1}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;">{quemConduz.paragrafo2}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); text-wrap:pretty;">{quemConduz.paragrafo3}</p>
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:19px; line-height:1.7; color:var(--ouroc); margin-top:40px; text-wrap:pretty;">{quemConduz.frase}</p>
+    </div>
+  </article>
+
+  <!-- 5) PSICOTERAPIA E VISÃO SISTÊMICA -->
+  <section id="psicoterapia-e-visao-sistemica" data-screen-label="Comparacao" style="background:var(--creme); padding:110px 30px;">
+    <div data-reveal style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:18px; text-wrap:balance;">{comparacao.titulo}</h2>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); text-align:center; max-width:440px; margin:0 auto 64px; text-wrap:pretty;">{comparacao.subtitulo}</p>
+      <div style="display:flex; flex-wrap:wrap; gap:28px;">
+        <div style="flex:1 1 240px; padding:40px 30px; background:#FBF8F3;">
+          <div style="font-family:'Playfair Display',serif; font-size:21px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia);">{comparacao.col1Titulo}</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:16px;">
+            {comparacao.col1.map((item) => (
+            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);">{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div style="flex:1 1 240px; padding:40px 30px; background:#FBF8F3; border:1px solid var(--ouro);">
+          <div style="font-family:'Playfair Display',serif; font-size:21px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--ouro);">{comparacao.col2Titulo}</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:16px;">
+            {comparacao.col2.map((item) => (
+            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);">{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:18px; line-height:1.65; color:var(--terracota); text-align:center; max-width:520px; margin:56px auto 0; text-wrap:pretty;">{comparacao.fecho}</p>
+    </div>
+  </section>
+
+  <!-- 6) AS JORNADAS -->
+  <section id="jornadas" data-screen-label="Jornadas" style="background:var(--creme); padding:40px 30px 110px;">
+    <div style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
+      <div data-reveal style="text-align:center; margin-bottom:56px;">
+        <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.3; color:var(--marrom); margin-bottom:16px;">{jornadas.titulo}</h2>
+        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); max-width:420px; margin:0 auto; text-wrap:pretty;">{jornadas.subtitulo}</p>
+      </div>
+
+      <div data-reveal style="border:1px dashed var(--ouro); padding:38px 30px; text-align:center; margin-bottom:44px;">
+        <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.32em; text-transform:uppercase; color:var(--ouro); margin-bottom:16px;">{jornadas.meditacoes.rotulo}</div>
+        <div style="font-family:'Playfair Display',serif; font-size:23px; color:var(--marrom); margin-bottom:16px;">{jornadas.meditacoes.titulo}</div>
+        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); max-width:400px; margin:0 auto 26px; text-wrap:pretty;">{jornadas.meditacoes.texto}</p>
+        <a href={wa(config.mensagemMeditacoes)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota); text-decoration:none; border-bottom:1px solid var(--areia); padding-bottom:6px;">{jornadas.meditacoes.cta}</a>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:22px;">
+        {jornadas.cards.map((card) => (
+        <div data-reveal style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
+          <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
+            <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro);">{card.num}</span>
+            <span style="font-family:'Playfair Display',serif; font-size:22px; color:var(--marrom);">{card.titulo}</span>
+          </div>
+          <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{card.rotulo}</div>
+          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); margin-bottom:26px; text-wrap:pretty;">{card.texto}</p>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:22px; border-top:1px solid var(--areia);">
+            <span style="font-family:'Playfair Display',serif; font-size:18px; color:var(--ouro);">{card.preco} <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12px; color:var(--bordeaux);">{card.precoNota}</span></span>
+            <a href={wa(card.mensagem)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:13px 26px;">{card.cta}</a>
+          </div>
+        </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7) PARA QUEM É -->
+  <section id="para-quem" data-screen-label="ParaQuemE" style="background:var(--rosa); padding:110px 30px;">
+    <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:28px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:56px; text-wrap:balance;">{paraQuem.titulo}</h2>
+      <div style="display:flex; flex-wrap:wrap; gap:44px;">
+        <div style="flex:1 1 240px;">
+          <div style="font-family:'Playfair Display',serif; font-size:20px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia);">{paraQuem.col1Titulo}</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:18px;">
+            {paraQuem.col1.map((item) => (
+            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);">{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div style="flex:1 1 240px;">
+          <div style="font-family:'Playfair Display',serif; font-size:20px; color:var(--bordeaux); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia);">{paraQuem.col2Titulo}</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:18px;">
+            {paraQuem.col2.map((item) => (
+            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--bordeaux);">{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7b) PERGUNTAS FREQUENTES -->
+  <section id="faq" data-screen-label="FAQ" style="background:var(--creme); padding:110px 30px;">
+    <div data-reveal style="position:relative; z-index:2; max-width:660px; margin:0 auto;">
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); text-align:center; margin-bottom:24px;">{faq.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:56px; text-wrap:balance;">{faq.titulo}</h2>
+      <div style="display:flex; flex-direction:column; gap:40px;">
+        {faq.itens.map((item) => (
+        <div>
+          <h3 style="font-family:'Playfair Display',serif; font-weight:400; font-size:21px; line-height:1.35; color:var(--marrom); margin-bottom:14px;">{item.pergunta}</h3>
+          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95; color:var(--bordeaux); text-wrap:pretty;">{item.resposta}</p>
+        </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8) EMPRESAS E EVENTOS -->
+  <section id="empresas" data-screen-label="Empresas" style="background:var(--areia); padding:96px 30px;">
+    <div data-reveal style="position:relative; z-index:2; max-width:520px; margin:0 auto; text-align:center;">
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--marrom); margin-bottom:28px; opacity:0.7;">{empresas.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:26px; line-height:1.3; color:var(--marrom); margin-bottom:26px; text-wrap:balance;">{empresas.titulo}</h2>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95; color:var(--marrom); margin-bottom:40px; text-wrap:pretty;">{empresas.paragrafo}</p>
+      <a href={wa(empresas.mensagem)} target="_blank" rel="noopener" class="tp-corp" style="display:inline-block; font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--marrom); text-decoration:none; border:1px solid var(--marrom); padding:15px 32px; transition:background .4s,color .4s,border-color .4s;">{empresas.cta}</a>
+    </div>
+  </section>
+
+  <!-- 9) CONVITE FINAL -->
+  <section id="convite" data-screen-label="Convite" style="position:relative; min-height:100vh; background:var(--marrom); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:110px 30px; overflow:hidden;">
+    <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;">
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouro); margin-bottom:44px;">{convite.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:32px; line-height:1.3; color:var(--creme); max-width:520px; text-wrap:balance;">{convite.titulo}</h2>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); max-width:420px; margin-top:30px; text-wrap:pretty;">{convite.paragrafo}</p>
+      <a href={wa(config.mensagemConversa)} target="_blank" rel="noopener" class="tp-btn" style="display:inline-block; margin-top:48px; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:17px 38px;">{convite.cta}</a>
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:16px; line-height:1.7; color:var(--ouroc); max-width:460px; margin-top:56px; text-wrap:pretty;">{convite.frase}</p>
+      <img id="tp-couple" src="/assets/casal.webp" alt="Ilustração de mãe e pai frente a frente — os vínculos familiares que nos formam na Visão Sistêmica" width="845" height="660" loading="lazy" decoding="async" style="display:block; width:min(560px,88vw); height:auto; margin:72px auto 0; opacity:0.97;">
+      <img id="tp-roots-img" src="/assets/raizes.webp" alt="Árvore de raízes com retratos de várias gerações — os padrões familiares transgeracionais da constelação familiar" width="1536" height="844" loading="lazy" decoding="async" style="display:block; width:min(1080px,100%); height:auto; margin:10px auto 0; opacity:0.98;">
+    </div>
+  </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="position:relative; z-index:2; background:var(--marrom-escuro); padding:52px 30px 64px; text-align:center;">
+    <nav aria-label="Navegação do site" style="margin-bottom:34px;">
+      <ul style="list-style:none; display:flex; flex-wrap:wrap; gap:14px 26px; justify-content:center; padding:0;">
+        <li><a href="#inicio" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Início</a></li>
+        <li><a href="#visao-sistemica" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Visão Sistêmica</a></li>
+        <li><a href="#quem-conduz" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Quem conduz</a></li>
+        <li><a href="#jornadas" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">As Jornadas</a></li>
+        <li><a href="#faq" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Perguntas frequentes</a></li>
+        <li><a href="#convite" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Contato</a></li>
+      </ul>
+    </nav>
+    <a href={footer.instagramUrl} rel="me" style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:12px; letter-spacing:0.28em; text-transform:uppercase; color:var(--ouroc); text-decoration:none;">{footer.instagramTexto}</a>
+    <div style="font-family:'Playfair Display',serif; font-weight:500; font-size:15px; letter-spacing:0.3em; color:var(--areia); margin-top:26px; padding-left:0.3em;">TAPHINY</div>
+    <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:11px; letter-spacing:0.05em; color:var(--areia); opacity:0.6; margin-top:22px;">{footer.copyright}</p>
+  </footer>
+
+  <!-- MÚSICA DE FUNDO -->
+  <audio id="tp-audio" src={config.musica || undefined} loop preload="auto"></audio>
+  <button id="tp-som" type="button" aria-label="Ligar música" aria-pressed="false" title="Ligar música"
+    style="position:fixed; z-index:60; right:22px; bottom:22px; width:46px; height:46px; border-radius:50%; border:1px solid var(--ouro); background:rgba(58,13,15,0.72); color:var(--ouroc); cursor:pointer; display:none; align-items:center; justify-content:center; -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); transition:opacity .3s, transform .3s;"></button>
+
+</div>
+
+<!-- MOTOR DA ÁRVORE -->
+<script is:inline>
+(function(){
+  "use strict";
+  var HALF = Math.PI / 2;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var S = {};
+
+  function smooth(t){ return t*t*(3-2*t); }
+  function mkRnd(seed){ return function(){ seed = (seed*1103515245 + 12345) & 0x7fffffff; return seed/0x7fffffff; }; }
+  function el(id){ return document.getElementById(id); }
+
+  function quad(x0,y0,cx,cy,x1,y1,n){
+    var p = [];
+    for(var i=0;i<=n;i++){ var t=i/n, u=1-t;
+      p.push([u*u*x0 + 2*u*t*cx + t*t*x1, u*u*y0 + 2*u*t*cy + t*t*y1]); }
+    return p;
+  }
+  function ribbon(pts, wFn){
+    var n = pts.length, L = [], R = [], i;
+    for(i=0;i<n;i++){
+      var a = pts[Math.max(0,i-1)], b = pts[Math.min(n-1,i+1)];
+      var dx=b[0]-a[0], dy=b[1]-a[1], ln=Math.hypot(dx,dy)||1; dx/=ln; dy/=ln;
+      var nx=-dy, ny=dx, w=wFn(i/(n-1));
+      L.push([pts[i][0]+nx*w, pts[i][1]+ny*w]);
+      R.push([pts[i][0]-nx*w, pts[i][1]-ny*w]);
+    }
+    var d = 'M'+L[0][0].toFixed(1)+' '+L[0][1].toFixed(1);
+    for(i=1;i<n;i++) d += 'L'+L[i][0].toFixed(1)+' '+L[i][1].toFixed(1);
+    for(i=n-1;i>=0;i--) d += 'L'+R[i][0].toFixed(1)+' '+R[i][1].toFixed(1);
+    return d+'Z';
+  }
+  function poly(pts){
+    var d='M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+    for(var i=1;i<pts.length;i++) d+='L'+pts[i][0].toFixed(1)+' '+pts[i][1].toFixed(1);
+    return d;
+  }
+  function reflectPath(d, ox){
+    var k=0;
+    return d.replace(/-?\d+\.?\d*/g, function(m){ return ((k++%2)===0) ? (2*ox-parseFloat(m)).toFixed(1) : m; });
+  }
+
+  function buildTree(){
+    var svg = el('tp-tree-svg'), page = el('tp-page'), final = el('convite');
+    if(!svg || !page) return;
+    var W = Math.max(200, svg.getBoundingClientRect().width);
+    var H = page.offsetHeight;
+    svg.setAttribute('viewBox', '0 0 '+W+' '+H);
+
+    var trunkBottom = H*0.9, finalH = final ? final.offsetHeight : H*0.4;
+    var svgTop = svg.getBoundingClientRect().top;
+    S.useImageRoots = false;
+    var rimg = el('tp-roots-img'), cimg = el('tp-couple');
+    if(rimg && rimg.getBoundingClientRect().height > 10){
+      var rr = rimg.getBoundingClientRect();
+      var rTop = rr.top - svgTop;
+      trunkBottom = rTop + rr.height*0.055;
+      S.useImageRoots = true;
+      if(cimg && cimg.getBoundingClientRect().height > 10){
+        var cr0 = cimg.getBoundingClientRect();
+        S.boyStop = (cr0.top - svgTop) + cr0.height*0.46;
+      } else { S.boyStop = rTop; }
+    } else if(cimg && cimg.getBoundingClientRect().height > 10){
+      var cr = cimg.getBoundingClientRect();
+      var cTop = cr.top - svgTop, cH = cr.height;
+      trunkBottom = cTop + cH*0.99;
+      S.boyStop = cTop + cH*0.46;
+    } else if(final){
+      trunkBottom = final.offsetTop + finalH*0.70;
+      S.boyStop = trunkBottom;
+    }
+    S.trunkBottom = trunkBottom;
+
+    var grad = el('tp-gold'), gradB = el('tp-gold-bright');
+    if(grad){ grad.setAttribute('y2', trunkBottom.toFixed(0)); }
+    if(gradB){ gradB.setAttribute('y2', trunkBottom.toFixed(0)); }
+
+    var x0 = W*0.87, xEnd = W*0.5, amp = W*0.02, diveStart = 0.70, diveEnd = 0.88;
+    function centerX(t){
+      var dive = t<=diveStart ? 0 : t>=diveEnd ? 1 : smooth((t-diveStart)/(diveEnd-diveStart));
+      var base = x0 + (xEnd-x0)*dive;
+      return base + amp*Math.sin(t*Math.PI*3.2)*Math.sin(t*Math.PI)*(1-dive);
+    }
+    var maxHW = Math.min(19, W*0.021);
+    function halfW(t){
+      var base = 1.1 + (maxHW-1.1)*Math.pow(t,1.3);
+      var nf = t>0.82 ? 1 - ((t-0.82)/0.18)*0.42 : 1;
+      return base*nf;
+    }
+    S.centerX = centerX; S.maxHW = maxHW;
+
+    var N = 170, pts = [], i, t;
+    for(i=0;i<=N;i++){ t=i/N; pts.push([centerX(t), t*trunkBottom]); }
+
+    var ribbon0 = el('tp-trunk-ribbon');
+    if(ribbon0) ribbon0.setAttribute('d', ribbon(pts, function(tt){ return halfW(tt); }));
+
+    var edge = el('tp-trunk-edge');
+    if(edge){
+      var ep=[];
+      for(i=0;i<=N;i+=2){ t=i/N;
+        var a=pts[Math.max(0,i-1)], b=pts[Math.min(N,i+1)];
+        var dx=b[0]-a[0], dy=b[1]-a[1], ln=Math.hypot(dx,dy)||1; var nx=-dy/ln, ny=dx/ln;
+        var w=halfW(t)*0.82;
+        ep.push([pts[i][0]+nx*w, pts[i][1]+ny*w]);
+      }
+      edge.setAttribute('d', poly(ep));
+      edge.setAttribute('stroke-width', Math.max(0.8, maxHW*0.09).toFixed(2));
+    }
+
+    function strandRibbon(offFn, wFn){
+      var cl=[];
+      for(var ii=0;ii<=N;ii+=2){ var tt=ii/N;
+        var a=pts[Math.max(0,ii-1)], b=pts[Math.min(N,ii+1)];
+        var dx=b[0]-a[0], dy=b[1]-a[1], ln=Math.hypot(dx,dy)||1;
+        var nx=-dy/ln, ny=dx/ln, off=offFn(tt);
+        cl.push([pts[ii][0]+nx*off, pts[ii][1]+ny*off]);
+      }
+      return ribbon(cl, wFn);
+    }
+    var braidG = el('tp-fibers');
+    if(braidG){
+      braidG.setAttribute('fill','url(#tp-gold-bright)');
+      braidG.setAttribute('stroke','none');
+      var freq = 19, out = '', beadsOut = '';
+      for(var s=0;s<2;s++){
+        var ph = s*Math.PI;
+        var offFn = (function(p){ return function(tt){
+          var A = 2.2 + halfW(tt)*1.05;
+          var conv = Math.min(1, tt/0.05);
+          return Math.sin(tt*Math.PI*freq + p)*A*conv;
+        }; })(ph);
+        var wFn = function(u){
+          var w = 0.9 + halfW(u)*0.22;
+          var top = 0.3 + 0.7*Math.sin(Math.min(1,u/0.05)*HALF);
+          var tip = u>0.9 ? (1-(u-0.9)/0.1*0.55) : 1;
+          return w*top*tip;
+        };
+        out += '<path fill="'+(s?'url(#tp-gold-bright)':'url(#tp-gold)')+'" d="'+strandRibbon(offFn,wFn)+'" opacity="'+(s?0.5:0.42)+'"/>';
+      }
+      for(var c=1;c<freq;c++){
+        var tc = c/freq; if(tc<0.06 || tc>0.92) continue;
+        var xc = centerX(tc), yc = tc*trunkBottom, rc = 1.1 + halfW(tc)*0.15;
+        beadsOut += '<circle fill="url(#tp-gold)" cx="'+xc.toFixed(1)+'" cy="'+yc.toFixed(1)+'" r="'+rc.toFixed(2)+'" opacity="0.5"/>';
+      }
+      braidG.innerHTML = out + beadsOut;
+    }
+
+    var vein = el('tp-vein');
+    if(vein){
+      var t0=0.30, vp=[];
+      for(i=0;i<=70;i++){ t=t0+(1-t0)*(i/70); vp.push([centerX(t), t*trunkBottom]); }
+      vein.setAttribute('d', poly(vp));
+      vein.setAttribute('stroke-width', (maxHW*0.30).toFixed(2));
+    }
+
+    var tendG = el('tp-tendrils');
+    if(tendG){
+      var tr = mkRnd(4021), tspots = [0.40,0.50,0.60,0.70,0.78], tout='';
+      for(var k=0;k<tspots.length;k++){
+        var tt2 = tspots[k], side = (k%2===0)? 1 : -1;
+        var bx = centerX(tt2), by = tt2*trunkBottom, hw2 = halfW(tt2);
+        var len = hw2*2.4 + W*0.028*(0.7+tr());
+        var ang = side>0 ? -0.30 : Math.PI+0.30;
+        var ex = bx + Math.cos(ang)*len, ey = by + Math.sin(ang)*len - len*0.25;
+        var cx = bx + Math.cos(ang)*len*0.5 + side*len*0.10, cy = by - len*0.05;
+        var tp = quad(bx,by,cx,cy,ex,ey,14);
+        tout += '<path d="'+ribbon(tp, function(u){ return (hw2*0.5)*(1-u) + 0.4; })+'"/>';
+        tout += '<circle cx="'+ex.toFixed(1)+'" cy="'+ey.toFixed(1)+'" r="'+(1.4+tr()*1.4).toFixed(2)+'" fill="#E7C57F"/>';
+      }
+      tendG.innerHTML = tout;
+    }
+
+    var beads = el('tp-beads');
+    if(beads){
+      var br = mkRnd(20240), bc='', count=22;
+      for(i=0;i<count;i++){
+        var bt = 0.05 + (i/count)*0.64 + (br()-0.5)*0.03;
+        var bside = br()<0.5 ? -1 : 1;
+        var boff = halfW(bt) + 6 + br()*(W*0.05);
+        var bxx = centerX(bt) + bside*boff;
+        var byy = bt*trunkBottom + (br()-0.5)*(H*0.008);
+        var brad = 1.1 + br()*2.4;
+        bc += '<circle cx="'+bxx.toFixed(1)+'" cy="'+byy.toFixed(1)+'" r="'+brad.toFixed(2)+'" opacity="'+(0.22+br()*0.3).toFixed(2)+'"/>';
+      }
+      beads.innerHTML = bc;
+    }
+
+    var halo = el('tp-bloom-halo');
+    if(halo){
+      halo.setAttribute('cx', centerX(1).toFixed(1));
+      halo.setAttribute('cy', trunkBottom.toFixed(1));
+      halo.setAttribute('r', Math.min(W*0.13, 130).toFixed(0));
+    }
+
+    if(S.useImageRoots){
+      ['tp-roots','tp-root-veins','tp-rootnodes'].forEach(function(id){ var g=el(id); if(g) g.innerHTML=''; });
+    } else {
+      var avail = Math.max(120, H - trunkBottom);
+      var baseLen = Math.min(W*0.22, avail*0.82);
+      buildRoots(centerX(1), trunkBottom, baseLen);
+    }
+
+    var sm = el('tp-sunmoon');
+    if(sm) sm.style.left = ((x0/W)*100).toFixed(2)+'%';
+
+    var rect = el('tp-tree-clip-rect');
+    if(rect) rect.setAttribute('width', String(W+10));
+  }
+
+  function buildRoots(ox, oy, baseLen){
+    var rootsG = el('tp-roots'), veinsG = el('tp-root-veins'), nodesG = el('tp-rootnodes');
+    if(!rootsG) return;
+    var w0 = S.maxHW ? S.maxHW*1.05 : 14;
+
+    function growSide(seed){
+      var rnd = mkRnd(seed);
+      var fills = [], veins = [], dots = [];
+      function grow(x, y, ang, len, w, depth){
+        if(depth<=0 || len<9 || w<0.5) return;
+        var ex = x + Math.cos(ang)*len, ey = y + Math.sin(ang)*len;
+        var nx = Math.cos(ang+HALF), ny = Math.sin(ang+HALF);
+        var bend = len*0.20*(rnd()-0.5);
+        var cx = x + Math.cos(ang)*len*0.5 + nx*bend;
+        var cy = y + Math.sin(ang)*len*0.5 + ny*bend;
+        var pts = quad(x,y,cx,cy,ex,ey,18);
+        var w1 = w*0.44;
+        fills.push('<path d="'+ribbon(pts, function(u){ return (w + (w1-w)*u)/2; })+'"/>');
+        veins.push('<path d="'+poly(pts)+'" stroke-width="'+(w*0.16+0.35).toFixed(2)+'"/>');
+        if(depth<=2 || rnd()<0.4)
+          dots.push('<circle cx="'+ex.toFixed(1)+'" cy="'+ey.toFixed(1)+'" r="'+Math.max(1.1, w1*0.95).toFixed(2)+'"/>');
+        var n = depth>2 ? 3 : 2;
+        for(var i=0;i<n;i++){
+          var na = ang + (i-(n-1)/2)*(0.36+rnd()*0.30) + (rnd()-0.5)*0.18;
+          na = Math.max(HALF-1.24, Math.min(HALF+1.24, na));
+          grow(ex, ey, na, len*(0.62+rnd()*0.16), w1*(0.94+rnd()*0.16), depth-1);
+        }
+      }
+      var primaries = [
+        [HALF-0.22, baseLen*1.00, w0*0.94],
+        [HALF-0.48, baseLen*0.92, w0*0.82],
+        [HALF-0.76, baseLen*0.82, w0*0.68],
+        [HALF-1.04, baseLen*0.70, w0*0.54],
+        [HALF-1.26, baseLen*0.56, w0*0.44]
+      ];
+      for(var p=0;p<primaries.length;p++)
+        grow(ox, oy, primaries[p][0], primaries[p][1], primaries[p][2], 5);
+      return { fills:fills, veins:veins, dots:dots };
+    }
+
+    var center = (function(){
+      var rnd = mkRnd(777);
+      var fills=[], veins=[], dots=[];
+      (function grow(x,y,ang,len,w,depth){
+        if(depth<=0||len<9||w<0.5) return;
+        var ex=x+Math.cos(ang)*len, ey=y+Math.sin(ang)*len;
+        var bend=len*0.10*(rnd()-0.5);
+        var cx=x+Math.cos(ang)*len*0.5+bend, cy=y+Math.sin(ang)*len*0.5;
+        var pts=quad(x,y,cx,cy,ex,ey,18);
+        var w1=w*0.46;
+        fills.push('<path d="'+ribbon(pts,function(u){return (w+(w1-w)*u)/2;})+'"/>');
+        veins.push('<path d="'+poly(pts)+'" stroke-width="'+(w*0.16+0.35).toFixed(2)+'"/>');
+        if(depth<=2) dots.push('<circle cx="'+ex.toFixed(1)+'" cy="'+ey.toFixed(1)+'" r="'+Math.max(1.1,w1*0.95).toFixed(2)+'"/>');
+        var n=depth>2?2:2;
+        for(var i=0;i<n;i++){
+          var na=ang+(i-(n-1)/2)*(0.30+rnd()*0.22)+(rnd()-0.5)*0.14;
+          na=Math.max(HALF-0.9,Math.min(HALF+0.9,na));
+          grow(ex,ey,na,len*(0.62+rnd()*0.14),w1*(0.96+rnd()*0.12),depth-1);
+        }
+      })(ox,oy,HALF,baseLen*1.02,w0,5);
+      return {fills:fills,veins:veins,dots:dots};
+    })();
+
+    var right = growSide(8123);
+
+    var fills = center.fills.concat(right.fills);
+    var veins = center.veins.concat(right.veins);
+    var dots  = center.dots.concat(right.dots);
+    for(var i=0;i<right.fills.length;i++) fills.push(reflectPath(right.fills[i], ox));
+    for(i=0;i<right.veins.length;i++)     veins.push(reflectPath(right.veins[i], ox));
+    for(i=0;i<right.dots.length;i++){
+      dots.push(right.dots[i].replace(/cx="(-?\d+\.?\d*)"/, function(_,v){ return 'cx="'+(2*ox-parseFloat(v)).toFixed(1)+'"'; }));
+    }
+
+    rootsG.innerHTML = fills.join('');
+    if(veinsG) veinsG.innerHTML = veins.join('');
+    if(nodesG) nodesG.innerHTML = dots.join('');
+  }
+
+  function setReveal(){
+    var clamp = function(v){ return Math.max(0, Math.min(1, v)); };
+    var clip = el('tp-tree-clip-rect'), boy = el('tp-boy'), svg = el('tp-tree-svg'), page = el('tp-page');
+    var tb = S.trunkBottom || (page ? page.offsetHeight*0.9 : 1000);
+    var cX = S.centerX || function(){ return 0; };
+
+    if(reduce){
+      if(clip) clip.setAttribute('height', String((page?page.offsetHeight:9999)+200));
+      if(boy){ var sp=S.boyStop||tb; boy.style.left=cX(clamp(sp/tb)).toFixed(1)+'px'; boy.style.top=sp.toFixed(1)+'px'; boy.style.opacity='0.9'; }
+      return;
+    }
+    var svgTop = svg ? svg.getBoundingClientRect().top : -window.scrollY;
+    var revealY = (-svgTop) + window.innerHeight*0.9;
+    if(clip) clip.setAttribute('height', Math.max(0, revealY).toFixed(0));
+    if(boy){
+      var stop = S.boyStop || tb;
+      var tipY = Math.min(Math.max(0, revealY - window.innerHeight*0.12), stop);
+      var tt = clamp(tb>0 ? tipY/tb : 0);
+      boy.style.left = cX(tt).toFixed(1)+'px';
+      boy.style.top = tipY.toFixed(1)+'px';
+      boy.style.opacity = clamp(tipY/240).toFixed(2);
+    }
+  }
+
+  function setupReveal(){
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if(reduce){ els.forEach(function(e){ e.style.opacity='1'; e.style.transform='none'; }); return; }
+    els.forEach(function(e){ e.style.opacity='0'; e.style.transform='translateY(26px)'; e.style.transition='opacity 1s ease, transform 1s ease'; });
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(e){ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='none'; io.unobserve(e.target); } });
+    }, { threshold:0.12 });
+    els.forEach(function(e){ io.observe(e); });
+  }
+
+  function init(){
+    buildTree(); setReveal(); setupReveal();
+    setTimeout(function(){ buildTree(); setReveal(); }, 400);
+    setTimeout(function(){ buildTree(); setReveal(); }, 1200);
+    window.addEventListener('load', function(){ buildTree(); setReveal(); });
+
+    if(!reduce){
+      var rt;
+      window.addEventListener('resize', function(){ clearTimeout(rt); rt=setTimeout(function(){ buildTree(); setReveal(); }, 150); });
+      window.addEventListener('scroll', setReveal, { passive:true, capture:true });
+      var lastTop = null;
+      (function tick(){
+        var svg = el('tp-tree-svg');
+        var top = svg ? Math.round(svg.getBoundingClientRect().top) : 0;
+        if(top !== lastTop){ lastTop = top; setReveal(); }
+        requestAnimationFrame(tick);
+      })();
+    }
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+<!-- MÚSICA DE FUNDO -->
+<script is:inline>
+(function(){
+  "use strict";
+  var audio = document.getElementById('tp-audio');
+  var btn = document.getElementById('tp-som');
+  if(!audio || !btn) return;
+  if(!audio.getAttribute('src')){ return; }
+
+  var ON  = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
+  var OFF = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><line x1="3" y1="3" x2="21" y2="21" stroke-width="2"/></svg>';
+
+  var userMuted = false;
+  var started   = false;
+  var wasPlaying = false;
+
+  function paint(){
+    var on = !audio.paused;
+    btn.innerHTML = on ? ON : OFF;
+    btn.style.opacity = on ? '1' : '0.62';
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    var label = on ? 'Desligar música' : 'Ligar música';
+    btn.setAttribute('aria-label', label); btn.title = label;
+  }
+  function tryPlay(){ return audio.play().then(paint).catch(paint); }
+
+  audio.addEventListener('canplaythrough', function(){ btn.style.display = 'flex'; paint(); });
+  audio.addEventListener('loadeddata',    function(){ btn.style.display = 'flex'; paint(); });
+  audio.addEventListener('error',         function(){ btn.style.display = 'none'; });
+
+  tryPlay();
+  function firstGesture(){
+    if(started) return; started = true;
+    if(!userMuted && audio.paused) tryPlay();
+    remove();
+  }
+  function remove(){
+    ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){
+      window.removeEventListener(ev, firstGesture, true);
+    });
+  }
+  ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){
+    window.addEventListener(ev, firstGesture, { capture:true, passive:true });
+  });
+
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(audio.paused){ userMuted = false; tryPlay(); }
+    else { userMuted = true; audio.pause(); paint(); }
+  });
+
+  document.addEventListener('play', function(e){
+    if(e.target && e.target.tagName === 'VIDEO'){
+      wasPlaying = !audio.paused;
+      if(wasPlaying){ audio.pause(); paint(); }
+    }
+  }, true);
+  function videoStopped(e){
+    if(e.target && e.target.tagName === 'VIDEO'){
+      if(wasPlaying && !userMuted){ tryPlay(); }
+      wasPlaying = false;
+    }
+  }
+  document.addEventListener('pause', videoStopped, true);
+  document.addEventListener('ended', videoStopped, true);
+
+  paint();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+# Dependências e build
+node_modules/
+dist/
+.astro/
+
+# TinaCMS (gerado no build)
+tina/__generated__/
+public/admin/
+
+# Variáveis de ambiente (segredos — nunca commitar)
+.env
+.env.*
+!.env.example
+
+# Sistema / editores
+.DS_Store
+*.log
+npm-debug.log*
+
+# ============================================================
+# Arquivos que NÃO fazem parte do site (material de origem, só na raiz)
+# ============================================================
+/_backup/
+/Taphiny.html
+/taphiny-tema.html
+/taphiny-site-astro.zip
+/*.zip
+/*.pdf
+/Raizes.jpeg
+/WhatsApp Image 2026-07-22 at 22.27.34.jpeg
+/WhatsApp Image 2026-07-22 at 22.28.54.jpeg
+/Ícone_Taphiny.png
+/Logo Taphiny_Mentoria Sistêmica.svg
+# pasta antiga assets/ na raiz (a que vale é public/assets/)
+/assets/
+# cópias antigas na raiz (as que valem estão em public/)
+/robots.txt
+/sitemap.xml
+/llms.txt

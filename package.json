@@ -1,0 +1,20 @@
+{
+  "name": "site-taphiny",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site da Taphiny — Visão Sistêmica e Mentoria Sistêmica (Astro + TinaCMS)",
+  "scripts": {
+    "dev": "tinacms dev -c \"astro dev\"",
+    "dev:site": "astro dev",
+    "build": "node ./scripts/tina-build.mjs && astro build",
+    "build:site": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@tinacms/cli": "^2.5.6",
+    "astro": "^7.1.3",
+    "tinacms": "^3.11.0"
+  }
+}

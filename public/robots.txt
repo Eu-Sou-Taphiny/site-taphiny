@@ -1,0 +1,43 @@
+# robots.txt — Taphiny (Visão Sistêmica)
+# >>> Troque o domínio na linha Sitemap pelo domínio final. <<<
+
+# Buscadores tradicionais
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Assistentes / crawlers de IA (permitidos para o site ser lido e CITADO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Demais robôs
+User-agent: *
+Allow: /
+
+Sitemap: https://www.eusoutaphiny.com.br/sitemap.xml
