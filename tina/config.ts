@@ -33,9 +33,10 @@ export default defineConfig({
         format: "json",
         match: { include: "site" },
         ui: {
-          // documento único: sem criar/apagar
+          // documento único: sem criar/apagar. Sem `router` para abrir num
+          // formulário normal e editável no /admin (a edição visual no preview
+          // exigiria useTina/tinaField na página, o que não usamos aqui).
           allowedActions: { create: false, delete: false },
-          router: () => "/",
         },
         fields: [
           // ---------- SEO ----------
