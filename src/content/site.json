@@ -1,6 +1,6 @@
 {
   "seo": {
-    "titulo": "Visão Sistêmica e Constelação Familiar | Taphiny",
+    "titulo": "Visão Sistêmica e Constelação Familiar | Taphiny TESTEEEEE",
     "descricao": "Visão Sistêmica e terapia sistêmica com Taphiny: um caminho que dialoga com a constelação familiar para reconhecer padrões transgeracionais e restaurar a ordem."
   },
   "hero": {
@@ -23,9 +23,18 @@
     "definicao": "A Visão Sistêmica é uma abordagem terapêutica que enxerga cada pessoa dentro dos sistemas a que pertence — família, vínculos e história. Ela dialoga diretamente com a prática da constelação familiar e parte de um princípio simples: nem tudo o que vivemos começou em nós. Reconhecer os padrões herdados ao longo das gerações é o caminho para restaurar a ordem dos vínculos e permitir que a vida volte a fluir.",
     "paragrafo": "A Visão Sistêmica considera que ninguém existe isoladamente. Somos parte de uma rede de relações construída muito antes do nosso nascimento. Família, pertencimento, vínculos e histórias influenciam a forma como nos relacionamos com o amor, o dinheiro, a carreira e a própria vida.",
     "pilares": [
-      { "titulo": "Pertencer", "texto": "Reconhecer a origem." },
-      { "titulo": "Ordenar", "texto": "Restaurar lugares e devolver pesos que não são seus." },
-      { "titulo": "Fluir", "texto": "Permitir que a vida volte a seguir seu movimento natural." }
+      {
+        "titulo": "Pertencer",
+        "texto": "Reconhecer a origem."
+      },
+      {
+        "titulo": "Ordenar",
+        "texto": "Restaurar lugares e devolver pesos que não são seus."
+      },
+      {
+        "titulo": "Fluir",
+        "texto": "Permitir que a vida volte a seguir seu movimento natural."
+      }
     ]
   },
   "quemConduz": {
