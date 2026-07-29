@@ -173,5 +173,13 @@
     "whatsapp": "5511925027759",
     "mensagemConversa": "Olá, Taphiny! Cheguei pelo seu site e gostaria de começar uma conversa sobre a Visão Sistêmica.",
     "mensagemMeditacoes": "Olá, Taphiny! Gostaria de acessar as meditações guiadas."
+  },
+  "popup": {
+    "ativo": false,
+    "titulo": "Um convite para começar",
+    "texto": "Receba um primeiro olhar sobre a Visão Sistêmica e dê o primeiro passo, no seu tempo.",
+    "imagem": "",
+    "botaoTexto": "Quero começar uma conversa",
+    "botaoLink": "https://wa.me/5511925027759"
   }
 }

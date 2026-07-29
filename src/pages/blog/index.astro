@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const fmt = (d?: Date) =>
+  d ? new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }).format(d) : '';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => p.data.publicado)
+  .sort((a, b) => (b.data.data?.getTime() ?? 0) - (a.data.data?.getTime() ?? 0));
+---
+<BlogLayout
+  title="Blog | Taphiny — Visão Sistêmica"
+  description="Artigos sobre Visão Sistêmica, terapia sistêmica e constelação familiar."
+  path="/blog"
+>
+  <section style="max-width:760px; margin:0 auto; padding:80px 30px 40px;">
+    <div style="text-align:center; margin-bottom:64px;">
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:20px;">Blog</div>
+      <h1 style="font-family:'Playfair Display',serif; font-weight:400; font-size:34px; line-height:1.25; color:var(--marrom); text-wrap:balance;">Reflexões sobre a Visão Sistêmica</h1>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); max-width:460px; margin:22px auto 0; text-wrap:pretty;">Textos sobre pertencimento, vínculos, padrões familiares e o caminho de volta ao próprio lugar.</p>
+    </div>
+
+    {posts.length === 0 ? (
+      <p style="text-align:center; font-family:'Montserrat',sans-serif; font-weight:300; color:var(--bordeaux);">Em breve, os primeiros artigos.</p>
+    ) : (
+      <div style="display:flex; flex-direction:column; gap:44px;">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}`} style="display:block; text-decoration:none; color:inherit; border-bottom:1px solid var(--areia); padding-bottom:44px;">
+            {post.data.capa && (
+              <img src={post.data.capa} alt={post.data.titulo} loading="lazy" decoding="async" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px; margin-bottom:24px; background:#EDE4DA;">
+            )}
+            <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota); margin-bottom:12px;">{fmt(post.data.data)}</div>
+            <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:26px; line-height:1.3; color:var(--marrom); margin-bottom:14px; text-wrap:balance;">{post.data.titulo}</h2>
+            {post.data.resumo && (
+              <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); text-wrap:pretty;">{post.data.resumo}</p>
+            )}
+            <span style="display:inline-block; margin-top:18px; font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--ouro);">Ler artigo →</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</BlogLayout>

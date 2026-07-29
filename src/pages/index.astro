@@ -1,6 +1,8 @@
 ---
 import site from '../content/site.json';
-const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, footer, config } = site;
+import SiteFooter from '../components/SiteFooter.astro';
+const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, config } = site;
+const popup = (site as any).popup;
 const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(msg)}`;
 ---
 <!DOCTYPE html>
@@ -347,22 +349,8 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
   </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer style="position:relative; z-index:2; background:var(--marrom-escuro); padding:52px 30px 64px; text-align:center;">
-    <nav aria-label="Navegação do site" style="margin-bottom:34px;">
-      <ul style="list-style:none; display:flex; flex-wrap:wrap; gap:14px 26px; justify-content:center; padding:0;">
-        <li><a href="#inicio" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Início</a></li>
-        <li><a href="#visao-sistemica" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Visão Sistêmica</a></li>
-        <li><a href="#quem-conduz" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Quem conduz</a></li>
-        <li><a href="#jornadas" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">As Jornadas</a></li>
-        <li><a href="#faq" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Perguntas frequentes</a></li>
-        <li><a href="#convite" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;">Contato</a></li>
-      </ul>
-    </nav>
-    <a href={footer.instagramUrl} rel="me" style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:12px; letter-spacing:0.28em; text-transform:uppercase; color:var(--ouroc); text-decoration:none;">{footer.instagramTexto}</a>
-    <div style="font-family:'Playfair Display',serif; font-weight:500; font-size:15px; letter-spacing:0.3em; color:var(--areia); margin-top:26px; padding-left:0.3em;">TAPHINY</div>
-    <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:11px; letter-spacing:0.05em; color:var(--areia); opacity:0.6; margin-top:22px;">{footer.copyright}</p>
-  </footer>
+  <!-- FOOTER (componente reutilizado no blog) -->
+  <SiteFooter />
 
   <!-- MÚSICA DE FUNDO -->
   <audio id="tp-audio" src={config.musica || undefined} loop preload="auto"></audio>
@@ -370,6 +358,29 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     style="position:fixed; z-index:60; right:22px; bottom:22px; width:46px; height:46px; border-radius:50%; border:1px solid var(--ouro); background:rgba(58,13,15,0.72); color:var(--ouroc); cursor:pointer; display:none; align-items:center; justify-content:center; -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); transition:opacity .3s, transform .3s;"></button>
 
 </div>
+
+<!-- POP-UP DE ENTRADA (aparece só se "ativo" no painel; 1x por sessão) -->
+{popup?.ativo && (
+  <div id="tp-popup-overlay" role="presentation" style="display:none; position:fixed; inset:0; z-index:80; background:rgba(58,13,15,0.62); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); align-items:center; justify-content:center; padding:22px;">
+    <div id="tp-popup" role="dialog" aria-modal="true" style="position:relative; background:var(--creme); color:var(--marrom); max-width:440px; width:100%; border-radius:18px; box-shadow:0 24px 70px rgba(0,0,0,0.4); overflow:hidden; text-align:center; transform:translateY(12px) scale(0.98); opacity:0; transition:transform .4s ease, opacity .4s ease;">
+      <button id="tp-popup-close" type="button" aria-label="Fechar" style="position:absolute; top:12px; right:14px; width:32px; height:32px; border:none; background:rgba(0,0,0,0.07); color:var(--marrom); border-radius:50%; font-size:20px; line-height:1; cursor:pointer; z-index:1;">×</button>
+      {popup.imagem && (
+        <img src={popup.imagem} alt="" style="width:100%; height:auto; max-height:230px; object-fit:cover; display:block;">
+      )}
+      <div style="padding:34px 30px 34px;">
+        {popup.titulo && (
+          <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:24px; line-height:1.3; color:var(--marrom); margin-bottom:14px; text-wrap:balance;">{popup.titulo}</h2>
+        )}
+        {popup.texto && (
+          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.8; color:var(--bordeaux); text-wrap:pretty;">{popup.texto}</p>
+        )}
+        {popup.botaoTexto && popup.botaoLink && (
+          <a href={popup.botaoLink} style="display:inline-block; margin-top:24px; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:15px 32px; border-radius:6px;">{popup.botaoTexto}</a>
+        )}
+      </div>
+    </div>
+  </div>
+)}
 
 <!-- MOTOR DA ÁRVORE -->
 <script is:inline>
@@ -786,6 +797,32 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
   document.addEventListener('ended', videoStopped, true);
 
   paint();
+})();
+</script>
+
+<!-- POP-UP: abre 1x por sessão, com fechar (X), clique fora e Esc -->
+<script is:inline>
+(function(){
+  "use strict";
+  var overlay = document.getElementById('tp-popup-overlay');
+  if(!overlay) return;
+  var card = document.getElementById('tp-popup');
+  var KEY = 'tp-popup-seen';
+  try { if(sessionStorage.getItem(KEY)) return; } catch(e){}
+  function open(){
+    overlay.style.display = 'flex';
+    requestAnimationFrame(function(){ if(card){ card.style.opacity='1'; card.style.transform='none'; } });
+  }
+  function close(){
+    if(card){ card.style.opacity='0'; card.style.transform='translateY(12px) scale(0.98)'; }
+    setTimeout(function(){ overlay.style.display='none'; }, 350);
+    try { sessionStorage.setItem(KEY,'1'); } catch(e){}
+  }
+  var btn = document.getElementById('tp-popup-close');
+  if(btn) btn.addEventListener('click', close);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  setTimeout(open, 900);
 })();
 </script>
 </body>

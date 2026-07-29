@@ -1,0 +1,47 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((p) => p.data.publicado);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d?: Date) =>
+  d ? new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }).format(d) : '';
+
+const desc = post.data.resumo || `${post.data.titulo} — por Taphiny, Visão Sistêmica.`;
+---
+<BlogLayout
+  title={`${post.data.titulo} | Taphiny`}
+  description={desc}
+  path={`/blog/${post.id}`}
+  ogImage={post.data.capa || '/assets/og-image.png'}
+  type="article"
+>
+  <article style="max-width:720px; margin:0 auto; padding:70px 30px 40px;">
+    <a href="/blog" style="display:inline-block; font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracota); text-decoration:none; margin-bottom:34px;">← Blog</a>
+
+    <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota); margin-bottom:16px;">{fmt(post.data.data)}</div>
+    <h1 style="font-family:'Playfair Display',serif; font-weight:400; font-size:36px; line-height:1.2; color:var(--marrom); margin-bottom:14px; text-wrap:balance;">{post.data.titulo}</h1>
+    {post.data.resumo && (
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:19px; line-height:1.6; color:var(--terracota); margin-bottom:8px; text-wrap:pretty;">{post.data.resumo}</p>
+    )}
+
+    {post.data.capa && (
+      <img src={post.data.capa} alt={post.data.titulo} width="1200" height="675" decoding="async" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:14px; margin:38px 0; background:#EDE4DA;">
+    )}
+
+    <div class="tp-prose">
+      <Content />
+    </div>
+
+    <div style="margin-top:64px; padding-top:40px; border-top:1px solid var(--areia); text-align:center;">
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:18px; color:var(--bordeaux); margin-bottom:26px;">Quer olhar para a sua própria história com mais leveza?</p>
+      <a href="/#convite" style="display:inline-block; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:16px 36px;">Começar uma conversa</a>
+    </div>
+  </article>
+</BlogLayout>

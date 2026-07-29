@@ -1,0 +1,24 @@
+---
+import site from '../content/site.json';
+const { footer } = site;
+const linkStyle = "font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;";
+const nav = [
+  { href: '/#inicio', label: 'Início' },
+  { href: '/#visao-sistemica', label: 'Visão Sistêmica' },
+  { href: '/#quem-conduz', label: 'Quem conduz' },
+  { href: '/#jornadas', label: 'As Jornadas' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/#faq', label: 'Perguntas frequentes' },
+  { href: '/#convite', label: 'Contato' },
+];
+---
+<footer style="position:relative; z-index:2; background:var(--marrom-escuro); padding:52px 30px 64px; text-align:center;">
+  <nav aria-label="Navegação do site" style="margin-bottom:34px;">
+    <ul style="list-style:none; display:flex; flex-wrap:wrap; gap:14px 26px; justify-content:center; padding:0;">
+      {nav.map((n) => (<li><a href={n.href} style={linkStyle}>{n.label}</a></li>))}
+    </ul>
+  </nav>
+  <a href={footer.instagramUrl} rel="me" style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:12px; letter-spacing:0.28em; text-transform:uppercase; color:var(--ouroc); text-decoration:none;">{footer.instagramTexto}</a>
+  <div style="font-family:'Playfair Display',serif; font-weight:500; font-size:15px; letter-spacing:0.3em; color:var(--areia); margin-top:26px; padding-left:0.3em;">TAPHINY</div>
+  <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:11px; letter-spacing:0.05em; color:var(--areia); opacity:0.6; margin-top:22px;">{footer.copyright}</p>
+</footer>

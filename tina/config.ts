@@ -251,6 +251,49 @@ export default defineConfig({
               { type: "string", name: "mensagemMeditacoes", label: "Mensagem do botão 'meditações'", ui: { component: "textarea" } },
             ],
           },
+          // ---------- POP-UP DE ENTRADA ----------
+          {
+            type: "object",
+            name: "popup",
+            label: "Pop-up de entrada",
+            fields: [
+              { type: "boolean", name: "ativo", label: "Ativar pop-up (liga/desliga)" },
+              { type: "string", name: "titulo", label: "Título" },
+              { type: "string", name: "texto", label: "Texto", ui: { component: "textarea" } },
+              { type: "image", name: "imagem", label: "Imagem (opcional)" },
+              { type: "string", name: "botaoTexto", label: "Texto do botão (opcional)" },
+              { type: "string", name: "botaoLink", label: "Link do botão (opcional — ex.: link do WhatsApp)" },
+            ],
+          },
+        ],
+      },
+      // ============================================================
+      // COLEÇÃO: BLOG (artigos em markdown, um arquivo por post)
+      // ============================================================
+      {
+        name: "blog",
+        label: "Blog",
+        path: "src/content/blog",
+        format: "md",
+        ui: {
+          // gera o nome do arquivo (slug) a partir do título ao criar o post
+          filename: {
+            slugify: (values) =>
+              (values?.titulo || "post")
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-+|-+$/g, ""),
+          },
+        },
+        fields: [
+          { type: "string", name: "titulo", label: "Título", isTitle: true, required: true },
+          { type: "datetime", name: "data", label: "Data de publicação", required: true },
+          { type: "image", name: "capa", label: "Imagem de capa" },
+          { type: "string", name: "resumo", label: "Resumo (aparece na listagem e no Google)", ui: { component: "textarea" } },
+          { type: "boolean", name: "publicado", label: "Publicado (desmarque para deixar como rascunho)" },
+          { type: "rich-text", name: "corpo", label: "Conteúdo do post", isBody: true },
         ],
       },
     ],

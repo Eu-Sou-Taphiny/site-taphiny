@@ -1,0 +1,58 @@
+---
+import '../styles/theme.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  path?: string;      // caminho da página, ex: "/blog" ou "/blog/meu-post"
+  ogImage?: string;   // caminho absoluto (/assets/...) da imagem de compartilhamento
+  type?: string;      // "website" | "article"
+}
+const SITE = 'https://www.eusoutaphiny.com.br';
+const { title, description = '', path = '/', ogImage = '/assets/og-image.png', type = 'website' } = Astro.props;
+const canonical = SITE + path;
+const ogAbsolute = ogImage.startsWith('http') ? ogImage : SITE + ogImage;
+---
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+{description && <meta name="description" content={description}>}
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href={canonical}>
+<meta name="theme-color" content="#521416">
+
+<meta property="og:type" content={type}>
+<meta property="og:site_name" content="Taphiny — Visão Sistêmica">
+<meta property="og:title" content={title}>
+{description && <meta property="og:description" content={description}>}
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content={canonical}>
+<meta property="og:image" content={ogAbsolute}>
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+{description && <meta name="twitter:description" content={description}>}
+<meta name="twitter:image" content={ogAbsolute}>
+
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <SiteHeader />
+  <main>
+    <slot />
+  </main>
+  <SiteFooter />
+</body>
+</html>
