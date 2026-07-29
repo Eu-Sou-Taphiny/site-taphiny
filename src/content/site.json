@@ -175,7 +175,7 @@
     "mensagemMeditacoes": "Olá, Taphiny! Gostaria de acessar as meditações guiadas."
   },
   "popup": {
-    "ativo": false,
+    "ativo": true,
     "titulo": "Um convite para começar",
     "texto": "Receba um primeiro olhar sobre a Visão Sistêmica e dê o primeiro passo, no seu tempo.",
     "imagem": "",
