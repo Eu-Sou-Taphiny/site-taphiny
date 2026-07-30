@@ -177,10 +177,10 @@
   },
   "popup": {
     "ativo": true,
-    "titulo": "Um convite para começar",
-    "texto": "Receba um primeiro olhar sobre a Visão Sistêmica e dê o primeiro passo, no seu tempo.",
+    "titulo": "Eu tenho um convite para você...",
+    "texto": "Jornada Caminho de Volta\n\nUm trabalho a quatro mãos que une a Radiestesia e a Constelação Familiar para te guiar no resgate da sua essência e no reequilíbrio do seu campo.\nUm encontro especial de integração e cura profunda.",
     "imagem": "",
-    "botaoTexto": "Quero começar uma conversa",
+    "botaoTexto": "Quero garantir minha vaga",
     "botaoLink": "https://wa.me/5511925027759"
   }
 }
