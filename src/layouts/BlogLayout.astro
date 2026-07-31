@@ -10,7 +10,7 @@ interface Props {
   ogImage?: string;   // caminho absoluto (/assets/...) da imagem de compartilhamento
   type?: string;      // "website" | "article"
 }
-const SITE = 'https://www.eusoutaphiny.com.br';
+const SITE = 'https://eusoutaphiny.com.br';
 const { title, description = '', path = '/', ogImage = '/assets/og-image.png', type = 'website' } = Astro.props;
 const canonical = SITE + path;
 const ogAbsolute = ogImage.startsWith('http') ? ogImage : SITE + ogImage;

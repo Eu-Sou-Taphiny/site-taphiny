@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
-const SITE = 'https://www.eusoutaphiny.com.br';
+const SITE = 'https://eusoutaphiny.com.br';
 
 export const GET: APIRoute = async () => {
   const posts = (await getCollection('blog')).filter((p) => p.data.publicado);
