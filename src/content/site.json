@@ -71,6 +71,7 @@
     "meditacoes": {
       "rotulo": "Porta de entrada",
       "titulo": "Meditações Sistêmicas Guiadas",
+      "subtitulo": "Sentir no seu tempo",
       "texto": "Sinta a leveza e a clareza do meu método no seu tempo.\nPráticas guiadas para quem busca reordenar os pensamentos, acalmar as emoções e iniciar o processo de libertação de padrões herdados. Um passo simples, mas profundo, para você se conectar com a sua força no dia a dia.",
       "cta": "Lançamento em Breve"
     },
@@ -178,7 +179,8 @@
   "popup": {
     "ativo": true,
     "titulo": "Eu tenho um convite para você...",
-    "texto": "Jornada Caminho de Volta\n\nUm trabalho a quatro mãos que une a Radiestesia e a Constelação Familiar para te guiar no resgate da sua essência e no reequilíbrio do seu campo.\nUm encontro especial de integração e cura profunda.",
+    "subtitulo": "Jornada Caminho de Volta",
+    "texto": "Um trabalho a quatro mãos que une a Radiestesia e a Constelação Familiar para te guiar no resgate da sua essência e no reequilíbrio do seu campo.\nUm encontro especial de integração e cura profunda.",
     "imagem": "",
     "botaoTexto": "Quero garantir minha vaga",
     "botaoLink": "https://wa.me/5511925027759"

@@ -145,6 +145,7 @@ export default defineConfig({
                 fields: [
                   { type: "string", name: "rotulo", label: "Rótulo" },
                   { type: "string", name: "titulo", label: "Título" },
+                  { type: "string", name: "subtitulo", label: "Subtítulo em destaque (opcional)" },
                   { type: "string", name: "texto", label: "Texto", ui: { component: "textarea" } },
                   { type: "string", name: "cta", label: "Texto do link" },
                 ],
@@ -259,6 +260,7 @@ export default defineConfig({
             fields: [
               { type: "boolean", name: "ativo", label: "Ativar pop-up (liga/desliga)" },
               { type: "string", name: "titulo", label: "Título" },
+              { type: "string", name: "subtitulo", label: "Subtítulo em destaque (opcional)" },
               { type: "string", name: "texto", label: "Texto", ui: { component: "textarea" } },
               { type: "image", name: "imagem", label: "Imagem (opcional)" },
               { type: "string", name: "botaoTexto", label: "Texto do botão (opcional)" },

@@ -260,7 +260,10 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
 
       <div data-reveal style="border:1px dashed var(--ouro); padding:38px 30px; text-align:center; margin-bottom:44px;">
         <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.32em; text-transform:uppercase; color:var(--ouro); margin-bottom:16px;">{jornadas.meditacoes.rotulo}</div>
-        <div style="font-family:'Playfair Display',serif; font-size:23px; color:var(--marrom); margin-bottom:16px;">{jornadas.meditacoes.titulo}</div>
+        <div style={`font-family:'Playfair Display',serif; font-size:23px; color:var(--marrom); margin-bottom:${jornadas.meditacoes.subtitulo ? '10px' : '16px'};`}>{jornadas.meditacoes.titulo}</div>
+        {jornadas.meditacoes.subtitulo && (
+        <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{jornadas.meditacoes.subtitulo}</div>
+        )}
         <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); max-width:400px; margin:0 auto 26px; text-wrap:pretty;">{jornadas.meditacoes.texto}</p>
         <a href={wa(config.mensagemMeditacoes)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota); text-decoration:none; border-bottom:1px solid var(--areia); padding-bottom:6px;">{jornadas.meditacoes.cta}</a>
       </div>
@@ -370,6 +373,9 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
       <div style="padding:34px 30px 34px;">
         {popup.titulo && (
           <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:24px; line-height:1.3; color:var(--marrom); margin-bottom:14px; text-wrap:balance;">{popup.titulo}</h2>
+        )}
+        {popup.subtitulo && (
+          <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{popup.subtitulo}</div>
         )}
         {popup.texto && (
           <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.8; color:var(--bordeaux); text-wrap:pretty;">{popup.texto}</p>
