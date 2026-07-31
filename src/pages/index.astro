@@ -68,6 +68,36 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
   .tp-corp:hover{ background:var(--marrom) !important; color:var(--ouroc) !important; border-color:var(--marrom) !important; }
   .tp-btn{ transition:opacity .4s; }
   .tp-btn:hover{ opacity:.85; }
+
+  /* ---------- FAQ em sanfona (clique para expandir) ---------- */
+  .tp-faq-item{ border-bottom:1px solid var(--areia); }
+  .tp-faq-item:first-child{ border-top:1px solid var(--areia); }
+  .tp-faq-q{ display:flex; align-items:flex-start; justify-content:space-between; gap:22px;
+             padding:26px 0; cursor:pointer; list-style:none; }
+  .tp-faq-q::-webkit-details-marker{ display:none; }
+  .tp-faq-q h3{ font-family:'Playfair Display',serif; font-weight:400; font-size:21px; line-height:1.35;
+                color:var(--marrom); text-wrap:pretty; transition:color .3s; }
+  .tp-faq-q:hover h3{ color:var(--terracota); }
+  .tp-faq-i{ flex:none; width:22px; height:22px; margin-top:4px; position:relative;
+             transition:transform .35s ease; }
+  .tp-faq-i::before, .tp-faq-i::after{ content:''; position:absolute; top:50%; left:50%; background:var(--ouro);
+             transform:translate(-50%,-50%); }
+  .tp-faq-i::before{ width:15px; height:1px; }
+  .tp-faq-i::after{ width:1px; height:15px; }
+  .tp-faq-item[open] .tp-faq-i{ transform:rotate(135deg); }
+  .tp-faq-a{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95;
+             color:var(--bordeaux); padding:0 42px 30px 0; text-wrap:pretty; }
+  .tp-faq-item[open] .tp-faq-a{ animation:tp-faq-abrir .32s ease both; }
+  @keyframes tp-faq-abrir{ from{ opacity:0; transform:translateY(-6px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce){
+    .tp-faq-i{ transition:none; }
+    .tp-faq-item[open] .tp-faq-a{ animation:none; }
+  }
+  @media (max-width:480px){
+    .tp-faq-q{ gap:16px; padding:22px 0; }
+    .tp-faq-q h3{ font-size:19px; }
+    .tp-faq-a{ padding-right:0; }
+  }
 </style>
 
 <!-- DADOS ESTRUTURADOS (schema.org / JSON-LD) -->
@@ -317,12 +347,15 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     <div data-reveal style="position:relative; z-index:2; max-width:660px; margin:0 auto;">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); text-align:center; margin-bottom:24px;">{faq.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:56px; text-wrap:balance;">{faq.titulo}</h2>
-      <div style="display:flex; flex-direction:column; gap:40px;">
+      <div>
         {faq.itens.map((item) => (
-        <div>
-          <h3 style="font-family:'Playfair Display',serif; font-weight:400; font-size:21px; line-height:1.35; color:var(--marrom); margin-bottom:14px;">{item.pergunta}</h3>
-          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95; color:var(--bordeaux); text-wrap:pretty;">{item.resposta}</p>
-        </div>
+        <details class="tp-faq-item">
+          <summary class="tp-faq-q">
+            <h3>{item.pergunta}</h3>
+            <span class="tp-faq-i" aria-hidden="true"></span>
+          </summary>
+          <p class="tp-faq-a">{item.resposta}</p>
+        </details>
         ))}
       </div>
     </div>
