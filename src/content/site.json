@@ -49,21 +49,23 @@
     "frase": "“Por amor, aprendemos quem precisávamos ser; por consciência, lembramos quem realmente somos.”"
   },
   "comparacao": {
-    "titulo": "Psicoterapia e Visão Sistêmica",
+    "titulo": "Psicoterapia e Terapia Sistêmica",
     "subtitulo": "Não são caminhos opostos. São abordagens complementares.",
     "col1Titulo": "Psicoterapia",
     "col1": [
       "Compreende a experiência individual.",
       "Favorece autoconhecimento e elaboração emocional.",
-      "Trabalha pensamentos, emoções e comportamentos."
+      "Trabalha pensamentos, emoções e comportamentos.",
+      "Ajuda a desenvolver novos recursos internos."
     ],
-    "col2Titulo": "Visão Sistêmica",
+    "col2Titulo": "Terapia Sistêmica",
     "col2": [
-      "Observa a pessoa dentro dos sistemas aos quais pertence.",
-      "Revela lealdades invisíveis e dinâmicas familiares.",
-      "Busca restaurar a ordem dos vínculos."
+      "Amplia o olhar para os vínculos e sistemas dos quais a pessoa faz parte.",
+      "Amplia a consciência sobre padrões, lealdades e dinâmicas invisíveis que influenciam as escolhas.",
+      "Considera a história familiar e a posição da pessoa dentro do seu sistema familiar de origem.",
+      "Busca reconhecer o que pertence a cada história, favorecendo mais clareza e liberdade nas escolhas."
     ],
-    "fecho": "Enquanto a psicoterapia amplia a consciência sobre a experiência individual, a Visão Sistêmica convida a olhar para a origem onde essa experiência foi construída."
+    "fecho": "Enquanto a Psicoterapia aprofunda a experiência individual, a Terapia Sistêmica amplia o olhar para os vínculos e as histórias que também influenciam a forma como vivemos."
   },
   "jornadas": {
     "titulo": "As Jornadas",
