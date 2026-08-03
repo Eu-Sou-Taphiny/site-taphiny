@@ -20,20 +20,20 @@
   "visao": {
     "rotulo": "A abordagem",
     "titulo": "O que é Visão Sistêmica?",
-    "definicao": "A Visão Sistêmica enxerga você além do sintoma, compreendendo a sua história dentro do seu sistema familiar e dos seus vínculos mais profundos.\nInspirada nos princípios da Constelação Familiar, essa abordagem parte da premissa de que nem tudo o que nos trava começou em nós. Ao trazer clareza para os padrões herdados por gerações, reorganizamos o que estava fora de lugar para que a sua vida volte a caminhar.",
-    "paragrafo": "A Visão Sistêmica considera que ninguém existe isoladamente. Somos parte de uma rede de relações construída muito antes do nosso nascimento. Família, pertencimento, vínculos e histórias que já aconteceram influenciam a forma como nos relacionamos hoje com o amor, o dinheiro, a carreira, a saúde e a própria vida.",
+    "definicao": "A Visão Sistêmica convida você a compreender a sua vida para além do sintoma. Ela considera que a forma como pensamos, sentimos, agimos e nos relacionamos também é influenciada pela nossa história, pelos vínculos que construímos ao longo da vida e pelo sistema familiar ao qual pertencemos.",
+    "paragrafo": "Inspirada nos princípios da Constelação Familiar, desenvolvida por Bert Hellinger, essa abordagem amplia a consciência sobre padrões que podem estar influenciando as suas escolhas, para que você assuma o seu lugar com mais clareza, liberdade e responsabilidade.",
     "pilares": [
       {
-        "titulo": "Pertencer",
-        "texto": "Reconhecer a origem."
+        "titulo": "Lei do Pertencimento",
+        "texto": "Reconhecer a sua história e dar lugar a tudo e a todos que fazem parte dela."
       },
       {
-        "titulo": "Ordenar",
-        "texto": "Restaurar lugares e devolver pesos que não são seus."
+        "titulo": "Lei da Ordem",
+        "texto": "Respeitar o lugar de cada pessoa e assumir apenas aquilo que lhe pertence."
       },
       {
-        "titulo": "Fluir",
-        "texto": "Permitir que a vida volte a seguir seu movimento natural."
+        "titulo": "Lei do Equilíbrio",
+        "texto": "Construir relações e escolhas com mais consciência, responsabilidade e reciprocidade, permitindo que a vida volte a fluir."
       }
     ]
   },
