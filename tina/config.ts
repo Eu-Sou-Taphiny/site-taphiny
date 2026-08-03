@@ -161,6 +161,8 @@ export default defineConfig({
                   { type: "string", name: "titulo", label: "Título" },
                   { type: "string", name: "rotulo", label: "Rótulo" },
                   { type: "string", name: "texto", label: "Texto", ui: { component: "textarea" } },
+                  { type: "string", name: "resultadoRotulo", label: "Rótulo do resultado (padrão: Resultado esperado)" },
+                  { type: "string", name: "resultado", label: "Resultado esperado (opcional)", ui: { component: "textarea" } },
                   { type: "string", name: "preco", label: "Preço / destaque (ex.: R$ 450)" },
                   { type: "string", name: "precoNota", label: "Nota ao lado do preço" },
                   { type: "string", name: "cta", label: "Texto do botão" },
