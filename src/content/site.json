@@ -138,6 +138,14 @@
     "titulo": "Visão Sistêmica, Terapia Sistêmica e Constelação Familiar",
     "itens": [
       {
+        "pergunta": "Qual é a diferença entre Visão Sistêmica, Terapia Sistêmica e Constelação Familiar?",
+        "resposta": "A Visão Sistêmica é uma forma de compreender a vida a partir dos vínculos, das relações e da história de cada pessoa. Mais do que uma abordagem terapêutica, é um convite para desenvolver um novo olhar sobre si, reconhecendo como sentimentos, emoções, experiências e relações influenciam a forma como vivemos e fazemos as nossas escolhas. É um estilo de vida a ser vivido.\nA Terapia Sistêmica é o processo terapêutico que utiliza essa visão para ampliar a consciência, favorecer novas compreensões e promover mudanças internas mais consistentes.\nJá a Constelação Familiar, criada por Bert Hellinger, é uma das principais ferramentas utilizadas nesse processo para tornar visíveis as dinâmicas, os vínculos e os padrões que podem estar influenciando a vida de uma pessoa."
+      },
+      {
+        "pergunta": "Preciso acreditar em Constelação Familiar para fazer qualquer mentoria ou sessão?",
+        "resposta": "Não. O mais importante é estar aberto a refletir sobre a própria história e participar do processo com curiosidade e responsabilidade. A Visão Sistêmica é um convite para ampliar a consciência, e não exige nenhuma crença específica."
+      },
+      {
         "pergunta": "A Terapia Sistêmica substitui a Psicoterapia?",
         "resposta": "Não. São abordagens diferentes e que podem caminhar juntas. Enquanto a psicoterapia aprofunda a experiência individual, a Terapia Sistêmica amplia o olhar para os vínculos, a história e as dinâmicas que também influenciam as suas escolhas."
       },
@@ -164,14 +172,6 @@
       {
         "pergunta": "Como escolher entre a Sessão Única, a Jornada Essência e a Jornada Raízes?",
         "resposta": "A escolha depende do momento que você está vivendo e do seu objetivo.\n- Sessão Sistêmica: para compreender uma questão específica.\n- Jornada Essência: para fortalecer a sua estrutura interna enquanto trabalha uma área da vida.\n- Jornada Raízes: para aprofundar a compreensão das histórias, vínculos e dinâmicas que influenciam alguma área da vida.\nSe houver dúvida, eu ajudo você a escolher o caminho mais adequado."
-      },
-      {
-        "pergunta": "Preciso acreditar em Constelação Familiar para fazer qualquer mentoria ou sessão?",
-        "resposta": "Não. O mais importante é estar aberto a refletir sobre a própria história e participar do processo com curiosidade e responsabilidade. A Visão Sistêmica é um convite para ampliar a consciência, e não exige nenhuma crença específica."
-      },
-      {
-        "pergunta": "Qual é a diferença entre Visão Sistêmica, Terapia Sistêmica e Constelação Familiar?",
-        "resposta": "A Visão Sistêmica é uma forma de compreender a vida a partir dos vínculos, das relações e da história de cada pessoa. Mais do que uma abordagem terapêutica, é um convite para desenvolver um novo olhar sobre si, reconhecendo como sentimentos, emoções, experiências e relações influenciam a forma como vivemos e fazemos as nossas escolhas. É um estilo de vida a ser vivido.\nA Terapia Sistêmica é o processo terapêutico que utiliza essa visão para ampliar a consciência, favorecer novas compreensões e promover mudanças internas mais consistentes.\nJá a Constelação Familiar, criada por Bert Hellinger, é uma das principais ferramentas utilizadas nesse processo para tornar visíveis as dinâmicas, os vínculos e os padrões que podem estar influenciando a vida de uma pessoa."
       }
     ]
   },
