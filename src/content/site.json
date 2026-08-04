@@ -118,19 +118,19 @@
   },
   "paraQuem": {
     "titulo": "Para quem é esta jornada",
-    "col1Titulo": "Esta jornada pode fazer sentido para você se...",
+    "col1Titulo": "Esta jornada é para você se...",
     "col1": [
-      "Você sente que alguma(s) área(s) da sua vida parecem se repetir, mesmo quando se esforça para fazer diferente.",
-      "Você deseja compreender o que influencia as suas escolhas, em vez de apenas reagir às situações.",
-      "Você busca viver com mais clareza, autenticidade e responsabilidade pela própria vida.",
-      "Você sente que chegou o momento de ocupar o seu lugar e construir uma história diferente."
+      "Você faz diferente, mas os resultados continuam os mesmos.",
+      "Você deseja compreender o que influencia as suas escolhas.",
+      "Você busca viver com mais clareza, autenticidade e liberdade.",
+      "Você sente que chegou o momento de viver a sua própria história."
     ],
     "col2Titulo": "Ainda não é o momento se...",
     "col2": [
       "Você espera que alguém encontre as respostas por você.",
-      "Busca uma solução rápida, sem disposição para um processo de reflexão.",
-      "Não sente abertura para olhar com curiosidade e responsabilidade para a própria história.",
-      "Prefere que tudo permaneça como está, mesmo desejando resultados diferentes."
+      "Busca soluções rápidas, sem disposição para um processo.",
+      "Não sente abertura para olhar para a própria história.",
+      "Espera resultados diferentes sem disposição para rever o caminho."
     ]
   },
   "faq": {
