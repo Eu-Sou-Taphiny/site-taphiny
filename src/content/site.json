@@ -210,11 +210,11 @@
   },
   "popup": {
     "ativo": true,
-    "titulo": "É uma alegria receber você por aqui!",
-    "subtitulo": "Sinta-se em casa",
-    "texto": "Este é um espaço criado para quem deseja compreender a própria história, ampliar a consciência e construir uma vida mais alinhada a quem realmente é. Seja muito bem-vindo(a).",
+    "titulo": "Que bom ter você por aqui!",
+    "subtitulo": "Um convite para olhar além da superfície",
+    "texto": "Reorganize seu mundo interno com a Visão Sistêmica e assuma o controle da sua vida e da sua história com clareza, presença e leveza.",
     "imagem": "",
-    "botaoTexto": "Quero garantir minha vaga",
+    "botaoTexto": "",
     "botaoLink": "https://wa.me/5511925027759"
   }
 }
