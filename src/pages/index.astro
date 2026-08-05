@@ -228,6 +228,9 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-const-rotulo{ font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.32em;
                     text-transform:uppercase; color:var(--bordeaux); margin-bottom:12px; }
   .tp-const-titulo{ font-family:'Playfair Display',serif; font-size:23px; color:var(--marrom); }
+  .tp-const-dica{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:12.5px;
+                  line-height:1.7; color:var(--bordeaux); max-width:330px; margin:12px auto 0;
+                  text-wrap:pretty; }
   .tp-const-palco{ display:block; width:100%; height:auto; touch-action:none;
                    margin:6px auto 0; max-width:520px; }
   .tp-const-alvo{ fill:none; stroke:var(--areia); stroke-width:1; stroke-dasharray:3 5;
@@ -236,8 +239,12 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-const-peca{ cursor:grab; }
   .tp-const-peca.pegando{ cursor:grabbing; }
   .tp-const-peca circle{ fill:#FBF3E6; stroke:var(--terracota); stroke-width:1.2;
-                         transition:fill .35s ease, stroke .35s ease; }
+                         transition:fill .35s ease, stroke .35s ease, r .45s ease; }
   .tp-const-peca.ok circle{ fill:var(--ouro); fill-opacity:0.28; stroke:var(--ouro); }
+  /* sintoma e destino: sem lugar marcado, então vêm com traço interrompido —
+     a pessoa vê que ali não há resposta certa esperando por ela */
+  .tp-const-peca.livre circle{ stroke-dasharray:4 4; }
+  .tp-const-peca.livre.ok circle{ stroke-dasharray:none; }
   .tp-const-peca text{ font-family:'Montserrat',sans-serif; font-size:9.5px; font-weight:400;
                        letter-spacing:0.08em; fill:var(--marrom); text-anchor:middle;
                        pointer-events:none; user-select:none; }
@@ -438,15 +445,18 @@ const blocado = !!(config as any).secoesFechadas;
         </div>
       </div>
 
-      <!-- 4a) CONSTELAÇÃO INTERATIVA: arrastar cada pessoa até o seu lugar.
-           Explica a Visão Sistêmica pela mão, sem texto. Só aparece se houver
-           JavaScript e ponteiro; o parágrafo acima já diz o necessário sem ela.
-           A DISPOSIÇÃO das posições precisa do aval da Taphiny — quem entende
-           de ordem dos vínculos é ela, não eu. -->
+      <!-- 4a) CONSTELAÇÃO INTERATIVA, conforme a orientação da Taphiny.
+           Peças: Avô, Avó, Pai, Mãe, Você, Sintoma e Destino. Sem irmãos de
+           propósito — quem é filho único travaria na projeção.
+           Sintoma e Destino NÃO têm lugar marcado nem encaixe: é justamente
+           onde a pessoa os coloca que está a projeção (em cima de si, na frente
+           da mãe, entre os pais). O Reordenar é que revela a ordem, com o
+           sintoma menor e ao lado. -->
       <div class="tp-const" data-tp-const hidden>
         <div class="tp-const-cab">
           <div class="tp-const-rotulo">Experimente</div>
           <div class="tp-const-titulo">Leve cada um ao seu lugar</div>
+          <p class="tp-const-dica">O sintoma e o destino não têm lugar marcado — ponha onde sentir.</p>
         </div>
         <svg class="tp-const-palco" viewBox="0 0 400 300" aria-hidden="true">
           <g class="tp-const-alvos"></g>
@@ -454,8 +464,8 @@ const blocado = !!(config as any).secoesFechadas;
         </svg>
         <p class="tp-const-fim" role="status">Quando cada um ocupa o seu lugar, a vida volta a fluir.</p>
         <div class="tp-const-bts">
-          <button type="button" class="tp-const-bt" data-const-resolver>Ver no lugar</button>
-          <button type="button" class="tp-const-bt" data-const-embaralhar>Embaralhar</button>
+          <button type="button" class="tp-const-bt" data-const-resolver>Reordenar</button>
+          <button type="button" class="tp-const-bt" data-const-embaralhar>Começar de novo</button>
         </div>
       </div>
       </Bloco>
@@ -1207,44 +1217,57 @@ const blocado = !!(config as any).secoesFechadas;
     var gPecas = raiz.querySelector('.tp-const-pecas');
     if(!svg || !gAlvos || !gPecas || !window.PointerEvent) return;
 
-    var R = 27, PERTO = 34;                    // raio da peça e tolerância do encaixe
-    // A ordem aqui é um rascunho meu; quem valida é a Taphiny.
-    var LUGARES = [
-      { nome:'Avó',  x:200, y:54,  ini:{x:54,  y:242} },
-      { nome:'Pai',  x:146, y:132, ini:{x:336, y:62}  },
-      { nome:'Mãe',  x:254, y:132, ini:{x:64,  y:74}  },
-      { nome:'Você', x:160, y:220, ini:{x:308, y:236} },
-      { nome:'Irmã', x:240, y:220, ini:{x:196, y:150} }
+    var R = 25, R_MENOR = 18, PERTO = 32;      // raio da peça e tolerância do encaixe
+
+    // Ordem indicada pela Taphiny: avós atrás e acima, depois pai e mãe (dando
+    // força), você no centro, o destino na frente (olhando para o futuro) e o
+    // sintoma ao lado, menor, pacificado.
+    var PECAS = [
+      { nome:'Avô',     x:148, y:46,  ini:{x:56,  y:250}, marcado:true },
+      { nome:'Avó',     x:252, y:46,  ini:{x:292, y:274}, marcado:true },
+      { nome:'Pai',     x:164, y:112, ini:{x:52,  y:130}, marcado:true },
+      { nome:'Mãe',     x:236, y:112, ini:{x:348, y:130}, marcado:true },
+      { nome:'Você',    x:200, y:182, ini:{x:200, y:40},  marcado:true },
+      // sem lugar marcado: é onde a pessoa põe que interessa
+      { nome:'Destino', x:200, y:252, ini:{x:72,  y:74},  marcado:false },
+      { nome:'Sintoma', x:322, y:214, ini:{x:312, y:74},  marcado:false, encolhe:true }
     ];
 
     var pecas = [];
-    LUGARES.forEach(function(L){
-      var alvo = document.createElementNS('http://www.w3.org/2000/svg','circle');
-      alvo.setAttribute('class','tp-const-alvo');
-      alvo.setAttribute('cx', L.x); alvo.setAttribute('cy', L.y); alvo.setAttribute('r', R);
-      gAlvos.appendChild(alvo);
+    PECAS.forEach(function(L){
+      var alvo = null;
+      if(L.marcado){
+        alvo = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        alvo.setAttribute('class','tp-const-alvo');
+        alvo.setAttribute('cx', L.x); alvo.setAttribute('cy', L.y); alvo.setAttribute('r', R);
+        gAlvos.appendChild(alvo);
+      }
 
       var g = document.createElementNS('http://www.w3.org/2000/svg','g');
-      g.setAttribute('class','tp-const-peca');
+      g.setAttribute('class', 'tp-const-peca' + (L.marcado ? '' : ' livre'));
       var c = document.createElementNS('http://www.w3.org/2000/svg','circle');
       c.setAttribute('r', R); c.setAttribute('cx', 0); c.setAttribute('cy', 0);
       var tx = document.createElementNS('http://www.w3.org/2000/svg','text');
       tx.setAttribute('y', 3.4); tx.textContent = L.nome;
       g.appendChild(c); g.appendChild(tx);
       gPecas.appendChild(g);
-      pecas.push({ g:g, alvo:alvo, L:L, x:L.ini.x, y:L.ini.y, ok:false });
+      pecas.push({ g:g, c:c, alvo:alvo, L:L, x:L.ini.x, y:L.ini.y, ok:false });
     });
 
     function pinta(p){
       p.g.setAttribute('transform', 'translate('+p.x.toFixed(1)+','+p.y.toFixed(1)+')');
       p.g.classList.toggle('ok', p.ok);
-      p.alvo.classList.toggle('ok', p.ok);
+      if(p.alvo) p.alvo.classList.toggle('ok', p.ok);
+      p.c.setAttribute('r', (p.ok && p.L.encolhe) ? R_MENOR : R);
     }
+    // O desfecho aparece quando a família está no lugar; sintoma e destino não
+    // entram na conta porque não têm lugar certo antes do Reordenar.
     function conferir(){
-      var todos = pecas.every(function(p){ return p.ok; });
-      raiz.classList.toggle('completo', todos);
+      var prontos = pecas.every(function(p){ return !p.L.marcado || p.ok; });
+      raiz.classList.toggle('completo', prontos);
     }
     function coloca(p, x, y){
+      if(!p.L.marcado){ p.x = x; p.y = y; pinta(p); return; }   // sem encaixe
       var d = Math.hypot(x - p.L.x, y - p.L.y);
       if(d <= PERTO){ p.x = p.L.x; p.y = p.L.y; p.ok = true; }
       else { p.x = x; p.y = y; p.ok = false; }
@@ -1264,7 +1287,11 @@ const blocado = !!(config as any).secoesFechadas;
         p.g.classList.add('pegando');
         gPecas.appendChild(p.g);                 // quem está na mão fica na frente
         try { p.g.setPointerCapture(ev.pointerId); } catch(e){}
-        var mv = function(e2){ var q = noPalco(e2); p.x = q.x; p.y = q.y; p.ok = false; pinta(p); };
+        var mv = function(e2){
+          var q = noPalco(e2); p.x = q.x; p.y = q.y;
+          if(p.L.marcado){ p.ok = false; }
+          pinta(p);
+        };
         var up = function(e2){
           p.g.classList.remove('pegando');
           var q = noPalco(e2); coloca(p, q.x, q.y);
@@ -1283,13 +1310,17 @@ const blocado = !!(config as any).secoesFechadas;
     // sem eles o desfecho ficaria trancado atrás do arrastar.
     var bResolver = raiz.querySelector('[data-const-resolver]');
     var bEmbaralhar = raiz.querySelector('[data-const-embaralhar]');
+    // Reordenar mostra a ordem: a família assume o lugar, o destino vai para a
+    // frente e o sintoma se recolhe ao lado, menor. Um a um, de trás para a
+    // frente, para a ordem ser lida e não só vista.
     if(bResolver) bResolver.addEventListener('click', function(){
       pecas.forEach(function(p, i){
         var ir = function(){ p.x = p.L.x; p.y = p.L.y; p.ok = true; pinta(p); conferir(); };
-        reduce ? ir() : setTimeout(ir, i * 130);
+        reduce ? ir() : setTimeout(ir, i * 150);
       });
     });
     if(bEmbaralhar) bEmbaralhar.addEventListener('click', function(){
+      raiz.classList.remove('completo');
       pecas.forEach(function(p){ p.x = p.L.ini.x; p.y = p.L.ini.y; p.ok = false; pinta(p); });
       conferir();
     });
