@@ -222,17 +222,12 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-cards.js .tp-card{ display:none; }
   .tp-cards.js .tp-card.ativo{ display:block; animation:tp-troca .4s ease both; }
 
-  /* ---------- 4a) Constelação interativa ---------- */
-  .tp-const{ margin-top:64px; padding-top:56px; border-top:1px solid rgba(82,20,22,0.14); }
-  .tp-const-cab{ text-align:center; margin-bottom:8px; }
-  .tp-const-rotulo{ font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.32em;
-                    text-transform:uppercase; color:var(--bordeaux); margin-bottom:12px; }
-  .tp-const-titulo{ font-family:'Playfair Display',serif; font-size:23px; color:var(--marrom); }
-  .tp-const-dica{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:12.5px;
-                  line-height:1.7; color:var(--bordeaux); max-width:330px; margin:12px auto 0;
-                  text-wrap:pretty; }
+  /* ---------- 4a) Constelação interativa (seção própria) ---------- */
+  .tp-const-dica{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:13px;
+                  line-height:1.8; color:var(--bordeaux); text-align:center; max-width:390px;
+                  margin:0 auto; text-wrap:pretty; }
   .tp-const-palco{ display:block; width:100%; height:auto; touch-action:none;
-                   margin:6px auto 0; max-width:520px; }
+                   margin:22px auto 0; max-width:520px; }
   .tp-const-alvo{ fill:none; stroke:var(--areia); stroke-width:1; stroke-dasharray:3 5;
                   transition:stroke .4s ease, stroke-dasharray .4s ease; }
   .tp-const-alvo.ok{ stroke:var(--ouro); stroke-dasharray:none; }
@@ -445,29 +440,6 @@ const blocado = !!(config as any).secoesFechadas;
         </div>
       </div>
 
-      <!-- 4a) CONSTELAÇÃO INTERATIVA, conforme a orientação da Taphiny.
-           Peças: Avô, Avó, Pai, Mãe, Você, Sintoma e Destino. Sem irmãos de
-           propósito — quem é filho único travaria na projeção.
-           Sintoma e Destino NÃO têm lugar marcado nem encaixe: é justamente
-           onde a pessoa os coloca que está a projeção (em cima de si, na frente
-           da mãe, entre os pais). O Reordenar é que revela a ordem, com o
-           sintoma menor e ao lado. -->
-      <div class="tp-const" data-tp-const hidden>
-        <div class="tp-const-cab">
-          <div class="tp-const-rotulo">Experimente</div>
-          <div class="tp-const-titulo">Leve cada um ao seu lugar</div>
-          <p class="tp-const-dica">O sintoma e o destino não têm lugar marcado — ponha onde sentir.</p>
-        </div>
-        <svg class="tp-const-palco" viewBox="0 0 400 300" aria-hidden="true">
-          <g class="tp-const-alvos"></g>
-          <g class="tp-const-pecas"></g>
-        </svg>
-        <p class="tp-const-fim" role="status">Quando cada um ocupa o seu lugar, a vida volta a fluir.</p>
-        <div class="tp-const-bts">
-          <button type="button" class="tp-const-bt" data-const-resolver>Reordenar</button>
-          <button type="button" class="tp-const-bt" data-const-embaralhar>Começar de novo</button>
-        </div>
-      </div>
       </Bloco>
     </div>
   </section>
@@ -542,8 +514,43 @@ const blocado = !!(config as any).secoesFechadas;
     </div>
   </section>
 
+  <!-- 5b) A EXPERIÊNCIA: CONSTELAÇÃO INTERATIVA
+       Bloco próprio, logo depois do comparativo. Peças e ordem conforme a
+       orientação da Taphiny: Avô, Avó, Pai, Mãe, Você, Sintoma e Destino — sem
+       irmãos de propósito, porque quem é filho único travaria na projeção.
+       Sintoma e Destino não têm lugar marcado nem encaixe: é onde a pessoa os
+       coloca que está a projeção (em cima de si, na frente da mãe, entre os
+       pais). O Reordenar é que revela a ordem, com o sintoma menor e ao lado.
+       Fundo rosa de propósito: é a cor sobre a qual as peças foram desenhadas,
+       e separa o comparativo (creme) das Jornadas (creme). -->
+  <section id="constelacao" data-screen-label="Constelacao" style="background:var(--rosa); padding:110px 30px;">
+    <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
+      <Bloco blocado={blocado} centro>
+      <Fragment slot="cabeca">
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">Experimente</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:18px; text-wrap:balance;">Leve cada um ao seu lugar</h2>
+      </Fragment>
+      <div class="tp-const" data-tp-const hidden>
+        <p class="tp-const-dica">Arraste as pessoas. O sintoma e o destino não têm lugar marcado — ponha onde sentir, e depois toque em Reordenar.</p>
+        <svg class="tp-const-palco" viewBox="0 0 400 300" aria-hidden="true">
+          <g class="tp-const-alvos"></g>
+          <g class="tp-const-pecas"></g>
+        </svg>
+        <p class="tp-const-fim" role="status">Quando cada um ocupa o seu lugar, a vida volta a fluir.</p>
+        <div class="tp-const-bts">
+          <button type="button" class="tp-const-bt" data-const-resolver>Reordenar</button>
+          <button type="button" class="tp-const-bt" data-const-embaralhar>Começar de novo</button>
+        </div>
+      </div>
+      </Bloco>
+    </div>
+  </section>
+
   <!-- 6) AS JORNADAS -->
-  <section id="jornadas" data-screen-label="Jornadas" style="background:var(--creme); padding:40px 30px 110px;">
+  <!-- padding do topo é 110px (e não os 40px de antes) porque agora existe a
+       seção da constelação, em rosa, imediatamente acima — antes esta seção
+       encostava no comparativo, também creme, e as duas liam como um bloco só -->
+  <section id="jornadas" data-screen-label="Jornadas" style="background:var(--creme); padding:110px 30px;">
     <div style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <div data-reveal style="text-align:center; margin-bottom:56px;">
         <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.3; color:var(--marrom); margin-bottom:16px;">{jornadas.titulo}</h2>
