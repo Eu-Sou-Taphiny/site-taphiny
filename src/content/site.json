@@ -7,33 +7,150 @@
     "marca": "TAPHINY",
     "subtitulo": "Mentora Sistêmica",
     "titulo": "Nem sempre o melhor caminho é agir mais, mas compreender melhor.",
-    "paragrafo": "Viver no automático é repetir caminhos e colher os mesmos resultados nas suas escolhas e relações. Ampliar essa consciência é o que te tira da reação automática — permitindo que você ocupe o seu lugar e construa, com clareza e responsabilidade, a vida que realmente deseja.",
-    "frase": "\"Toda transformação começa com a consciência sobre o que influencia as suas escolhas.\"",
+    "paragrafo": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Viver no automático é repetir caminhos e colher os mesmos resultados nas suas escolhas e relações. Ampliar essa consciência é o que te tira da reação automática — permitindo que você ocupe o seu lugar e construa, com clareza e responsabilidade, a vida que realmente deseja."
+            }
+          ]
+        }
+      ]
+    },
+    "frase": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "\"Toda transformação começa com a consciência sobre o que influencia as suas escolhas.\""
+            }
+          ]
+        }
+      ]
+    },
     "cta": "Quero dar o meu primeiro passo"
   },
   "provocacao": {
     "rotulo": "Autoconsciência",
     "titulo": "Por que fazemos o que fazemos?",
-    "paragrafo1": "Tentamos mudar comportamentos e nos posicionar com firmeza, mas bloqueios invisíveis continuam nos travando.",
-    "paragrafo2": "Enxergar essas dinâmicas não serve para nos prender a histórias do passado ou à trava atual, mas para revelar o que ainda opera no oculto e não destrava a nossa vida hoje - permitindo, assim, que assumamos o controle consciente das nossas decisões e o nosso verdadeiro lugar."
+    "paragrafo1": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Tentamos mudar comportamentos e nos posicionar com firmeza, mas bloqueios invisíveis continuam nos travando."
+            }
+          ]
+        }
+      ]
+    },
+    "paragrafo2": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Enxergar essas dinâmicas não serve para nos prender a histórias do passado ou à trava atual, mas para revelar o que ainda opera no oculto e não destrava a nossa vida hoje - permitindo, assim, que assumamos o controle consciente das nossas decisões e o nosso verdadeiro lugar."
+            }
+          ]
+        }
+      ]
+    }
   },
   "visao": {
     "rotulo": "A abordagem",
     "titulo": "O que é Visão Sistêmica?",
-    "definicao": "É uma postura de autopercepção diária. Ela te convida a tirar o foco do problema externo e entender o que ele desperta dentro de você, trazendo maturidade para as suas escolhas práticas.",
-    "paragrafo": "Através da Constelação Familiar, identificamos histórias que se repetem no seu sistema. Um olhar que acolhe a origem, solta repetições antigas e abre espaço para uma vida verdadeiramente consciente e livre.",
+    "definicao": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "É uma postura de autopercepção diária. Ela te convida a tirar o foco do problema externo e entender o que ele desperta dentro de você, trazendo maturidade para as suas escolhas práticas."
+            }
+          ]
+        }
+      ]
+    },
+    "paragrafo": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Através da Constelação Familiar, identificamos histórias que se repetem no seu sistema. Um olhar que acolhe a origem, solta repetições antigas e abre espaço para uma vida verdadeiramente consciente e livre."
+            }
+          ]
+        }
+      ]
+    },
     "pilares": [
       {
         "titulo": "Pertencimento",
-        "texto": "Acolher sua história, ganhar força."
+        "texto": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Acolher sua história, ganhar força."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "titulo": "Ordem",
-        "texto": "Ocupar com presença seu lugar."
+        "texto": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Ocupar com presença seu lugar."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "titulo": "Equilíbrio",
-        "texto": "Trocas saudáveis, vida fluindo."
+        "texto": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Trocas saudáveis, vida fluindo."
+                }
+              ]
+            }
+          ]
+        }
       }
     ]
   },
@@ -43,14 +160,79 @@
     "videoCapa": "",
     "rotulo": "A Taphiny",
     "titulo": "Realizar muito e, ainda assim, sentir que algo falta",
-    "paragrafo1": "Sempre fui uma pessoa prática e realizadora. Mas, por dentro, existia uma sensação incômoda de que as conquistas externas não preenchiam meu mundo interno.",
-    "paragrafo2": "Na busca por respostas, encontrei a Visão Sistêmica. Compreendi o que operava no meu inconsciente, reorganizei meu mundo interno e assumi meu verdadeiro protagonismo.",
-    "paragrafo3": "Hoje, como mentora e consteladora, conduzo pessoas a enxergarem o invisível das suas histórias, soltando repetições automáticas para ocuparem o seu próprio lugar com clareza, força e autenticidade.",
-    "frase": "“Por amor, aprendemos quem precisávamos ser; por consciência, lembramos quem realmente somos.”"
+    "paragrafo1": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Sempre fui uma pessoa prática e realizadora. Mas, por dentro, existia uma sensação incômoda de que as conquistas externas não preenchiam meu mundo interno."
+            }
+          ]
+        }
+      ]
+    },
+    "paragrafo2": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Na busca por respostas, encontrei a Visão Sistêmica. Compreendi o que operava no meu inconsciente, reorganizei meu mundo interno e assumi meu verdadeiro protagonismo."
+            }
+          ]
+        }
+      ]
+    },
+    "paragrafo3": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Hoje, como mentora e consteladora, conduzo pessoas a enxergarem o invisível das suas histórias, soltando repetições automáticas para ocuparem o seu próprio lugar com clareza, força e autenticidade."
+            }
+          ]
+        }
+      ]
+    },
+    "frase": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "“Por amor, aprendemos quem precisávamos ser; por consciência, lembramos quem realmente somos.”"
+            }
+          ]
+        }
+      ]
+    }
   },
   "comparacao": {
     "titulo": "Terapia Convencional e Visão Sistêmica",
-    "subtitulo": "Não são caminhos opostos. São abordagens que se somam.",
+    "subtitulo": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Não são caminhos opostos. São abordagens que se somam."
+            }
+          ]
+        }
+      ]
+    },
     "col1Titulo": "Terapia Convencional",
     "col1": [
       "Compreende a experiência e o comportamento individual.",
@@ -65,16 +247,55 @@
       "Compreende o lugar que você ocupa na sua história familiar.",
       "Traz clareza para destravar escolhas e decisões no presente."
     ],
-    "fecho": "Enquanto a Terapia Convencional foca na sua jornada individual, a Visão Sistêmica amplia o mapa: ela revela o que está oculto nas suas relações para que você possa fazer escolhas mais livres e autênticas hoje."
+    "fecho": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Enquanto a Terapia Convencional foca na sua jornada individual, a Visão Sistêmica amplia o mapa: ela revela o que está oculto nas suas relações para que você possa fazer escolhas mais livres e autênticas hoje."
+            }
+          ]
+        }
+      ]
+    }
   },
   "jornadas": {
     "titulo": "As Jornadas Sistêmicas",
-    "subtitulo": "Cada história tem o seu tempo. Encontre a melhor jornada para o seu momento.",
+    "subtitulo": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Cada história tem o seu tempo. Encontre a melhor jornada para o seu momento."
+            }
+          ]
+        }
+      ]
+    },
     "meditacoes": {
       "rotulo": "Primeiro Passo",
       "titulo": "Meditações Sistêmicas Guiadas",
       "subtitulo": "",
-      "texto": "Uma ferramenta de vivência prática para você acessar a Visão Sistêmica no seu tempo. Para soltar tensões do presente, acalmar a mente e resgatar a sua força interna.",
+      "texto": {
+        "type": "root",
+        "children": [
+          {
+            "type": "p",
+            "children": [
+              {
+                "type": "text",
+                "text": "Uma ferramenta de vivência prática para você acessar a Visão Sistêmica no seu tempo. Para soltar tensões do presente, acalmar a mente e resgatar a sua força interna."
+              }
+            ]
+          }
+        ]
+      },
       "cta": "Lançamento em Breve"
     },
     "cards": [
@@ -82,9 +303,35 @@
         "num": "i",
         "titulo": "Sessão Sistêmica",
         "rotulo": "Olhar para um tema específico",
-        "texto": "Encontro único e individual focado na questão que mais precisa de atenção no seu momento atual. Trazemos à luz as dinâmicas invisíveis por trás desse tema para que você ganhe clareza imediata e consiga destravar suas decisões no presente.",
+        "texto": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Encontro único e individual focado na questão que mais precisa de atenção no seu momento atual. Trazemos à luz as dinâmicas invisíveis por trás desse tema para que você ganhe clareza imediata e consiga destravar suas decisões no presente."
+                }
+              ]
+            }
+          ]
+        },
         "resultadoRotulo": "Resultado esperado",
-        "resultado": "Clareza, organização interna e direção prática para a sua questão.",
+        "resultado": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Clareza, organização interna e direção prática para a sua questão."
+                }
+              ]
+            }
+          ]
+        },
         "preco": "R$ 450,00",
         "precoNota": "investimento único",
         "cta": "Agendar minha sessão",
@@ -94,9 +341,35 @@
         "num": "ii",
         "titulo": "Jornada Essência",
         "rotulo": "Reorganização e Foco",
-        "texto": "Quatro encontros individuais direcionados para transformar a relação com a área da sua vida que hoje mais te afeta. Um espaço para soltar pesos antigos, organizar seu mundo interno e assumir a sua postura adulta no dia a dia.",
+        "texto": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Quatro encontros individuais direcionados para transformar a relação com a área da sua vida que hoje mais te afeta. Um espaço para soltar pesos antigos, organizar seu mundo interno e assumir a sua postura adulta no dia a dia."
+                }
+              ]
+            }
+          ]
+        },
         "resultadoRotulo": "Resultado esperado",
-        "resultado": "Reorganização interna e maior segurança para decidir e agir.",
+        "resultado": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Reorganização interna e maior segurança para decidir e agir."
+                }
+              ]
+            }
+          ]
+        },
         "preco": "4 Encontros",
         "precoNota": "consulte valores e disponibilidade",
         "cta": "Saber mais sobre a mentoria",
@@ -106,9 +379,35 @@
         "num": "iii",
         "titulo": "Jornada Raízes",
         "rotulo": "Transformação Profunda",
-        "texto": "Sete encontros individuais para um acompanhamento amplo, calmo e customizado. Além do olhar sistêmico, integramos vivências práticas, meditações guiadas e exercícios direcionados de acordo com a sua necessidade. Um processo com tempo para assimilar cada etapa, soltar padrões do inconsciente e consolidar transformações reais no seu presente.",
+        "texto": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Sete encontros individuais para um acompanhamento amplo, calmo e customizado. Além do olhar sistêmico, integramos vivências práticas, meditações guiadas e exercícios direcionados de acordo com a sua necessidade. Um processo com tempo para assimilar cada etapa, soltar padrões do inconsciente e consolidar transformações reais no seu presente."
+                }
+              ]
+            }
+          ]
+        },
         "resultadoRotulo": "Resultado esperado",
-        "resultado": "Mapeamento completo, vivências de aprofundamento, tempo de integração e postura consolidada.",
+        "resultado": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Mapeamento completo, vivências de aprofundamento, tempo de integração e postura consolidada."
+                }
+              ]
+            }
+          ]
+        },
         "preco": "7 Encontros",
         "precoNota": "consulte valores e disponibilidade",
         "cta": "Saber mais sobre a mentoria",
@@ -139,63 +438,245 @@
     "itens": [
       {
         "pergunta": "Qual é a diferença entre Visão Sistêmica, Terapia Sistêmica e Constelação Familiar?",
-        "resposta": "Visão Sistêmica: É o estilo de vida — a autopercepção diária para tirar o foco do externo e olhar para o seu interno.\nMentoria Sistêmica: É o processo — o acompanhamento prático para reorganizar suas emoções e bancar decisões conscientes no presente.\nConstelação Familiar: É a ferramenta — a dinâmica que traz à luz padrões invisíveis do inconsciente para te libertar do passado."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Visão Sistêmica: É o estilo de vida — a autopercepção diária para tirar o foco do externo e olhar para o seu interno.\nMentoria Sistêmica: É o processo — o acompanhamento prático para reorganizar suas emoções e bancar decisões conscientes no presente.\nConstelação Familiar: É a ferramenta — a dinâmica que traz à luz padrões invisíveis do inconsciente para te libertar do passado."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "Preciso acreditar em Constelação Familiar para fazer qualquer mentoria ou sessão?",
-        "resposta": "Não. A Constelação Familiar é apenas uma das ferramentas que utilizo. O foco do nosso trabalho é a autoconsciência prática sobre os seus comportamentos. Tudo o que você precisa é de curiosidade e compromisso com o seu próprio desenvolvimento."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Não. A Constelação Familiar é apenas uma das ferramentas que utilizo. O foco do nosso trabalho é a autoconsciência prática sobre os seus comportamentos. Tudo o que você precisa é de curiosidade e compromisso com o seu próprio desenvolvimento."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "A Terapia Sistêmica substitui a Psicoterapia?",
-        "resposta": "Não. São abordagens diferentes e que podem caminhar juntas. Enquanto a psicoterapia aprofunda a experiência individual, a Terapia Sistêmica amplia o olhar para os vínculos, a história e as dinâmicas que também influenciam as suas escolhas."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Não. São abordagens diferentes e que podem caminhar juntas. Enquanto a psicoterapia aprofunda a experiência individual, a Terapia Sistêmica amplia o olhar para os vínculos, a história e as dinâmicas que também influenciam as suas escolhas."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "Preciso conhecer toda a minha história familiar?",
-        "resposta": "Não. O trabalho sempre parte do seu desafio atual, no presente. Olhamos apenas para o que é essencial para compreender a sua questão hoje, sem qualquer necessidade de investigar ou conhecer detalhes do passado da sua família."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Não. O trabalho sempre parte do seu desafio atual, no presente. Olhamos apenas para o que é essencial para compreender a sua questão hoje, sem qualquer necessidade de investigar ou conhecer detalhes do passado da sua família."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "A Visão Sistêmica pode ajudar em qualquer área da vida?",
-        "resposta": "Sim. A Visão Sistêmica se aplica a qualquer contexto onde existam relações e escolhas. Trabalhamos temas como carreira, dinheiro, relacionamentos, conflitos familiares, transições de vida e decisões complexas. O foco sempre será a questão que mais precisa de clareza no seu momento atual."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Sim. A Visão Sistêmica se aplica a qualquer contexto onde existam relações e escolhas. Trabalhamos temas como carreira, dinheiro, relacionamentos, conflitos familiares, transições de vida e decisões complexas. O foco sempre será a questão que mais precisa de clareza no seu momento atual."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "A Visão Sistêmica cura doenças ou garante uma gravidez?",
-        "resposta": "Não. A Visão Sistêmica não substitui tratamentos médicos, psicológicos ou diagnósticos de saúde.\nEla atua de forma complementar, trazendo consciência sobre os fatores emocionais, relacionais e inconscientes que atravessam esse momento, ajudando você a viver o processo com mais estrutura interna e clareza."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Não. A Visão Sistêmica não substitui tratamentos médicos, psicológicos ou diagnósticos de saúde.\nEla atua de forma complementar, trazendo consciência sobre os fatores emocionais, relacionais e inconscientes que atravessam esse momento, ajudando você a viver o processo com mais estrutura interna e clareza."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "Posso fazer a Mentoria ou uma Sessão se estiver grávida?",
-        "resposta": "Por cuidado e respeito a esse momento tão especial, não realizo sessões ou jornadas durante a gestação. A gravidez é um período de intensas transformações físicas e emocionais, e prefiro que esse trabalho seja realizado em um momento em que a mulher possa vivenciar o processo com mais disponibilidade e segurança. Caso tenha dúvidas sobre o seu caso, podemos conversa."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Por cuidado e respeito a esse momento tão especial, não realizo sessões ou jornadas durante a gestação. A gravidez é um período de intensas transformações físicas e emocionais, e prefiro que esse trabalho seja realizado em um momento em que a mulher possa vivenciar o processo com mais disponibilidade e segurança. Caso tenha dúvidas sobre o seu caso, podemos conversa."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "Como acontece cada sessão?",
-        "resposta": "Formato: Atendimentos individuais e 100% online.\nMetodologia: Visão Sistêmica com uso de Constelação, meditações guiadas e vivências práticas.\nAntes de você fechar: Fale comigo pelos canais oficiais de atendimento para receber um material explicativo detalhado sobre os valores, etapas e diferenciais de cada jornada antes de fazer a sua escolha."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Formato: Atendimentos individuais e 100% online.\nMetodologia: Visão Sistêmica com uso de Constelação, meditações guiadas e vivências práticas.\nAntes de você fechar: Fale comigo pelos canais oficiais de atendimento para receber um material explicativo detalhado sobre os valores, etapas e diferenciais de cada jornada antes de fazer a sua escolha."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "Como escolher entre a Sessão Única, a Jornada Essência e a Jornada Raízes?",
-        "resposta": "A escolha depende do seu objetivo atual:\nSessão Sistêmica: Direcionamento e clareza imediata para um desafio pontual.\nJornada Essência (4 encontros): Processo objetivo para focar e fortalecer uma área específica.\nJornada Raízes (7 encontros): Imersão completa com vivências e tempo para reorganizar sua história com calma.\nQualquer dúvida, eu te oriento na escolha ideal para o seu momento."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "A escolha depende do seu objetivo atual:\nSessão Sistêmica: Direcionamento e clareza imediata para um desafio pontual.\nJornada Essência (4 encontros): Processo objetivo para focar e fortalecer uma área específica.\nJornada Raízes (7 encontros): Imersão completa com vivências e tempo para reorganizar sua história com calma.\nQualquer dúvida, eu te oriento na escolha ideal para o seu momento."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "A Visão Sistêmica pode me ajudar na transição de carreira?",
-        "resposta": "Sim, e muito. Mudar de carreira não é apenas escolher uma nova profissão, mas reorganizar como você se relaciona com o trabalho, o dinheiro e o sucesso. A Visão Sistêmica traz clareza para soltar velhas lealdades e te ajuda a tomar decisões profissionais com segurança e maturidade."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Sim, e muito. Mudar de carreira não é apenas escolher uma nova profissão, mas reorganizar como você se relaciona com o trabalho, o dinheiro e o sucesso. A Visão Sistêmica traz clareza para soltar velhas lealdades e te ajuda a tomar decisões profissionais com segurança e maturidade."
+                }
+              ]
+            }
+          ]
+        }
       },
       {
         "pergunta": "A Visão Sistêmica também pode ser aplicada aos negócios?",
-        "resposta": "Com certeza. Empresas também são sistemas e possuem dinâmicas invisíveis que impactam diretamente a sua lucratividade e crescimento.\nAplicamos a Visão Sistêmica ao alinhamento entre sócios, gestão de equipes, empresas familiares, sucessão e tomada de decisões estratégicas, sempre com foco no momento atual e na maturidade do negócio."
+        "resposta": {
+          "type": "root",
+          "children": [
+            {
+              "type": "p",
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Com certeza. Empresas também são sistemas e possuem dinâmicas invisíveis que impactam diretamente a sua lucratividade e crescimento.\nAplicamos a Visão Sistêmica ao alinhamento entre sócios, gestão de equipes, empresas familiares, sucessão e tomada de decisões estratégicas, sempre com foco no momento atual e na maturidade do negócio."
+                }
+              ]
+            }
+          ]
+        }
       }
     ]
   },
   "empresas": {
     "rotulo": "Soluções Corporativas",
     "titulo": "Visão Sistêmica para Negócios",
-    "paragrafo": "Empresas também são sistemas. Por isso, a Visão Sistêmica pode ser aplicada ao desenvolvimento de lideranças, alinhamento entre sócios, empresas familiares, equipes e cultura organizacional. Por meio de workshops, palestras e programas personalizados, ajudo empresas a fortalecerem relações, ampliar a consciência e criar ambientes mais saudáveis, colaborativos e preparados para crescer.",
+    "paragrafo": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Empresas também são sistemas. Por isso, a Visão Sistêmica pode ser aplicada ao desenvolvimento de lideranças, alinhamento entre sócios, empresas familiares, equipes e cultura organizacional. Por meio de workshops, palestras e programas personalizados, ajudo empresas a fortalecerem relações, ampliar a consciência e criar ambientes mais saudáveis, colaborativos e preparados para crescer."
+            }
+          ]
+        }
+      ]
+    },
     "cta": "Falar sobre projetos corporativos",
     "mensagem": "Olá, Taphiny! Tenho interesse em levar a Visão Sistêmica para a minha empresa/equipe e gostaria de conversar sobre um projeto."
   },
   "convite": {
     "rotulo": "O convite",
     "titulo": "A vida que é sua continua esperando por você",
-    "paragrafo": "Toda transformação no presente começa com autoconsciência. O primeiro passo é escolher olhar para o que opera no invisível da sua vida para que, em seguida, você possa assumir o seu verdadeiro lugar no mundo.",
+    "paragrafo": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "Toda transformação no presente começa com autoconsciência. O primeiro passo é escolher olhar para o que opera no invisível da sua vida para que, em seguida, você possa assumir o seu verdadeiro lugar no mundo."
+            }
+          ]
+        }
+      ]
+    },
     "cta": "Quero iniciar a minha jornada",
-    "frase": "“A vida não muda apenas pelas decisões que tomamos na superfície. Ela muda quando aquilo que opera silenciosamente no nosso inconsciente encontra, finalmente, o seu devido lugar.”"
+    "frase": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "“A vida não muda apenas pelas decisões que tomamos na superfície. Ela muda quando aquilo que opera silenciosamente no nosso inconsciente encontra, finalmente, o seu devido lugar.”"
+            }
+          ]
+        }
+      ]
+    }
   },
   "footer": {
     "instagramTexto": "Instagram - @eu.sou.taphiny",
@@ -212,7 +693,20 @@
     "ativo": true,
     "titulo": "Que bom ter você por aqui!",
     "subtitulo": "Um convite para olhar a vida com mais consciência",
-    "texto": "A Visão Sistêmica amplia a compreensão sobre o que influencia as suas escolhas e relações para que você ocupe o seu lugar e construa uma vida mais alinhada a quem realmente é.",
+    "texto": {
+      "type": "root",
+      "children": [
+        {
+          "type": "p",
+          "children": [
+            {
+              "type": "text",
+              "text": "A Visão Sistêmica amplia a compreensão sobre o que influencia as suas escolhas e relações para que você ocupe o seu lugar e construa uma vida mais alinhada a quem realmente é."
+            }
+          ]
+        }
+      ]
+    },
     "imagem": "",
     "botaoTexto": "",
     "botaoLink": "https://wa.me/5511925027759"

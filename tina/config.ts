@@ -7,6 +7,32 @@ const branch =
   process.env.HEAD ||
   "main";
 
+// ---------------------------------------------------------------------------
+// Campos de PROSA (rich-text): a caixa vem com botões de Negrito e Itálico.
+//
+// Sublinhado não tem botão porque o rich-text do Tina é markdown, e markdown não
+// tem sublinhado (as marcas que ele grava são bold, italic, code e
+// strikethrough). Para sublinhar, escreve-se ++assim++ no meio do texto, e o
+// renderizador do site (src/lib/texto.ts) converte pra <u>.
+//
+// A barra é enxuta de propósito: dentro de um parágrafo do site não faz sentido
+// oferecer título, imagem, tabela ou bloco de código.
+// ---------------------------------------------------------------------------
+const DICA = "Negrito e itálico nos botões da caixa. Para sublinhar, escreva ++assim++.";
+
+const prosa = (name: string, label: string, dica: string = DICA) => ({
+  type: "rich-text" as const,
+  name,
+  label,
+  description: dica,
+  overrides: { toolbar: ["bold", "italic", "link"], showEmbed: false },
+});
+
+// Listas de tópicos continuam texto simples: o Tina não aceita `list: true` em
+// rich-text, e virar um cartão por tópico pioraria a edição. Nelas a formatação
+// sai pelos marcadores, que o renderizador entende igual.
+const DICA_LISTA = "Um tópico por linha. Formatação: **negrito**, _itálico_, ++sublinhado++.";
+
 export default defineConfig({
   branch,
   clientId: process.env.TINA_CLIENT_ID || "", // Tina Cloud → Client ID
@@ -58,8 +84,8 @@ export default defineConfig({
               { type: "string", name: "marca", label: "Marca (ex.: TAPHINY)" },
               { type: "string", name: "subtitulo", label: "Subtítulo (ex.: Mentora Sistêmica)" },
               { type: "string", name: "titulo", label: "Título principal" },
-              { type: "string", name: "paragrafo", label: "Parágrafo", ui: { component: "textarea" } },
-              { type: "string", name: "frase", label: "Frase em destaque (itálico)" },
+              prosa("paragrafo", "Parágrafo"),
+              prosa("frase", "Frase em destaque (itálico)"),
               { type: "string", name: "cta", label: "Texto do botão" },
             ],
           },
@@ -71,8 +97,8 @@ export default defineConfig({
             fields: [
               { type: "string", name: "rotulo", label: "Rótulo (linha pequena)" },
               { type: "string", name: "titulo", label: "Título" },
-              { type: "string", name: "paragrafo1", label: "Parágrafo 1", ui: { component: "textarea" } },
-              { type: "string", name: "paragrafo2", label: "Parágrafo 2", ui: { component: "textarea" } },
+              prosa("paragrafo1", "Parágrafo 1"),
+              prosa("paragrafo2", "Parágrafo 2"),
             ],
           },
           // ---------- VISÃO SISTÊMICA ----------
@@ -83,8 +109,8 @@ export default defineConfig({
             fields: [
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título" },
-              { type: "string", name: "definicao", label: "Definição (1º parágrafo)", ui: { component: "textarea" } },
-              { type: "string", name: "paragrafo", label: "Parágrafo complementar", ui: { component: "textarea" } },
+              prosa("definicao", "Definição (1º parágrafo)"),
+              prosa("paragrafo", "Parágrafo complementar"),
               {
                 type: "object",
                 name: "pilares",
@@ -93,7 +119,7 @@ export default defineConfig({
                 ui: { itemProps: (i) => ({ label: i?.titulo || "Pilar" }) },
                 fields: [
                   { type: "string", name: "titulo", label: "Título do pilar" },
-                  { type: "string", name: "texto", label: "Texto" },
+                  prosa("texto", "Texto"),
                 ],
               },
             ],
@@ -109,10 +135,10 @@ export default defineConfig({
               { type: "image", name: "videoCapa", label: "Capa do vídeo (opcional)" },
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título (itálico)" },
-              { type: "string", name: "paragrafo1", label: "Parágrafo 1", ui: { component: "textarea" } },
-              { type: "string", name: "paragrafo2", label: "Parágrafo 2", ui: { component: "textarea" } },
-              { type: "string", name: "paragrafo3", label: "Parágrafo 3", ui: { component: "textarea" } },
-              { type: "string", name: "frase", label: "Frase em destaque (itálico)" },
+              prosa("paragrafo1", "Parágrafo 1"),
+              prosa("paragrafo2", "Parágrafo 2"),
+              prosa("paragrafo3", "Parágrafo 3"),
+              prosa("frase", "Frase em destaque (itálico)"),
             ],
           },
           // ---------- COMPARAÇÃO ----------
@@ -122,12 +148,12 @@ export default defineConfig({
             label: "Seção: Psicoterapia x Visão Sistêmica",
             fields: [
               { type: "string", name: "titulo", label: "Título" },
-              { type: "string", name: "subtitulo", label: "Subtítulo" },
+              prosa("subtitulo", "Subtítulo"),
               { type: "string", name: "col1Titulo", label: "Coluna 1 — título" },
-              { type: "string", name: "col1", label: "Coluna 1 — itens", list: true },
+              { type: "string", name: "col1", label: "Coluna 1 — itens", list: true, description: DICA_LISTA },
               { type: "string", name: "col2Titulo", label: "Coluna 2 — título" },
-              { type: "string", name: "col2", label: "Coluna 2 — itens", list: true },
-              { type: "string", name: "fecho", label: "Frase de fechamento (itálico)", ui: { component: "textarea" } },
+              { type: "string", name: "col2", label: "Coluna 2 — itens", list: true, description: DICA_LISTA },
+              prosa("fecho", "Frase de fechamento"),
             ],
           },
           // ---------- JORNADAS ----------
@@ -137,7 +163,7 @@ export default defineConfig({
             label: "Seção: As Jornadas",
             fields: [
               { type: "string", name: "titulo", label: "Título" },
-              { type: "string", name: "subtitulo", label: "Subtítulo" },
+              prosa("subtitulo", "Subtítulo"),
               {
                 type: "object",
                 name: "meditacoes",
@@ -146,7 +172,7 @@ export default defineConfig({
                   { type: "string", name: "rotulo", label: "Rótulo" },
                   { type: "string", name: "titulo", label: "Título" },
                   { type: "string", name: "subtitulo", label: "Subtítulo em destaque (opcional)" },
-                  { type: "string", name: "texto", label: "Texto", ui: { component: "textarea" } },
+                  prosa("texto", "Texto"),
                   { type: "string", name: "cta", label: "Texto do link" },
                 ],
               },
@@ -160,9 +186,9 @@ export default defineConfig({
                   { type: "string", name: "num", label: "Numeral (i, ii, iii)" },
                   { type: "string", name: "titulo", label: "Título" },
                   { type: "string", name: "rotulo", label: "Rótulo" },
-                  { type: "string", name: "texto", label: "Texto", ui: { component: "textarea" } },
+                  prosa("texto", "Texto"),
                   { type: "string", name: "resultadoRotulo", label: "Rótulo do resultado (padrão: Resultado esperado)" },
-                  { type: "string", name: "resultado", label: "Resultado esperado (opcional)", ui: { component: "textarea" } },
+                  prosa("resultado", "Resultado esperado (opcional)"),
                   { type: "string", name: "preco", label: "Preço / destaque (ex.: R$ 450)" },
                   { type: "string", name: "precoNota", label: "Nota ao lado do preço" },
                   { type: "string", name: "cta", label: "Texto do botão" },
@@ -179,9 +205,9 @@ export default defineConfig({
             fields: [
               { type: "string", name: "titulo", label: "Título" },
               { type: "string", name: "col1Titulo", label: "Coluna 1 — título" },
-              { type: "string", name: "col1", label: "Coluna 1 — itens", list: true },
+              { type: "string", name: "col1", label: "Coluna 1 — itens", list: true, description: DICA_LISTA },
               { type: "string", name: "col2Titulo", label: "Coluna 2 — título" },
-              { type: "string", name: "col2", label: "Coluna 2 — itens", list: true },
+              { type: "string", name: "col2", label: "Coluna 2 — itens", list: true, description: DICA_LISTA },
             ],
           },
           // ---------- FAQ ----------
@@ -200,7 +226,7 @@ export default defineConfig({
                 ui: { itemProps: (i) => ({ label: i?.pergunta || "Pergunta" }) },
                 fields: [
                   { type: "string", name: "pergunta", label: "Pergunta" },
-                  { type: "string", name: "resposta", label: "Resposta", ui: { component: "textarea" } },
+                  prosa("resposta", "Resposta"),
                 ],
               },
             ],
@@ -213,7 +239,7 @@ export default defineConfig({
             fields: [
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título" },
-              { type: "string", name: "paragrafo", label: "Parágrafo", ui: { component: "textarea" } },
+              prosa("paragrafo", "Parágrafo"),
               { type: "string", name: "cta", label: "Texto do botão" },
               { type: "string", name: "mensagem", label: "Mensagem do WhatsApp" },
             ],
@@ -226,9 +252,9 @@ export default defineConfig({
             fields: [
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título" },
-              { type: "string", name: "paragrafo", label: "Parágrafo", ui: { component: "textarea" } },
+              prosa("paragrafo", "Parágrafo"),
               { type: "string", name: "cta", label: "Texto do botão" },
-              { type: "string", name: "frase", label: "Frase em destaque (itálico)" },
+              prosa("frase", "Frase em destaque (itálico)"),
             ],
           },
           // ---------- RODAPÉ ----------
@@ -263,7 +289,7 @@ export default defineConfig({
               { type: "boolean", name: "ativo", label: "Ativar pop-up (liga/desliga)" },
               { type: "string", name: "titulo", label: "Título" },
               { type: "string", name: "subtitulo", label: "Subtítulo em destaque (opcional)" },
-              { type: "string", name: "texto", label: "Texto", ui: { component: "textarea" } },
+              prosa("texto", "Texto"),
               { type: "image", name: "imagem", label: "Imagem (opcional)" },
               { type: "string", name: "botaoTexto", label: "Texto do botão (opcional)" },
               { type: "string", name: "botaoLink", label: "Link do botão (opcional — ex.: link do WhatsApp)" },

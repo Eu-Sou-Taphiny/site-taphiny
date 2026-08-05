@@ -1,6 +1,9 @@
 ---
 import site from '../content/site.json';
 import SiteFooter from '../components/SiteFooter.astro';
+// Campos de prosa vêm do Tina como rich-text (árvore) e os curtos como texto
+// simples; `t()` cuida dos dois e devolve o HTML inline. Ver src/lib/texto.ts.
+import { inline as t } from '../lib/texto';
 const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, config } = site;
 const popup = (site as any).popup;
 const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(msg)}`;
@@ -182,8 +185,14 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
 
   <img id="tp-sunmoon" src="/assets/sol-lua.webp" alt="" aria-hidden="true" width="204" height="204" decoding="async"
        style="position:absolute; z-index:1; pointer-events:none; width:clamp(78px,19vw,128px); height:auto; left:86%; top:30px; transform:translateX(-50%); opacity:0.94;">
-  <img id="tp-boy" src="/assets/menino.webp" alt="" aria-hidden="true" width="303" height="976" loading="lazy" decoding="async"
-       style="position:absolute; z-index:1; pointer-events:none; width:clamp(22px,5.2vw,36px); height:auto; left:0; top:0; transform:translate(-50%,-95%); opacity:0;">
+  <!-- Bonequinho: tira de 9 quadros (adulto → criança). Trocar o quadro conforme
+       ele desce faz o corpo encurtar de verdade; cruzar duas imagens por opacidade
+       mostraria as duas silhuetas ao mesmo tempo (efeito fantasma). A imagem é
+       atribuída pelo script só quando ele começa a aparecer, pra não competir com
+       o carregamento do topo. Gerada por scripts/gera-morph-menino.py. -->
+  <div id="tp-boy" aria-hidden="true" data-quadros="9"
+       style="position:absolute; z-index:1; pointer-events:none; width:clamp(22px,5.2vw,36px); aspect-ratio:303/976; left:0; top:0; transform:translate(-50%,-95%); opacity:0;
+              background-repeat:no-repeat; background-size:900% 100%; background-position:0% 0;"></div>
 
   <!-- 1) HERO -->
   <header id="inicio" data-screen-label="Hero" style="min-height:100vh; background:var(--marrom); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:96px 30px 80px;">
@@ -192,8 +201,8 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     <div style="font-family:'Playfair Display',serif; font-weight:400; font-size:26px; letter-spacing:0.42em; color:var(--rosa); padding-left:0.42em;">{hero.marca}</div>
     <div style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:10px; letter-spacing:0.42em; text-transform:uppercase; color:var(--ouro); margin-top:16px;">{hero.subtitulo}</div>
     <h1 style="font-family:'Playfair Display',serif; font-weight:400; font-size:34px; line-height:1.25; color:var(--creme); max-width:600px; margin-top:52px; text-wrap:balance;">{hero.titulo}</h1>
-    <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); max-width:440px; margin-top:30px; text-wrap:pretty;">{hero.paragrafo}</p>
-    <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:17px; line-height:1.7; color:var(--ouroc); max-width:400px; margin-top:34px; text-wrap:pretty;">{hero.frase}</p>
+    <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); max-width:440px; margin-top:30px; text-wrap:pretty;" set:html={t(hero.paragrafo)}></p>
+    <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:17px; line-height:1.7; color:var(--ouroc); max-width:400px; margin-top:34px; text-wrap:pretty;" set:html={t(hero.frase)}></p>
     <a href={wa(config.mensagemConversa)} target="_blank" rel="noopener" class="tp-btn" style="display:inline-block; margin-top:48px; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:17px 38px;">{hero.cta}</a>
     <div style="margin-top:70px; width:1px; height:52px; background:linear-gradient(var(--ouro),transparent);"></div>
     </div>
@@ -206,8 +215,8 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:36px;">{provocacao.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); max-width:480px; margin-bottom:40px; text-wrap:balance;">{provocacao.titulo}</h2>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); margin-bottom:26px; text-wrap:pretty;">{provocacao.paragrafo1}</p>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); text-wrap:pretty;">{provocacao.paragrafo2}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); margin-bottom:26px; text-wrap:pretty;" set:html={t(provocacao.paragrafo1)}></p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); text-wrap:pretty;" set:html={t(provocacao.paragrafo2)}></p>
     </div>
   </section>
 
@@ -216,14 +225,14 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); margin-bottom:24px;">{visao.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); max-width:520px; margin-bottom:28px; text-wrap:balance;">{visao.titulo}</h2>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:26px; text-wrap:pretty;">{visao.definicao}</p>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:64px; text-wrap:pretty;">{visao.paragrafo}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:26px; text-wrap:pretty;" set:html={t(visao.definicao)}></p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:64px; text-wrap:pretty;" set:html={t(visao.paragrafo)}></p>
       <div style="display:flex; flex-direction:column; gap:40px;">
         {visao.pilares.map((p) => (
         <div>
           <div style="font-family:'Playfair Display',serif; font-size:22px; color:var(--bordeaux); margin-bottom:10px;">{p.titulo}</div>
           <div style="width:32px; height:1px; background:var(--areia); margin-bottom:14px;"></div>
-          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--marrom);">{p.texto}</p>
+          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--marrom);" set:html={t(p.texto)}></p>
         </div>
         ))}
       </div>
@@ -246,10 +255,10 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
       </figure>
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouroc); margin-bottom:28px;">{quemConduz.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:25px; line-height:1.45; color:var(--creme); margin-bottom:30px; text-wrap:pretty;">{quemConduz.titulo}</h2>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;">{quemConduz.paragrafo1}</p>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;">{quemConduz.paragrafo2}</p>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); text-wrap:pretty;">{quemConduz.paragrafo3}</p>
-      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:19px; line-height:1.7; color:var(--ouroc); margin-top:40px; text-wrap:pretty;">{quemConduz.frase}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo1)}></p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo2)}></p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); text-wrap:pretty;" set:html={t(quemConduz.paragrafo3)}></p>
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:19px; line-height:1.7; color:var(--ouroc); margin-top:40px; text-wrap:pretty;" set:html={t(quemConduz.frase)}></p>
     </div>
   </article>
 
@@ -257,13 +266,13 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
   <section id="psicoterapia-e-visao-sistemica" data-screen-label="Comparacao" style="background:var(--creme); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:18px; text-wrap:balance;">{comparacao.titulo}</h2>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); text-align:center; max-width:440px; margin:0 auto 64px; text-wrap:pretty;">{comparacao.subtitulo}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); text-align:center; max-width:440px; margin:0 auto 64px; text-wrap:pretty;" set:html={t(comparacao.subtitulo)}></p>
       <div style="display:flex; flex-wrap:wrap; gap:28px;">
         <div style="flex:1 1 240px; padding:40px 30px; background:#FBF8F3;">
           <div style="font-family:'Playfair Display',serif; font-size:21px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia);">{comparacao.col1Titulo}</div>
           <ul style="list-style:none; display:flex; flex-direction:column; gap:16px;">
             {comparacao.col1.map((item) => (
-            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);">{item}</li>
+            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);" set:html={t(item)}></li>
             ))}
           </ul>
         </div>
@@ -271,12 +280,12 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
           <div style="font-family:'Playfair Display',serif; font-size:21px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--ouro);">{comparacao.col2Titulo}</div>
           <ul style="list-style:none; display:flex; flex-direction:column; gap:16px;">
             {comparacao.col2.map((item) => (
-            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);">{item}</li>
+            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);" set:html={t(item)}></li>
             ))}
           </ul>
         </div>
       </div>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--terracota); text-align:center; max-width:520px; margin:56px auto 0; text-wrap:pretty;">{comparacao.fecho}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--terracota); text-align:center; max-width:520px; margin:56px auto 0; text-wrap:pretty;" set:html={t(comparacao.fecho)}></p>
     </div>
   </section>
 
@@ -285,7 +294,7 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     <div style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <div data-reveal style="text-align:center; margin-bottom:56px;">
         <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.3; color:var(--marrom); margin-bottom:16px;">{jornadas.titulo}</h2>
-        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); max-width:420px; margin:0 auto; text-wrap:pretty;">{jornadas.subtitulo}</p>
+        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); max-width:420px; margin:0 auto; text-wrap:pretty;" set:html={t(jornadas.subtitulo)}></p>
       </div>
 
       <div data-reveal style="border:1px dashed var(--ouro); padding:38px 30px; text-align:center; margin-bottom:44px;">
@@ -294,23 +303,27 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
         {jornadas.meditacoes.subtitulo && (
         <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{jornadas.meditacoes.subtitulo}</div>
         )}
-        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); max-width:400px; margin:0 auto 26px; text-wrap:pretty;">{jornadas.meditacoes.texto}</p>
+        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); max-width:400px; margin:0 auto 26px; text-wrap:pretty;" set:html={t(jornadas.meditacoes.texto)}></p>
         <a href={wa(config.mensagemMeditacoes)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota); text-decoration:none; border-bottom:1px solid var(--areia); padding-bottom:6px;">{jornadas.meditacoes.cta}</a>
       </div>
 
       <div style="display:flex; flex-direction:column; gap:22px;">
-        {jornadas.cards.map((card) => (
+        {jornadas.cards.map((card) => {
+        // rich-text vazio ainda é um objeto (portanto "verdadeiro"): quem decide
+        // se o bloco de resultado aparece é o HTML já renderizado, não o campo.
+        const resultado = t(card.resultado);
+        return (
         <div data-reveal style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
           <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
             <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro);">{card.num}</span>
             <span style="font-family:'Playfair Display',serif; font-size:22px; color:var(--marrom);">{card.titulo}</span>
           </div>
           <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{card.rotulo}</div>
-          <p style={`font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); margin-bottom:${card.resultado ? '22px' : '26px'}; text-wrap:pretty;`}>{card.texto}</p>
-          {card.resultado && (
+          <p style={`font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); margin-bottom:${resultado ? '22px' : '26px'}; text-wrap:pretty;`} set:html={t(card.texto)}></p>
+          {resultado && (
           <div style="border-left:2px solid var(--ouro); background:var(--creme); padding:18px 22px; margin-bottom:26px;">
             <div style="font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouro); margin-bottom:9px;">{card.resultadoRotulo || 'Resultado esperado'}</div>
-            <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:13.5px; line-height:1.85; color:var(--bordeaux); margin:0; text-wrap:pretty;">{card.resultado}</p>
+            <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:13.5px; line-height:1.85; color:var(--bordeaux); margin:0; text-wrap:pretty;" set:html={resultado}></p>
           </div>
           )}
           <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:22px; border-top:1px solid var(--areia);">
@@ -318,7 +331,8 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
             <a href={wa(card.mensagem)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:13px 26px;">{card.cta}</a>
           </div>
         </div>
-        ))}
+        );
+        })}
       </div>
     </div>
   </section>
@@ -332,7 +346,7 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
           <div style="font-family:'Playfair Display',serif; font-size:20px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia);">{paraQuem.col1Titulo}</div>
           <ul style="list-style:none; display:flex; flex-direction:column; gap:18px;">
             {paraQuem.col1.map((item) => (
-            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);">{item}</li>
+            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);" set:html={t(item)}></li>
             ))}
           </ul>
         </div>
@@ -340,7 +354,7 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
           <div style="font-family:'Playfair Display',serif; font-size:20px; color:var(--bordeaux); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia);">{paraQuem.col2Titulo}</div>
           <ul style="list-style:none; display:flex; flex-direction:column; gap:18px;">
             {paraQuem.col2.map((item) => (
-            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--bordeaux);">{item}</li>
+            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--bordeaux);" set:html={t(item)}></li>
             ))}
           </ul>
         </div>
@@ -360,7 +374,7 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
             <h3>{item.pergunta}</h3>
             <span class="tp-faq-i" aria-hidden="true"></span>
           </summary>
-          <p class="tp-faq-a">{item.resposta}</p>
+          <p class="tp-faq-a" set:html={t(item.resposta)}></p>
         </details>
         ))}
       </div>
@@ -372,7 +386,7 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     <div data-reveal style="position:relative; z-index:2; max-width:520px; margin:0 auto; text-align:center;">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--marrom); margin-bottom:28px; opacity:0.7;">{empresas.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:26px; line-height:1.3; color:var(--marrom); margin-bottom:26px; text-wrap:balance;">{empresas.titulo}</h2>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95; color:var(--marrom); margin-bottom:40px; text-wrap:pretty;">{empresas.paragrafo}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95; color:var(--marrom); margin-bottom:40px; text-wrap:pretty;" set:html={t(empresas.paragrafo)}></p>
       <a href={wa(empresas.mensagem)} target="_blank" rel="noopener" class="tp-corp" style="display:inline-block; font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--marrom); text-decoration:none; border:1px solid var(--marrom); padding:15px 32px; transition:background .4s,color .4s,border-color .4s;">{empresas.cta}</a>
     </div>
   </section>
@@ -382,9 +396,9 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouro); margin-bottom:44px;">{convite.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:32px; line-height:1.3; color:var(--creme); max-width:520px; text-wrap:balance;">{convite.titulo}</h2>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); max-width:420px; margin-top:30px; text-wrap:pretty;">{convite.paragrafo}</p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); max-width:420px; margin-top:30px; text-wrap:pretty;" set:html={t(convite.paragrafo)}></p>
       <a href={wa(config.mensagemConversa)} target="_blank" rel="noopener" class="tp-btn" style="display:inline-block; margin-top:48px; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:17px 38px;">{convite.cta}</a>
-      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:16px; line-height:1.7; color:var(--ouroc); max-width:460px; margin-top:56px; text-wrap:pretty;">{convite.frase}</p>
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:16px; line-height:1.7; color:var(--ouroc); max-width:460px; margin-top:56px; text-wrap:pretty;" set:html={t(convite.frase)}></p>
       <img id="tp-couple" src="/assets/casal.webp" alt="Ilustração de mãe e pai frente a frente — os vínculos familiares que nos formam na Visão Sistêmica" width="845" height="660" loading="lazy" decoding="async" style="display:block; width:min(560px,88vw); height:auto; margin:72px auto 0; opacity:0.97;">
       <img id="tp-roots-img" src="/assets/raizes.webp" alt="Árvore de raízes com retratos de várias gerações — os padrões familiares transgeracionais da constelação familiar" width="1536" height="844" loading="lazy" decoding="async" style="display:block; width:min(1080px,100%); height:auto; margin:10px auto 0; opacity:0.98;">
     </div>
@@ -416,8 +430,8 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
         {popup.subtitulo && (
           <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{popup.subtitulo}</div>
         )}
-        {popup.texto && (
-          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.8; color:var(--bordeaux); text-wrap:pretty;">{popup.texto}</p>
+        {t(popup.texto) && (
+          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.8; color:var(--bordeaux); text-wrap:pretty;" set:html={t(popup.texto)}></p>
         )}
         {popup.botaoTexto && popup.botaoLink && (
           <a href={popup.botaoLink} style="display:inline-block; margin-top:24px; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:15px 32px; border-radius:6px;">{popup.botaoTexto}</a>
@@ -724,7 +738,8 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
 
     if(reduce){
       if(clip) clip.setAttribute('height', String((page?page.offsetHeight:9999)+200));
-      if(boy){ var sp=S.boyStop||tb; boy.style.left=cX(clamp(sp/tb)).toFixed(1)+'px'; boy.style.top=sp.toFixed(1)+'px'; boy.style.opacity='0.9'; }
+      if(boy){ var sp=S.boyStop||tb; boy.style.left=cX(clamp(sp/tb)).toFixed(1)+'px'; boy.style.top=sp.toFixed(1)+'px'; boy.style.opacity='0.9';
+               setBoyFrame(boy, 1); }
       return;
     }
     var svgTop = svg ? svg.getBoundingClientRect().top : -window.scrollY;
@@ -737,7 +752,22 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
       boy.style.left = cX(tt).toFixed(1)+'px';
       boy.style.top = tipY.toFixed(1)+'px';
       boy.style.opacity = clamp(tipY/240).toFixed(2);
+      // volta a ser criança durante a descida: nada muda no primeiro trecho e a
+      // regressão se completa exatamente onde ele encontra os pais (S.boyStop).
+      setBoyFrame(boy, clamp((clamp(stop>0 ? tipY/stop : 0) - MORPH_INICIO) / (1 - MORPH_INICIO)));
     }
+  }
+
+  // MORPH_INICIO: fração da descida em que ele ainda é adulto por completo.
+  var MORPH_INICIO = 0.30;
+
+  function setBoyFrame(boy, m){
+    var n = parseInt(boy.getAttribute('data-quadros'), 10) || 1;
+    if(!S.boySrc){ S.boySrc = true; boy.style.backgroundImage = "url('/assets/menino-morph.webp')"; }
+    var i = Math.round(m * (n-1));
+    if(i === S.boyFrame) return;              // só toca no DOM quando o quadro muda
+    S.boyFrame = i;
+    boy.style.backgroundPosition = (n>1 ? (i/(n-1))*100 : 0).toFixed(3)+'% 0';
   }
 
   function setupReveal(){
