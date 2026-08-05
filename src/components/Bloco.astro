@@ -1,0 +1,48 @@
+---
+/**
+ * Seção que pode vir fechada (sanfona) ou aberta, conforme o interruptor
+ * "Deixar as seções fechadas" no painel.
+ *
+ * O conteúdo entra por slots, então o HTML e os estilos de cada seção continuam
+ * exatamente como estão hoje — o componente só decide se envolve tudo num
+ * <details> ou não. Sem duplicar markup, e desligar o modo blocado devolve o
+ * site ao formato de rolagem contínua sem sobrar nada.
+ *
+ * Uso:
+ *   <Bloco blocado={blocado}>
+ *     <Fragment slot="cabeca">...rótulo + título...</Fragment>
+ *     ...resto da seção...
+ *   </Bloco>
+ *
+ * O slot "midia" existe para a seção "Quem conduz", onde a foto vem ANTES do
+ * título. Com o modo desligado ela continua no lugar de hoje; com o modo ligado
+ * ela vai para dentro do corpo, senão a seção fechada ocuparia uma tela inteira.
+ */
+interface Props {
+  blocado?: boolean;
+  /** deixa esta seção aberta já de saída */
+  aberto?: boolean;
+  /** título centralizado: compensa a largura do "+" para o texto ficar no eixo */
+  centro?: boolean;
+}
+const { blocado = false, aberto = false, centro = false } = Astro.props;
+---
+
+{blocado ? (
+  <details class:list={['tp-bloco', centro && 'tp-centro']} open={aberto}>
+    <summary class="tp-bloco-cab">
+      <div class="tp-bloco-cab-txt"><slot name="cabeca" /></div>
+      <span class="tp-bloco-i" aria-hidden="true"></span>
+    </summary>
+    <div class="tp-bloco-corpo">
+      <slot name="midia" />
+      <slot />
+    </div>
+  </details>
+) : (
+  <Fragment>
+    <slot name="midia" />
+    <slot name="cabeca" />
+    <slot />
+  </Fragment>
+)}

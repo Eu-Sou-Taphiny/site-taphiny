@@ -687,7 +687,8 @@
     "musica": "",
     "whatsapp": "5511925027759",
     "mensagemConversa": "Olá, Taphiny! Cheguei pelo seu site e gostaria de começar uma conversa sobre a Visão Sistêmica.",
-    "mensagemMeditacoes": "Olá, Taphiny! Gostaria de acessar as meditações guiadas."
+    "mensagemMeditacoes": "Olá, Taphiny! Gostaria de acessar as meditações guiadas.",
+    "secoesFechadas": true
   },
   "popup": {
     "ativo": true,

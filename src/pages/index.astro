@@ -4,9 +4,13 @@ import SiteFooter from '../components/SiteFooter.astro';
 // Campos de prosa vêm do Tina como rich-text (árvore) e os curtos como texto
 // simples; `t()` cuida dos dois e devolve o HTML inline. Ver src/lib/texto.ts.
 import { inline as t } from '../lib/texto';
+import Bloco from '../components/Bloco.astro';
 const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, config } = site;
 const popup = (site as any).popup;
 const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(msg)}`;
+// Modo blocado: seções longas fechadas, a pessoa abre a que quiser. O topo, a
+// esteira de produtos (As Jornadas) e o convite final ficam sempre abertos.
+const blocado = !!(config as any).secoesFechadas;
 ---
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -100,6 +104,158 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     .tp-faq-q{ gap:16px; padding:22px 0; }
     .tp-faq-q h3{ font-size:19px; }
     .tp-faq-a{ padding-right:0; }
+  }
+
+  /* ---------- Seções fechadas (modo blocado, ligado no painel) ---------- */
+  .tp-bloco-cab{ display:flex; align-items:flex-start; justify-content:space-between; gap:26px;
+                 cursor:pointer; list-style:none; }
+  .tp-bloco-cab::-webkit-details-marker{ display:none; }
+  .tp-bloco-cab-txt{ flex:1 1 auto; min-width:0; }
+  /* seção de título centralizado: espaçador do mesmo tamanho do "+" à esquerda,
+     senão o texto fica 26px fora do eixo da página */
+  .tp-centro .tp-bloco-cab::before{ content:''; flex:none; width:26px; }
+  @media (max-width:480px){ .tp-centro .tp-bloco-cab::before{ width:22px; } }
+  /* o título já traz a margem da seção; dentro do cabeçalho ela sobra */
+  .tp-bloco-cab-txt > *{ margin-bottom:0 !important; }
+  .tp-bloco-cab-txt > *:not(:last-child){ margin-bottom:14px !important; }
+  .tp-bloco-i{ flex:none; width:26px; height:26px; margin-top:6px; position:relative;
+               color:var(--ouro); transition:transform .35s ease; }
+  .tp-bloco-i::before, .tp-bloco-i::after{ content:''; position:absolute; top:50%; left:50%;
+               background:currentColor; transform:translate(-50%,-50%); }
+  .tp-bloco-i::before{ width:20px; height:1.5px; }
+  .tp-bloco-i::after{ width:1.5px; height:20px; }
+  .tp-bloco[open] .tp-bloco-i{ transform:rotate(135deg); }
+  .tp-bloco-corpo{ padding-top:34px; }
+  .tp-bloco[open] .tp-bloco-corpo{ animation:tp-bloco-abrir .42s ease both; }
+  @keyframes tp-bloco-abrir{ from{ opacity:0; transform:translateY(-10px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce){
+    .tp-bloco-i{ transition:none; }
+    .tp-bloco[open] .tp-bloco-corpo{ animation:none; }
+  }
+  @media (max-width:480px){
+    .tp-bloco-cab{ gap:16px; }
+    .tp-bloco-i{ width:22px; height:22px; }
+    .tp-bloco-i::before{ width:17px; } .tp-bloco-i::after{ height:17px; }
+  }
+
+  /* ============================================================
+     INTERATIVOS (item 4). Regra que vale para os três primeiros:
+     sem JavaScript, o bloco continua sendo o formato de hoje. O
+     script marca o pai com a classe `js` e só então o modo
+     interativo entra em cena.
+     ============================================================ */
+
+  /* ---------- 4b) Comparativo como chave ---------- */
+  .tp-vs-chave{ display:none; }
+  .tp-vs-palco{ display:flex; flex-wrap:wrap; gap:28px; }
+  .tp-vs-col{ flex:1 1 240px; padding:40px 30px; background:#FBF8F3; }
+  .tp-vs-destaque{ border:1px solid var(--ouro); }
+  .tp-vs-tit{ font-family:'Playfair Display',serif; font-size:21px; color:var(--marrom);
+              margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia); }
+  .tp-vs-destaque .tp-vs-tit{ border-bottom-color:var(--ouro); }
+  .tp-vs-lista{ list-style:none; display:flex; flex-direction:column; gap:16px; }
+  .tp-vs-lista li{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px;
+                   line-height:1.75; color:var(--marrom); }
+
+  .tp-vs.js .tp-vs-chave{ display:flex; position:relative; margin:0 auto 34px; max-width:440px;
+                          border:1px solid var(--areia); background:#FBF8F3; padding:4px; }
+  .tp-vs.js .tp-vs-bt{ flex:1 1 0; position:relative; z-index:1; border:none; background:none;
+                       cursor:pointer; padding:14px 10px; font-family:'Montserrat',sans-serif;
+                       font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+                       color:var(--bordeaux); transition:color .35s ease; }
+  .tp-vs.js .tp-vs-bt.ativo{ color:var(--marrom); }
+  .tp-vs.js .tp-vs-marca{ position:absolute; z-index:0; top:4px; bottom:4px; left:4px;
+                          width:calc(50% - 4px); background:var(--ouro); opacity:0.22;
+                          transition:transform .38s cubic-bezier(.4,0,.2,1); }
+  .tp-vs.js .tp-vs-chave[data-em="2"] .tp-vs-marca{ transform:translateX(100%); }
+  .tp-vs.js .tp-vs-col{ display:none; }
+  .tp-vs.js .tp-vs-col.ativo{ display:block; flex:1 1 100%;
+                              animation:tp-troca .4s ease both; }
+  @keyframes tp-troca{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+
+  /* ---------- 4c) Pilares como símbolos ---------- */
+  .tp-pil-simbolos{ display:none; }
+  .tp-pil-textos{ display:flex; flex-direction:column; gap:40px; }
+  .tp-pil-txt-tit{ font-family:'Playfair Display',serif; font-size:22px; color:var(--bordeaux);
+                   margin-bottom:10px; }
+  .tp-pil-txt-tit::after{ content:''; display:block; width:32px; height:1px;
+                   background:var(--areia); margin-top:14px; }
+  .tp-pil-txt p{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px;
+                 line-height:1.9; color:var(--marrom); }
+
+  .tp-pil.js .tp-pil-simbolos{ display:flex; justify-content:center; gap:clamp(18px,7vw,54px);
+                               margin-bottom:44px; }
+  .tp-pil.js .tp-pil-bt{ display:flex; flex-direction:column; align-items:center; gap:14px;
+                         border:none; background:none; cursor:pointer; padding:0;
+                         color:var(--bordeaux); opacity:0.5; transition:opacity .35s ease; }
+  .tp-pil.js .tp-pil-bt.ativo, .tp-pil.js .tp-pil-bt:hover{ opacity:1; }
+  .tp-pil.js .tp-pil-anel{ display:grid; place-items:center; width:clamp(66px,17vw,86px);
+                           aspect-ratio:1; border:1px solid var(--areia); border-radius:50%;
+                           color:var(--ouro); transition:border-color .35s ease, background .35s ease; }
+  .tp-pil.js .tp-pil-anel svg{ width:58%; height:58%; }
+  .tp-pil.js .tp-pil-bt.ativo .tp-pil-anel{ border-color:var(--ouro); background:rgba(183,144,91,0.1); }
+  .tp-pil.js .tp-pil-nome{ font-family:'Montserrat',sans-serif; font-size:10px;
+                           letter-spacing:0.22em; text-transform:uppercase; color:var(--bordeaux); }
+  .tp-pil.js .tp-pil-textos{ gap:0; }
+  .tp-pil.js .tp-pil-txt{ display:none; }
+  .tp-pil.js .tp-pil-txt.ativo{ display:block; animation:tp-troca .4s ease both; }
+  .tp-pil.js .tp-pil-txt-tit{ display:none; }   /* o nome já está sob o símbolo */
+
+  /* ---------- 4d) Esteira como trilha ---------- */
+  .tp-trilha{ display:none; }
+  .tp-trilha.js{ display:flex; position:relative; justify-content:space-between;
+                 margin:0 4px 40px; }
+  .tp-trilha-linha{ position:absolute; top:19px; left:8%; right:8%; height:1px;
+                    background:linear-gradient(90deg, transparent, var(--areia) 12%, var(--areia) 88%, transparent); }
+  .tp-trilha-no{ position:relative; z-index:1; flex:1 1 0; display:flex; flex-direction:column;
+                 align-items:center; gap:12px; border:none; background:none; cursor:pointer;
+                 padding:0; opacity:0.55; transition:opacity .35s ease; }
+  .tp-trilha-no.ativo, .tp-trilha-no:hover{ opacity:1; }
+  .tp-trilha-bola{ display:grid; place-items:center; width:38px; height:38px; border-radius:50%;
+                   border:1px solid var(--areia); background:var(--creme);
+                   font-family:'Playfair Display',serif; font-style:italic; font-size:15px;
+                   color:var(--ouro); transition:border-color .35s ease, background .35s ease; }
+  .tp-trilha-no.ativo .tp-trilha-bola{ border-color:var(--ouro); background:#FBF3E6; }
+  .tp-trilha-nome{ font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.14em;
+                   text-transform:uppercase; color:var(--bordeaux); text-align:center;
+                   line-height:1.5; max-width:11ch; }
+  .tp-cards.js .tp-card{ display:none; }
+  .tp-cards.js .tp-card.ativo{ display:block; animation:tp-troca .4s ease both; }
+
+  /* ---------- 4a) Constelação interativa ---------- */
+  .tp-const{ margin-top:64px; padding-top:56px; border-top:1px solid rgba(82,20,22,0.14); }
+  .tp-const-cab{ text-align:center; margin-bottom:8px; }
+  .tp-const-rotulo{ font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.32em;
+                    text-transform:uppercase; color:var(--bordeaux); margin-bottom:12px; }
+  .tp-const-titulo{ font-family:'Playfair Display',serif; font-size:23px; color:var(--marrom); }
+  .tp-const-palco{ display:block; width:100%; height:auto; touch-action:none;
+                   margin:6px auto 0; max-width:520px; }
+  .tp-const-alvo{ fill:none; stroke:var(--areia); stroke-width:1; stroke-dasharray:3 5;
+                  transition:stroke .4s ease, stroke-dasharray .4s ease; }
+  .tp-const-alvo.ok{ stroke:var(--ouro); stroke-dasharray:none; }
+  .tp-const-peca{ cursor:grab; }
+  .tp-const-peca.pegando{ cursor:grabbing; }
+  .tp-const-peca circle{ fill:#FBF3E6; stroke:var(--terracota); stroke-width:1.2;
+                         transition:fill .35s ease, stroke .35s ease; }
+  .tp-const-peca.ok circle{ fill:var(--ouro); fill-opacity:0.28; stroke:var(--ouro); }
+  .tp-const-peca text{ font-family:'Montserrat',sans-serif; font-size:9.5px; font-weight:400;
+                       letter-spacing:0.08em; fill:var(--marrom); text-anchor:middle;
+                       pointer-events:none; user-select:none; }
+  .tp-const-fim{ font-family:'Playfair Display',serif; font-style:italic; font-size:18px;
+                 line-height:1.6; color:var(--terracota); text-align:center; max-width:400px;
+                 margin:6px auto 0; opacity:0; transform:translateY(8px);
+                 transition:opacity .7s ease, transform .7s ease; }
+  .tp-const.completo .tp-const-fim{ opacity:1; transform:none; }
+  .tp-const-bts{ display:flex; justify-content:center; gap:12px; margin-top:26px; }
+  .tp-const-bt{ border:1px solid var(--areia); background:none; cursor:pointer;
+                padding:11px 20px; font-family:'Montserrat',sans-serif; font-size:10px;
+                letter-spacing:0.2em; text-transform:uppercase; color:var(--bordeaux);
+                transition:border-color .3s ease, color .3s ease; }
+  .tp-const-bt:hover{ border-color:var(--ouro); color:var(--marrom); }
+
+  @media (prefers-reduced-motion: reduce){
+    .tp-vs.js .tp-vs-col.ativo, .tp-pil.js .tp-pil-txt.ativo, .tp-cards.js .tp-card.ativo{ animation:none; }
+    .tp-vs.js .tp-vs-marca, .tp-const-fim, .tp-const-alvo, .tp-const-peca circle{ transition:none; }
   }
 </style>
 
@@ -213,35 +369,104 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
   <!-- 2) A PROVOCAÇÃO -->
   <section id="o-que-carregamos" data-screen-label="Provocacao" style="background:var(--creme); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
+      <Bloco blocado={blocado}>
+      <Fragment slot="cabeca">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:36px;">{provocacao.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); max-width:480px; margin-bottom:40px; text-wrap:balance;">{provocacao.titulo}</h2>
+      </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); margin-bottom:26px; text-wrap:pretty;" set:html={t(provocacao.paragrafo1)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); text-wrap:pretty;" set:html={t(provocacao.paragrafo2)}></p>
+      </Bloco>
     </div>
   </section>
 
   <!-- 3) A ABORDAGEM -->
   <section id="visao-sistemica" data-screen-label="Abordagem" style="background:var(--rosa); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
+      <Bloco blocado={blocado}>
+      <Fragment slot="cabeca">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); margin-bottom:24px;">{visao.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); max-width:520px; margin-bottom:28px; text-wrap:balance;">{visao.titulo}</h2>
+      </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:26px; text-wrap:pretty;" set:html={t(visao.definicao)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:64px; text-wrap:pretty;" set:html={t(visao.paragrafo)}></p>
-      <div style="display:flex; flex-direction:column; gap:40px;">
-        {visao.pilares.map((p) => (
-        <div>
-          <div style="font-family:'Playfair Display',serif; font-size:22px; color:var(--bordeaux); margin-bottom:10px;">{p.titulo}</div>
-          <div style="width:32px; height:1px; background:var(--areia); margin-bottom:14px;"></div>
-          <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--marrom);" set:html={t(p.texto)}></p>
+      <!-- 4c) PILARES CLICÁVEIS: três símbolos em linha de ouro; toca num e o
+           texto aparece embaixo. Sem JavaScript os três textos ficam visíveis,
+           que é o formato de hoje. -->
+      <div class="tp-pil" data-tp-pilares>
+        <div class="tp-pil-simbolos" role="tablist" aria-label="Os três pilares">
+          {visao.pilares.map((p, i) => (
+          <button type="button" class:list={['tp-pil-bt', i === 0 && 'ativo']} role="tab"
+                  aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`tp-pil-${i}`} data-pil={String(i)}>
+            {/* símbolos: 0 = Pertencer (um círculo que acolhe os outros),
+                1 = Ordenar (cada um no seu lugar), 2 = Fluir (a vida correndo) */}
+            <span class="tp-pil-anel" aria-hidden="true">
+              {i === 0 && (
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                <circle cx="24" cy="24" r="16"></circle>
+                <circle cx="18" cy="21" r="3.4" fill="currentColor" stroke="none" opacity="0.85"></circle>
+                <circle cx="29" cy="19" r="2.6" fill="currentColor" stroke="none" opacity="0.6"></circle>
+                <circle cx="25" cy="30" r="3" fill="currentColor" stroke="none" opacity="0.72"></circle>
+              </svg>
+              )}
+              {i === 1 && (
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                <line x1="10" y1="34" x2="38" y2="34"></line>
+                <circle cx="15" cy="26" r="4.2" fill="currentColor" stroke="none" opacity="0.85"></circle>
+                <circle cx="24" cy="23" r="3.4" fill="currentColor" stroke="none" opacity="0.68"></circle>
+                <circle cx="33" cy="20" r="2.6" fill="currentColor" stroke="none" opacity="0.52"></circle>
+              </svg>
+              )}
+              {i === 2 && (
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+                <path d="M9 19c5-5 9 5 15 0s10 5 15 0"></path>
+                <path d="M9 29c5-5 9 5 15 0s10 5 15 0" opacity="0.55"></path>
+              </svg>
+              )}
+            </span>
+            <span class="tp-pil-nome">{p.titulo}</span>
+          </button>
+          ))}
         </div>
-        ))}
+        <div class="tp-pil-textos">
+          {visao.pilares.map((p, i) => (
+          <div class:list={['tp-pil-txt', i === 0 && 'ativo']} id={`tp-pil-${i}`} role="tabpanel" data-pil={String(i)}>
+            <div class="tp-pil-txt-tit">{p.titulo}</div>
+            <p set:html={t(p.texto)}></p>
+          </div>
+          ))}
+        </div>
       </div>
+
+      <!-- 4a) CONSTELAÇÃO INTERATIVA: arrastar cada pessoa até o seu lugar.
+           Explica a Visão Sistêmica pela mão, sem texto. Só aparece se houver
+           JavaScript e ponteiro; o parágrafo acima já diz o necessário sem ela.
+           A DISPOSIÇÃO das posições precisa do aval da Taphiny — quem entende
+           de ordem dos vínculos é ela, não eu. -->
+      <div class="tp-const" data-tp-const hidden>
+        <div class="tp-const-cab">
+          <div class="tp-const-rotulo">Experimente</div>
+          <div class="tp-const-titulo">Leve cada um ao seu lugar</div>
+        </div>
+        <svg class="tp-const-palco" viewBox="0 0 400 300" aria-hidden="true">
+          <g class="tp-const-alvos"></g>
+          <g class="tp-const-pecas"></g>
+        </svg>
+        <p class="tp-const-fim" role="status">Quando cada um ocupa o seu lugar, a vida volta a fluir.</p>
+        <div class="tp-const-bts">
+          <button type="button" class="tp-const-bt" data-const-resolver>Ver no lugar</button>
+          <button type="button" class="tp-const-bt" data-const-embaralhar>Embaralhar</button>
+        </div>
+      </div>
+      </Bloco>
     </div>
   </section>
 
   <!-- 4) QUEM CONDUZ -->
   <article id="quem-conduz" data-screen-label="QuemConduz" style="background:var(--bordeaux); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
+      <Bloco blocado={blocado}>
+      <Fragment slot="midia">
       <figure id="tp-retrato" style="margin:0 0 48px; width:100%; aspect-ratio:4/5; border:1px solid var(--ouro); overflow:hidden; position:relative; background-color:#3A0D0F;">
         {quemConduz.video ? (
           <video src={quemConduz.video} poster={quemConduz.videoCapa || undefined} controls playsinline preload="metadata" style="width:100%; height:100%; object-fit:cover; display:block; background:#3A0D0F;"></video>
@@ -253,39 +478,57 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
           </div>
         )}
       </figure>
+      </Fragment>
+      <Fragment slot="cabeca">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouroc); margin-bottom:28px;">{quemConduz.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:25px; line-height:1.45; color:var(--creme); margin-bottom:30px; text-wrap:pretty;">{quemConduz.titulo}</h2>
+      </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo1)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo2)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); text-wrap:pretty;" set:html={t(quemConduz.paragrafo3)}></p>
       <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:19px; line-height:1.7; color:var(--ouroc); margin-top:40px; text-wrap:pretty;" set:html={t(quemConduz.frase)}></p>
+      </Bloco>
     </div>
   </article>
 
   <!-- 5) PSICOTERAPIA E VISÃO SISTÊMICA -->
   <section id="psicoterapia-e-visao-sistemica" data-screen-label="Comparacao" style="background:var(--creme); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
+      <Bloco blocado={blocado} centro>
+      <Fragment slot="cabeca">
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:18px; text-wrap:balance;">{comparacao.titulo}</h2>
+      </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); text-align:center; max-width:440px; margin:0 auto 64px; text-wrap:pretty;" set:html={t(comparacao.subtitulo)}></p>
-      <div style="display:flex; flex-wrap:wrap; gap:28px;">
-        <div style="flex:1 1 240px; padding:40px 30px; background:#FBF8F3;">
-          <div style="font-family:'Playfair Display',serif; font-size:21px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia);">{comparacao.col1Titulo}</div>
-          <ul style="list-style:none; display:flex; flex-direction:column; gap:16px;">
-            {comparacao.col1.map((item) => (
-            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);" set:html={t(item)}></li>
-            ))}
-          </ul>
+      <!-- 4b) CHAVE: alterna entre os dois olhares em vez de duas listas lado a
+           lado. Sem JavaScript o bloco continua sendo as duas colunas de hoje —
+           o interativo é uma camada em cima, não uma substituição. -->
+      <div class="tp-vs" data-tp-vs>
+        <div class="tp-vs-chave" role="tablist" aria-label="Escolha o olhar">
+          <button type="button" class="tp-vs-bt ativo" role="tab" aria-selected="true"  aria-controls="tp-vs-1" data-vs="1">{comparacao.col1Titulo}</button>
+          <button type="button" class="tp-vs-bt"       role="tab" aria-selected="false" aria-controls="tp-vs-2" data-vs="2">{comparacao.col2Titulo}</button>
+          <span class="tp-vs-marca" aria-hidden="true"></span>
         </div>
-        <div style="flex:1 1 240px; padding:40px 30px; background:#FBF8F3; border:1px solid var(--ouro);">
-          <div style="font-family:'Playfair Display',serif; font-size:21px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--ouro);">{comparacao.col2Titulo}</div>
-          <ul style="list-style:none; display:flex; flex-direction:column; gap:16px;">
-            {comparacao.col2.map((item) => (
-            <li style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.75; color:var(--marrom);" set:html={t(item)}></li>
-            ))}
-          </ul>
+        <div class="tp-vs-palco">
+          <div class="tp-vs-col ativo" id="tp-vs-1" role="tabpanel" data-vs="1">
+            <div class="tp-vs-tit">{comparacao.col1Titulo}</div>
+            <ul class="tp-vs-lista">
+              {comparacao.col1.map((item) => (
+              <li set:html={t(item)}></li>
+              ))}
+            </ul>
+          </div>
+          <div class="tp-vs-col tp-vs-destaque" id="tp-vs-2" role="tabpanel" data-vs="2">
+            <div class="tp-vs-tit">{comparacao.col2Titulo}</div>
+            <ul class="tp-vs-lista">
+              {comparacao.col2.map((item) => (
+              <li set:html={t(item)}></li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--terracota); text-align:center; max-width:520px; margin:56px auto 0; text-wrap:pretty;" set:html={t(comparacao.fecho)}></p>
+      </Bloco>
     </div>
   </section>
 
@@ -307,13 +550,25 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
         <a href={wa(config.mensagemMeditacoes)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota); text-decoration:none; border-bottom:1px solid var(--areia); padding-bottom:6px;">{jornadas.meditacoes.cta}</a>
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:22px;">
-        {jornadas.cards.map((card) => {
+      <!-- 4d) TRILHA: os degraus na linha de ouro; toca num degrau e vê a jornada.
+           Sem JavaScript os cartões continuam empilhados como hoje. -->
+      <div class="tp-trilha" data-tp-trilha aria-hidden="true">
+        <span class="tp-trilha-linha"></span>
+        {jornadas.cards.map((card, i) => (
+        <button type="button" class:list={['tp-trilha-no', i === 0 && 'ativo']} data-trilha={String(i)} tabindex="-1">
+          <span class="tp-trilha-bola">{card.num}</span>
+          <span class="tp-trilha-nome">{card.titulo}</span>
+        </button>
+        ))}
+      </div>
+
+      <div class="tp-cards" data-tp-cards style="display:flex; flex-direction:column; gap:22px;">
+        {jornadas.cards.map((card, i) => {
         // rich-text vazio ainda é um objeto (portanto "verdadeiro"): quem decide
         // se o bloco de resultado aparece é o HTML já renderizado, não o campo.
         const resultado = t(card.resultado);
         return (
-        <div data-reveal style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
+        <div data-reveal class:list={['tp-card', i === 0 && 'ativo']} data-trilha={String(i)} style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
           <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
             <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro);">{card.num}</span>
             <span style="font-family:'Playfair Display',serif; font-size:22px; color:var(--marrom);">{card.titulo}</span>
@@ -340,7 +595,10 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
   <!-- 7) PARA QUEM É -->
   <section id="para-quem" data-screen-label="ParaQuemE" style="background:var(--rosa); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
+      <Bloco blocado={blocado} centro>
+      <Fragment slot="cabeca">
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:28px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:56px; text-wrap:balance;">{paraQuem.titulo}</h2>
+      </Fragment>
       <div style="display:flex; flex-wrap:wrap; gap:44px;">
         <div style="flex:1 1 240px;">
           <div style="font-family:'Playfair Display',serif; font-size:20px; color:var(--marrom); margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--areia);">{paraQuem.col1Titulo}</div>
@@ -359,14 +617,18 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
           </ul>
         </div>
       </div>
+      </Bloco>
     </div>
   </section>
 
   <!-- 7b) PERGUNTAS FREQUENTES -->
   <section id="faq" data-screen-label="FAQ" style="background:var(--creme); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:660px; margin:0 auto;">
+      <Bloco blocado={blocado} centro>
+      <Fragment slot="cabeca">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); text-align:center; margin-bottom:24px;">{faq.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:56px; text-wrap:balance;">{faq.titulo}</h2>
+      </Fragment>
       <div>
         {faq.itens.map((item) => (
         <details class="tp-faq-item">
@@ -378,16 +640,21 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
         </details>
         ))}
       </div>
+      </Bloco>
     </div>
   </section>
 
   <!-- 8) EMPRESAS E EVENTOS -->
   <section id="empresas" data-screen-label="Empresas" style="background:var(--areia); padding:96px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:520px; margin:0 auto; text-align:center;">
+      <Bloco blocado={blocado} centro>
+      <Fragment slot="cabeca">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--marrom); margin-bottom:28px; opacity:0.7;">{empresas.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:26px; line-height:1.3; color:var(--marrom); margin-bottom:26px; text-wrap:balance;">{empresas.titulo}</h2>
+      </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95; color:var(--marrom); margin-bottom:40px; text-wrap:pretty;" set:html={t(empresas.paragrafo)}></p>
       <a href={wa(empresas.mensagem)} target="_blank" rel="noopener" class="tp-corp" style="display:inline-block; font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--marrom); text-decoration:none; border:1px solid var(--marrom); padding:15px 32px; transition:background .4s,color .4s,border-color .4s;">{empresas.cta}</a>
+      </Bloco>
     </div>
   </section>
 
@@ -780,8 +1047,35 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
     els.forEach(function(e){ io.observe(e); });
   }
 
+  // Qualquer coisa que mude a altura da página (abrir seção, trocar de painel
+  // num interativo) precisa redesenhar a árvore, senão o tronco descola das
+  // raízes. Fica em window porque o script dos interativos também chama.
+  // Definido aqui no corpo, e não dentro de init(), para já existir quando
+  // aquele script rodar mais abaixo na página.
+  window.tpRedesenhar = function(){
+    buildTree(); setReveal();
+    setTimeout(function(){ buildTree(); setReveal(); }, 60);
+    setTimeout(function(){ buildTree(); setReveal(); }, 460);  // fim da animação
+  };
+
+  function ligarSanfona(){
+    var blocos = document.querySelectorAll('details.tp-bloco');
+    Array.prototype.forEach.call(blocos, function(d){
+      d.addEventListener('toggle', function(){
+        if(d.open){
+          // o conteúdo estava escondido, então o observador de scroll nunca o
+          // revelou: mostra agora, senão a seção abre em branco.
+          Array.prototype.forEach.call(d.querySelectorAll('[data-reveal]'), function(e){
+            e.style.opacity = '1'; e.style.transform = 'none';
+          });
+        }
+        window.tpRedesenhar();
+      });
+    });
+  }
+
   function init(){
-    buildTree(); setReveal(); setupReveal();
+    buildTree(); setReveal(); setupReveal(); ligarSanfona();
     setTimeout(function(){ buildTree(); setReveal(); }, 400);
     setTimeout(function(){ buildTree(); setReveal(); }, 1200);
     window.addEventListener('load', function(){ buildTree(); setReveal(); });
@@ -802,6 +1096,207 @@ const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURICo
 
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
+})();
+</script>
+
+<!-- INTERATIVOS (item 4) -->
+<script is:inline>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Redesenha a árvore quando a altura da página muda por causa de uma troca.
+  function remexeu(){
+    if(window.tpRedesenhar) window.tpRedesenhar();
+  }
+
+  function trocar(botoes, paineis, i, marcador){
+    for(var k=0;k<botoes.length;k++){
+      var on = k === i;
+      botoes[k].classList.toggle('ativo', on);
+      if(botoes[k].hasAttribute('role')) botoes[k].setAttribute('aria-selected', on ? 'true' : 'false');
+    }
+    for(var k2=0;k2<paineis.length;k2++) paineis[k2].classList.toggle('ativo', k2 === i);
+    // O painel que entra pode carregar a animação de entrada por scroll ainda em
+    // opacidade 0 (o observador nunca o viu, porque estava escondido). Revela na
+    // mão para o cartão não aparecer em branco.
+    var vivo = paineis[i];
+    if(vivo){
+      var alvos = vivo.hasAttribute('data-reveal') ? [vivo] : [];
+      alvos = alvos.concat(Array.prototype.slice.call(vivo.querySelectorAll('[data-reveal]')));
+      alvos.forEach(function(e){ e.style.opacity = '1'; e.style.transform = 'none'; });
+    }
+    if(marcador) marcador.setAttribute('data-em', String(i+1));
+    remexeu();
+  }
+
+  // setas do teclado andam entre as abas, como manda o padrão
+  function setas(botoes, aplicar){
+    for(var i=0;i<botoes.length;i++){
+      (function(idx){
+        botoes[idx].addEventListener('keydown', function(e){
+          var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+          if(!d) return;
+          e.preventDefault();
+          var n = (idx + d + botoes.length) % botoes.length;
+          aplicar(n); botoes[n].focus();
+        });
+      })(i);
+    }
+  }
+
+  // ---------- 4b) comparativo como chave ----------
+  (function(){
+    var raiz = document.querySelector('[data-tp-vs]');
+    if(!raiz) return;
+    var chave = raiz.querySelector('.tp-vs-chave');
+    var bts = raiz.querySelectorAll('.tp-vs-bt');
+    var cols = raiz.querySelectorAll('.tp-vs-col');
+    if(!bts.length || bts.length !== cols.length) return;
+    raiz.classList.add('js');
+    function aplicar(i){ trocar(bts, cols, i, chave); }
+    for(var i=0;i<bts.length;i++) (function(idx){
+      bts[idx].addEventListener('click', function(){ aplicar(idx); });
+    })(i);
+    setas(bts, aplicar);
+    aplicar(0);
+  })();
+
+  // ---------- 4c) pilares como símbolos ----------
+  (function(){
+    var raiz = document.querySelector('[data-tp-pilares]');
+    if(!raiz) return;
+    var bts = raiz.querySelectorAll('.tp-pil-bt');
+    var txts = raiz.querySelectorAll('.tp-pil-txt');
+    if(!bts.length || bts.length !== txts.length) return;
+    raiz.classList.add('js');
+    function aplicar(i){ trocar(bts, txts, i, null); }
+    for(var i=0;i<bts.length;i++) (function(idx){
+      bts[idx].addEventListener('click', function(){ aplicar(idx); });
+    })(i);
+    setas(bts, aplicar);
+    aplicar(0);
+  })();
+
+  // ---------- 4d) esteira como trilha ----------
+  (function(){
+    var trilha = document.querySelector('[data-tp-trilha]');
+    var caixa  = document.querySelector('[data-tp-cards]');
+    if(!trilha || !caixa) return;
+    var nos = trilha.querySelectorAll('.tp-trilha-no');
+    var cards = caixa.querySelectorAll('.tp-card');
+    if(!nos.length || nos.length !== cards.length) return;
+    // a trilha estava escondida do leitor de tela enquanto não havia interação
+    trilha.removeAttribute('aria-hidden');
+    for(var i=0;i<nos.length;i++) nos[i].removeAttribute('tabindex');
+    trilha.classList.add('js'); caixa.classList.add('js');
+    function aplicar(i){ trocar(nos, cards, i, null); }
+    for(var j=0;j<nos.length;j++) (function(idx){
+      nos[idx].addEventListener('click', function(){ aplicar(idx); });
+    })(j);
+    setas(nos, aplicar);
+    aplicar(0);
+  })();
+
+  // ---------- 4a) constelação interativa ----------
+  (function(){
+    var raiz = document.querySelector('[data-tp-const]');
+    if(!raiz) return;
+    var svg = raiz.querySelector('.tp-const-palco');
+    var gAlvos = raiz.querySelector('.tp-const-alvos');
+    var gPecas = raiz.querySelector('.tp-const-pecas');
+    if(!svg || !gAlvos || !gPecas || !window.PointerEvent) return;
+
+    var R = 27, PERTO = 34;                    // raio da peça e tolerância do encaixe
+    // A ordem aqui é um rascunho meu; quem valida é a Taphiny.
+    var LUGARES = [
+      { nome:'Avó',  x:200, y:54,  ini:{x:54,  y:242} },
+      { nome:'Pai',  x:146, y:132, ini:{x:336, y:62}  },
+      { nome:'Mãe',  x:254, y:132, ini:{x:64,  y:74}  },
+      { nome:'Você', x:160, y:220, ini:{x:308, y:236} },
+      { nome:'Irmã', x:240, y:220, ini:{x:196, y:150} }
+    ];
+
+    var pecas = [];
+    LUGARES.forEach(function(L){
+      var alvo = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      alvo.setAttribute('class','tp-const-alvo');
+      alvo.setAttribute('cx', L.x); alvo.setAttribute('cy', L.y); alvo.setAttribute('r', R);
+      gAlvos.appendChild(alvo);
+
+      var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+      g.setAttribute('class','tp-const-peca');
+      var c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('r', R); c.setAttribute('cx', 0); c.setAttribute('cy', 0);
+      var tx = document.createElementNS('http://www.w3.org/2000/svg','text');
+      tx.setAttribute('y', 3.4); tx.textContent = L.nome;
+      g.appendChild(c); g.appendChild(tx);
+      gPecas.appendChild(g);
+      pecas.push({ g:g, alvo:alvo, L:L, x:L.ini.x, y:L.ini.y, ok:false });
+    });
+
+    function pinta(p){
+      p.g.setAttribute('transform', 'translate('+p.x.toFixed(1)+','+p.y.toFixed(1)+')');
+      p.g.classList.toggle('ok', p.ok);
+      p.alvo.classList.toggle('ok', p.ok);
+    }
+    function conferir(){
+      var todos = pecas.every(function(p){ return p.ok; });
+      raiz.classList.toggle('completo', todos);
+    }
+    function coloca(p, x, y){
+      var d = Math.hypot(x - p.L.x, y - p.L.y);
+      if(d <= PERTO){ p.x = p.L.x; p.y = p.L.y; p.ok = true; }
+      else { p.x = x; p.y = y; p.ok = false; }
+      pinta(p); conferir();
+    }
+
+    // tela -> unidades do viewBox
+    function noPalco(ev){
+      var r = svg.getBoundingClientRect();
+      return { x:(ev.clientX - r.left) * 400 / r.width,
+               y:(ev.clientY - r.top) * 300 / r.height };
+    }
+
+    pecas.forEach(function(p){
+      p.g.addEventListener('pointerdown', function(ev){
+        ev.preventDefault();
+        p.g.classList.add('pegando');
+        gPecas.appendChild(p.g);                 // quem está na mão fica na frente
+        try { p.g.setPointerCapture(ev.pointerId); } catch(e){}
+        var mv = function(e2){ var q = noPalco(e2); p.x = q.x; p.y = q.y; p.ok = false; pinta(p); };
+        var up = function(e2){
+          p.g.classList.remove('pegando');
+          var q = noPalco(e2); coloca(p, q.x, q.y);
+          p.g.removeEventListener('pointermove', mv);
+          p.g.removeEventListener('pointerup', up);
+          p.g.removeEventListener('pointercancel', up);
+        };
+        p.g.addEventListener('pointermove', mv);
+        p.g.addEventListener('pointerup', up);
+        p.g.addEventListener('pointercancel', up);
+      });
+      pinta(p);
+    });
+
+    // Os botões também são o caminho de quem usa teclado ou leitor de tela:
+    // sem eles o desfecho ficaria trancado atrás do arrastar.
+    var bResolver = raiz.querySelector('[data-const-resolver]');
+    var bEmbaralhar = raiz.querySelector('[data-const-embaralhar]');
+    if(bResolver) bResolver.addEventListener('click', function(){
+      pecas.forEach(function(p, i){
+        var ir = function(){ p.x = p.L.x; p.y = p.L.y; p.ok = true; pinta(p); conferir(); };
+        reduce ? ir() : setTimeout(ir, i * 130);
+      });
+    });
+    if(bEmbaralhar) bEmbaralhar.addEventListener('click', function(){
+      pecas.forEach(function(p){ p.x = p.L.ini.x; p.y = p.L.ini.y; p.ok = false; pinta(p); });
+      conferir();
+    });
+
+    raiz.removeAttribute('hidden');
+    remexeu();
+  })();
 })();
 </script>
 

@@ -274,6 +274,13 @@ export default defineConfig({
             name: "config",
             label: "Configurações (WhatsApp e Música)",
             fields: [
+              {
+                type: "boolean",
+                name: "secoesFechadas",
+                label: "Deixar as seções fechadas (a pessoa abre a que quiser)",
+                description:
+                  "Ligado: as seções longas viram sanfona e só 'As Jornadas' fica aberta. O topo e o convite final continuam sempre visíveis.",
+              },
               { type: "image", name: "musica", label: "Música de fundo (mp3)" },
               { type: "string", name: "whatsapp", label: "WhatsApp (só números, com DDI+DDD, ex.: 5511925027759)" },
               { type: "string", name: "mensagemConversa", label: "Mensagem do botão 'começar uma conversa'", ui: { component: "textarea" } },
