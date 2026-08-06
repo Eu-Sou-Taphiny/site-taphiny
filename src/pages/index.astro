@@ -243,6 +243,8 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-const-peca text{ font-family:'Montserrat',sans-serif; font-size:9.5px; font-weight:400;
                        letter-spacing:0.08em; fill:var(--marrom); text-anchor:middle;
                        pointer-events:none; user-select:none; }
+  /* rótulo de duas linhas (os ancestrais) cabe com a letra um pouco menor */
+  .tp-const-peca text.duas{ font-size:8.6px; letter-spacing:0.04em; }
   .tp-const-fim{ font-family:'Playfair Display',serif; font-style:italic; font-size:18px;
                  line-height:1.6; color:var(--terracota); text-align:center; max-width:400px;
                  margin:6px auto 0; opacity:0; transform:translateY(8px);
@@ -525,7 +527,9 @@ const blocado = !!(config as any).secoesFechadas;
        e separa o comparativo (creme) das Jornadas (creme). -->
   <section id="constelacao" data-screen-label="Constelacao" style="background:var(--rosa); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
-      <Bloco blocado={blocado} centro>
+      {/* `aberto`: a experiência nasce aberta mesmo no modo blocado, senão a
+          pessoa precisaria descobrir que existe uma dinâmica atrás do "+" */}
+      <Bloco blocado={blocado} aberto centro>
       <Fragment slot="cabeca">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">Experimente</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:18px; text-wrap:balance;">Leve cada um ao seu lugar</h2>
@@ -1224,48 +1228,80 @@ const blocado = !!(config as any).secoesFechadas;
     var gPecas = raiz.querySelector('.tp-const-pecas');
     if(!svg || !gAlvos || !gPecas || !window.PointerEvent) return;
 
-    var R = 25, R_MENOR = 18, PERTO = 32;      // raio da peça e tolerância do encaixe
+    var SVG = 'http://www.w3.org/2000/svg';
+    var PERTO = 32;                            // tolerância do encaixe
 
-    // Ordem indicada pela Taphiny: avós atrás e acima, depois pai e mãe (dando
-    // força), você no centro, o destino na frente (olhando para o futuro) e o
-    // sintoma ao lado, menor, pacificado.
+    // Ordem indicada pela Taphiny: ancestrais atrás e acima, depois pai e mãe
+    // (dando força), você no centro, o destino na frente (olhando para o futuro)
+    // e o sintoma integrado a você — pequeno, pacificado.
+    //
+    // `r` é o raio normal e `rOk` o raio depois de organizado. O sintoma é o
+    // contrário dos outros: grande enquanto está desorganizado (é o que domina a
+    // cena) e pequeno quando encontra o lugar.
+    //
+    // Os ancestrais têm círculo maior porque o rótulo tem duas linhas — e porque
+    // uma linhagem é maior que uma pessoa.
     var PECAS = [
-      { nome:'Avô',     x:148, y:46,  ini:{x:56,  y:250}, marcado:true },
-      { nome:'Avó',     x:252, y:46,  ini:{x:292, y:274}, marcado:true },
-      { nome:'Pai',     x:164, y:112, ini:{x:52,  y:130}, marcado:true },
-      { nome:'Mãe',     x:236, y:112, ini:{x:348, y:130}, marcado:true },
-      { nome:'Você',    x:200, y:182, ini:{x:200, y:40},  marcado:true },
+      { nome:'Ancestrais paternos', r:30, x:142, y:48,  ini:{x:58,  y:246}, marcado:true },
+      { nome:'Ancestrais maternos', r:30, x:258, y:48,  ini:{x:296, y:250}, marcado:true },
+      { nome:'Pai',     r:25, x:164, y:118, ini:{x:48,  y:132}, marcado:true },
+      { nome:'Mãe',     r:25, x:236, y:118, ini:{x:352, y:132}, marcado:true },
+      { nome:'Você',    r:25, x:196, y:186, ini:{x:200, y:38},  marcado:true },
       // sem lugar marcado: é onde a pessoa põe que interessa
-      { nome:'Destino', x:200, y:252, ini:{x:72,  y:74},  marcado:false },
-      { nome:'Sintoma', x:322, y:214, ini:{x:312, y:74},  marcado:false, encolhe:true }
+      { nome:'Destino', r:25, x:196, y:256, ini:{x:70,  y:74},  marcado:false },
+      // encostado no Você (a soma dos raios é exatamente a distância), à direita,
+      // onde o rótulo cabe embaixo sem bater no Destino
+      { nome:'Sintoma', r:32, rOk:16, x:237, y:186, ini:{x:314, y:76}, marcado:false }
     ];
+
+    function raio(p){ return (p.ok && p.L.rOk) ? p.L.rOk : p.L.r; }
 
     var pecas = [];
     PECAS.forEach(function(L){
       var alvo = null;
       if(L.marcado){
-        alvo = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        alvo = document.createElementNS(SVG,'circle');
         alvo.setAttribute('class','tp-const-alvo');
-        alvo.setAttribute('cx', L.x); alvo.setAttribute('cy', L.y); alvo.setAttribute('r', R);
+        alvo.setAttribute('cx', L.x); alvo.setAttribute('cy', L.y); alvo.setAttribute('r', L.r);
         gAlvos.appendChild(alvo);
       }
 
-      var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+      var g = document.createElementNS(SVG,'g');
       g.setAttribute('class', 'tp-const-peca' + (L.marcado ? '' : ' livre'));
-      var c = document.createElementNS('http://www.w3.org/2000/svg','circle');
-      c.setAttribute('r', R); c.setAttribute('cx', 0); c.setAttribute('cy', 0);
-      var tx = document.createElementNS('http://www.w3.org/2000/svg','text');
-      tx.setAttribute('y', 3.4); tx.textContent = L.nome;
+      var c = document.createElementNS(SVG,'circle');
+      c.setAttribute('r', L.r); c.setAttribute('cx', 0); c.setAttribute('cy', 0);
+
+      // rótulo de duas palavras vai em duas linhas, senão não cabe no círculo
+      var tx = document.createElementNS(SVG,'text');
+      var palavras = L.nome.split(' ');
+      if(palavras.length > 1){
+        tx.setAttribute('class','duas');
+        tx.setAttribute('y', -1.5);
+        palavras.forEach(function(w, k){
+          var ts = document.createElementNS(SVG,'tspan');
+          ts.setAttribute('x', 0);
+          if(k) ts.setAttribute('dy', 11);
+          ts.textContent = w;
+          tx.appendChild(ts);
+        });
+      } else {
+        tx.setAttribute('y', 3.4);
+        tx.textContent = L.nome;
+      }
+
       g.appendChild(c); g.appendChild(tx);
       gPecas.appendChild(g);
-      pecas.push({ g:g, c:c, alvo:alvo, L:L, x:L.ini.x, y:L.ini.y, ok:false });
+      pecas.push({ g:g, c:c, tx:tx, alvo:alvo, L:L, x:L.ini.x, y:L.ini.y, ok:false });
     });
 
     function pinta(p){
       p.g.setAttribute('transform', 'translate('+p.x.toFixed(1)+','+p.y.toFixed(1)+')');
       p.g.classList.toggle('ok', p.ok);
       if(p.alvo) p.alvo.classList.toggle('ok', p.ok);
-      p.c.setAttribute('r', (p.ok && p.L.encolhe) ? R_MENOR : R);
+      p.c.setAttribute('r', raio(p));
+      // o sintoma pacificado fica pequeno demais para o rótulo caber dentro:
+      // nesse caso o nome desce para debaixo do círculo
+      if(p.L.rOk) p.tx.setAttribute('y', p.ok ? raio(p) + 13 : 3.4);
     }
     // O desfecho aparece quando a família está no lugar; sintoma e destino não
     // entram na conta porque não têm lugar certo antes do Reordenar.
