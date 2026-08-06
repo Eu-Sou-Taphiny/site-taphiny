@@ -371,10 +371,10 @@ const blocado = !!(config as any).secoesFechadas;
   <!-- 2) A PROVOCAÇÃO -->
   <section id="o-que-carregamos" data-screen-label="Provocacao" style="background:var(--creme); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
-      <Bloco blocado={blocado}>
+      <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
-      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:36px;">{provocacao.rotulo}</div>
-      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); max-width:480px; margin-bottom:40px; text-wrap:balance;">{provocacao.titulo}</h2>
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); text-align:center; margin-bottom:36px;">{provocacao.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); text-align:center; max-width:480px; margin:0 auto 40px; text-wrap:balance;">{provocacao.titulo}</h2>
       </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); margin-bottom:26px; text-wrap:pretty;" set:html={t(provocacao.paragrafo1)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); text-wrap:pretty;" set:html={t(provocacao.paragrafo2)}></p>
@@ -385,10 +385,10 @@ const blocado = !!(config as any).secoesFechadas;
   <!-- 3) A ABORDAGEM -->
   <section id="visao-sistemica" data-screen-label="Abordagem" style="background:var(--rosa); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
-      <Bloco blocado={blocado}>
+      <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
-      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); margin-bottom:24px;">{visao.rotulo}</div>
-      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); max-width:520px; margin-bottom:28px; text-wrap:balance;">{visao.titulo}</h2>
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">{visao.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); text-align:center; max-width:520px; margin:0 auto 28px; text-wrap:balance;">{visao.titulo}</h2>
       </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:26px; text-wrap:pretty;" set:html={t(visao.definicao)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:64px; text-wrap:pretty;" set:html={t(visao.paragrafo)}></p>
@@ -447,7 +447,7 @@ const blocado = !!(config as any).secoesFechadas;
   <!-- 4) QUEM CONDUZ -->
   <article id="quem-conduz" data-screen-label="QuemConduz" style="background:var(--bordeaux); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
-      <Bloco blocado={blocado}>
+      <Bloco blocado={blocado} centro>
       <Fragment slot="midia">
       <figure id="tp-retrato" style="margin:0 0 48px; width:100%; aspect-ratio:4/5; border:1px solid var(--ouro); overflow:hidden; position:relative; background-color:#3A0D0F;">
         {quemConduz.video ? (
@@ -462,8 +462,8 @@ const blocado = !!(config as any).secoesFechadas;
       </figure>
       </Fragment>
       <Fragment slot="cabeca">
-      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouroc); margin-bottom:28px;">{quemConduz.rotulo}</div>
-      <h2 style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:25px; line-height:1.45; color:var(--creme); margin-bottom:30px; text-wrap:pretty;">{quemConduz.titulo}</h2>
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouroc); text-align:center; margin-bottom:28px;">{quemConduz.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:25px; line-height:1.45; color:var(--creme); text-align:center; margin-bottom:30px; text-wrap:pretty;">{quemConduz.titulo}</h2>
       </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo1)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo2)}></p>
