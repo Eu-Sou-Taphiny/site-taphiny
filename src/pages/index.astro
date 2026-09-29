@@ -56,7 +56,7 @@ const blocado = !!(config as any).secoesFechadas;
 <!-- Fontes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="/assets/selo.webp">
 
 <style is:global>
@@ -77,6 +77,12 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-corp:hover{ background:var(--marrom) !important; color:var(--ouroc) !important; border-color:var(--marrom) !important; }
   .tp-btn{ transition:opacity .4s; }
   .tp-btn:hover{ opacity:.85; }
+
+  /* ---------- Citações e frases em destaque ----------
+     Sem itálico: Playfair regular, entrelinha 1,5. Tamanho e cor ficam em cada
+     uso, porque dependem do fundo. */
+  .tp-citacao{ font-family:'Playfair Display',serif; font-style:normal; font-weight:400;
+               line-height:1.5; text-wrap:pretty; }
 
   /* ---------- FAQ em sanfona (clique para expandir) ---------- */
   .tp-faq-item{ border-bottom:1px solid var(--areia); }
@@ -164,10 +170,14 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-vs.js .tp-vs-bt{ flex:1 1 0; position:relative; z-index:1; border:none; background:none;
                        cursor:pointer; padding:14px 10px; font-family:'Montserrat',sans-serif;
                        font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
-                       color:var(--bordeaux); transition:color .35s ease; }
-  .tp-vs.js .tp-vs-bt.ativo{ color:var(--marrom); }
+                       transition:color .35s ease, background .35s ease; }
+  /* selecionado: bordô sólido e texto creme (7,7:1); o outro fica claro, com
+     texto marrom (13:1), e ganha só um véu de bordô ao passar o mouse */
+  .tp-vs.js .tp-vs-bt{ color:var(--marrom); }
+  .tp-vs.js .tp-vs-bt:not(.ativo):hover{ background:rgba(106,63,75,0.08); }
+  .tp-vs.js .tp-vs-bt.ativo{ color:var(--creme); font-weight:500; }
   .tp-vs.js .tp-vs-marca{ position:absolute; z-index:0; top:4px; bottom:4px; left:4px;
-                          width:calc(50% - 4px); background:var(--ouro); opacity:0.22;
+                          width:calc(50% - 4px); background:var(--bordeaux);
                           transition:transform .38s cubic-bezier(.4,0,.2,1); }
   .tp-vs.js .tp-vs-chave[data-em="2"] .tp-vs-marca{ transform:translateX(100%); }
   .tp-vs.js .tp-vs-col{ display:none; }
@@ -175,33 +185,21 @@ const blocado = !!(config as any).secoesFechadas;
                               animation:tp-troca .4s ease both; }
   @keyframes tp-troca{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
 
-  /* ---------- 4c) Pilares como símbolos ---------- */
-  .tp-pil-simbolos{ display:none; }
-  .tp-pil-textos{ display:flex; flex-direction:column; gap:40px; }
-  .tp-pil-txt-tit{ font-family:'Playfair Display',serif; font-size:22px; color:var(--bordeaux);
-                   margin-bottom:10px; }
-  .tp-pil-txt-tit::after{ content:''; display:block; width:32px; height:1px;
-                   background:var(--areia); margin-top:14px; }
-  .tp-pil-txt p{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px;
-                 line-height:1.9; color:var(--marrom); }
-
-  .tp-pil.js .tp-pil-simbolos{ display:flex; justify-content:center; gap:clamp(18px,7vw,54px);
-                               margin-bottom:44px; }
-  .tp-pil.js .tp-pil-bt{ display:flex; flex-direction:column; align-items:center; gap:14px;
-                         border:none; background:none; cursor:pointer; padding:0;
-                         color:var(--bordeaux); opacity:0.5; transition:opacity .35s ease; }
-  .tp-pil.js .tp-pil-bt.ativo, .tp-pil.js .tp-pil-bt:hover{ opacity:1; }
-  .tp-pil.js .tp-pil-anel{ display:grid; place-items:center; width:clamp(66px,17vw,86px);
-                           aspect-ratio:1; border:1px solid var(--areia); border-radius:50%;
-                           color:var(--ouro); transition:border-color .35s ease, background .35s ease; }
-  .tp-pil.js .tp-pil-anel svg{ width:58%; height:58%; }
-  .tp-pil.js .tp-pil-bt.ativo .tp-pil-anel{ border-color:var(--ouro); background:rgba(183,144,91,0.1); }
-  .tp-pil.js .tp-pil-nome{ font-family:'Montserrat',sans-serif; font-size:10px;
-                           letter-spacing:0.22em; text-transform:uppercase; color:var(--bordeaux); }
-  .tp-pil.js .tp-pil-textos{ gap:0; }
-  .tp-pil.js .tp-pil-txt{ display:none; }
-  .tp-pil.js .tp-pil-txt.ativo{ display:block; animation:tp-troca .4s ease both; }
-  .tp-pil.js .tp-pil-txt-tit{ display:none; }   /* o nome já está sob o símbolo */
+  /* ---------- Pilares: três cartões de cor sólida, todos à vista ---------- */
+  /* Cores com contraste AA medido: terracota escurecida #95604F com creme
+     (4,6:1), ouro velho com marrom (4,9:1), bordeaux com creme (7,7:1). Um
+     quarto pilar, se ela criar, recomeça o ciclo de cores. */
+  .tp-pil-cards{ display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:16px; }
+  .tp-pil-card{ padding:32px 22px 30px; text-align:center; }
+  @media (max-width:480px){ .tp-pil-card{ padding:24px 20px 22px; } .tp-pil-icone{ width:38px; height:38px; margin-bottom:12px; } }
+  .tp-pil-card.cor-0{ background:#95604F; color:var(--creme); }
+  .tp-pil-card.cor-1{ background:var(--ouro); color:var(--marrom); }
+  .tp-pil-card.cor-2{ background:var(--bordeaux); color:var(--creme); }
+  .tp-pil-icone{ display:block; width:46px; height:46px; margin:0 auto 18px; }
+  .tp-pil-tit{ font-family:'Playfair Display',serif; font-weight:600; font-size:22px; line-height:1.25;
+               margin-bottom:12px; }
+  .tp-pil-card p{ font-family:'Montserrat',sans-serif; font-weight:400; font-size:14.5px; line-height:1.7;
+                  text-wrap:pretty; }
 
   /* ---------- 4d) Esteira como trilha ---------- */
   .tp-trilha{ display:none; }
@@ -247,8 +245,8 @@ const blocado = !!(config as any).secoesFechadas;
                        pointer-events:none; user-select:none; }
   /* rótulo de duas linhas (os ancestrais) cabe com a letra um pouco menor */
   .tp-const-peca text.duas{ font-size:8.6px; letter-spacing:0.04em; }
-  .tp-const-fim{ font-family:'Playfair Display',serif; font-style:italic; font-size:18px;
-                 line-height:1.6; color:var(--terracota); text-align:center; max-width:400px;
+  .tp-const-fim{ font-family:'Playfair Display',serif; font-style:normal; font-size:20px;
+                 line-height:1.5; color:var(--bordeaux); text-align:center; max-width:420px;
                  margin:6px auto 0; opacity:0; transform:translateY(8px);
                  transition:opacity .7s ease, transform .7s ease; }
   .tp-const.completo .tp-const-fim{ opacity:1; transform:none; }
@@ -260,8 +258,8 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-const-bt:hover{ border-color:var(--ouro); color:var(--marrom); }
 
   @media (prefers-reduced-motion: reduce){
-    .tp-vs.js .tp-vs-col.ativo, .tp-pil.js .tp-pil-txt.ativo, .tp-cards.js .tp-card.ativo{ animation:none; }
-    .tp-vs.js .tp-vs-marca, .tp-const-fim, .tp-const-alvo, .tp-const-peca circle{ transition:none; }
+    .tp-vs.js .tp-vs-col.ativo, .tp-cards.js .tp-card.ativo{ animation:none; }
+    .tp-vs.js .tp-vs-marca, .tp-vs.js .tp-vs-bt, .tp-const-fim, .tp-const-alvo, .tp-const-peca circle{ transition:none; }
   }
 </style>
 
@@ -337,7 +335,7 @@ const blocado = !!(config as any).secoesFechadas;
     <div style="font-family:'Montserrat',sans-serif; font-weight:400; font-size:10px; letter-spacing:0.42em; text-transform:uppercase; color:var(--ouro); margin-top:16px;">{hero.subtitulo}</div>
     <h1 style="font-family:'Playfair Display',serif; font-weight:400; font-size:34px; line-height:1.25; color:var(--creme); max-width:600px; margin-top:52px; text-wrap:balance;">{hero.titulo}</h1>
     <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); max-width:440px; margin-top:30px; text-wrap:pretty;" set:html={t(hero.paragrafo)}></p>
-    <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:17px; line-height:1.7; color:var(--ouroc); max-width:400px; margin-top:34px; text-wrap:pretty;" set:html={t(hero.frase)}></p>
+    <p class="tp-citacao" style="font-size:19px; color:var(--ouroc); max-width:440px; margin-top:34px;" set:html={t(hero.frase)}></p>
     <a href={wa(config.mensagemConversa)} target="_blank" rel="noopener" class="tp-btn" style="display:inline-block; margin-top:48px; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:17px 38px;">{hero.cta}</a>
     <div style="margin-top:70px; width:1px; height:52px; background:linear-gradient(var(--ouro),transparent);"></div>
     </div>
@@ -372,52 +370,34 @@ const blocado = !!(config as any).secoesFechadas;
       </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:26px; text-wrap:pretty;" set:html={t(visao.definicao)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:64px; text-wrap:pretty;" set:html={t(visao.paragrafo)}></p>
-      <!-- 4c) PILARES CLICÁVEIS: três símbolos em linha de ouro; toca num e o
-           texto aparece embaixo. Sem JavaScript os três textos ficam visíveis,
-           que é o formato de hoje. -->
-      <div class="tp-pil" data-tp-pilares>
-        <div class="tp-pil-simbolos" role="tablist" aria-label="Os três pilares">
-          {visao.pilares.map((p, i) => (
-          <button type="button" class:list={['tp-pil-bt', i === 0 && 'ativo']} role="tab"
-                  aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`tp-pil-${i}`} data-pil={String(i)}>
-            {/* símbolos: 0 = Pertencer (um círculo que acolhe os outros),
-                1 = Ordenar (cada um no seu lugar), 2 = Fluir (a vida correndo) */}
-            <span class="tp-pil-anel" aria-hidden="true">
-              {i === 0 && (
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-                <circle cx="24" cy="24" r="16"></circle>
-                <circle cx="18" cy="21" r="3.4" fill="currentColor" stroke="none" opacity="0.85"></circle>
-                <circle cx="29" cy="19" r="2.6" fill="currentColor" stroke="none" opacity="0.6"></circle>
-                <circle cx="25" cy="30" r="3" fill="currentColor" stroke="none" opacity="0.72"></circle>
-              </svg>
-              )}
-              {i === 1 && (
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-                <line x1="10" y1="34" x2="38" y2="34"></line>
-                <circle cx="15" cy="26" r="4.2" fill="currentColor" stroke="none" opacity="0.85"></circle>
-                <circle cx="24" cy="23" r="3.4" fill="currentColor" stroke="none" opacity="0.68"></circle>
-                <circle cx="33" cy="20" r="2.6" fill="currentColor" stroke="none" opacity="0.52"></circle>
-              </svg>
-              )}
-              {i === 2 && (
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
-                <path d="M9 19c5-5 9 5 15 0s10 5 15 0"></path>
-                <path d="M9 29c5-5 9 5 15 0s10 5 15 0" opacity="0.55"></path>
-              </svg>
-              )}
-            </span>
-            <span class="tp-pil-nome">{p.titulo}</span>
-          </button>
-          ))}
+      <!-- PILARES: três cartões de cor sólida, todos à vista. O símbolo segue o
+           índice: 0 = Pertencimento (um círculo que acolhe os outros),
+           1 = Ordem (cada um no seu lugar), 2 = Equilíbrio (a vida correndo). -->
+      <div class="tp-pil-cards">
+        {visao.pilares.map((p, i) => (
+        <div class:list={['tp-pil-card', `cor-${i % 3}`]}>
+          <svg class="tp-pil-icone" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+            {i % 3 === 0 && (<>
+              <circle cx="24" cy="24" r="16"></circle>
+              <circle cx="18" cy="21" r="3.4" fill="currentColor" stroke="none" opacity="0.9"></circle>
+              <circle cx="29" cy="19" r="2.6" fill="currentColor" stroke="none" opacity="0.7"></circle>
+              <circle cx="25" cy="30" r="3" fill="currentColor" stroke="none" opacity="0.8"></circle>
+            </>)}
+            {i % 3 === 1 && (<>
+              <line x1="10" y1="34" x2="38" y2="34"></line>
+              <circle cx="15" cy="26" r="4.2" fill="currentColor" stroke="none" opacity="0.9"></circle>
+              <circle cx="24" cy="23" r="3.4" fill="currentColor" stroke="none" opacity="0.75"></circle>
+              <circle cx="33" cy="20" r="2.6" fill="currentColor" stroke="none" opacity="0.6"></circle>
+            </>)}
+            {i % 3 === 2 && (<>
+              <path d="M9 19c5-5 9 5 15 0s10 5 15 0"></path>
+              <path d="M9 29c5-5 9 5 15 0s10 5 15 0" opacity="0.6"></path>
+            </>)}
+          </svg>
+          <h3 class="tp-pil-tit">{p.titulo}</h3>
+          <p set:html={t(p.texto)}></p>
         </div>
-        <div class="tp-pil-textos">
-          {visao.pilares.map((p, i) => (
-          <div class:list={['tp-pil-txt', i === 0 && 'ativo']} id={`tp-pil-${i}`} role="tabpanel" data-pil={String(i)}>
-            <div class="tp-pil-txt-tit">{p.titulo}</div>
-            <p set:html={t(p.texto)}></p>
-          </div>
-          ))}
-        </div>
+        ))}
       </div>
 
       </Bloco>
@@ -450,7 +430,7 @@ const blocado = !!(config as any).secoesFechadas;
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo1)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo2)}></p>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); text-wrap:pretty;" set:html={t(quemConduz.paragrafo3)}></p>
-      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:19px; line-height:1.7; color:var(--ouroc); margin-top:40px; text-wrap:pretty;" set:html={t(quemConduz.frase)}></p>
+      <p class="tp-citacao" style="font-size:21px; color:#E3C58E; margin-top:40px;" set:html={t(quemConduz.frase)}></p>
       </Bloco>
     </div>
   </article>
@@ -679,7 +659,7 @@ const blocado = !!(config as any).secoesFechadas;
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:32px; line-height:1.3; color:var(--creme); max-width:520px; text-wrap:balance;">{convite.titulo}</h2>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); max-width:420px; margin-top:30px; text-wrap:pretty;" set:html={t(convite.paragrafo)}></p>
       <a href={wa(config.mensagemConversa)} target="_blank" rel="noopener" class="tp-btn" style="display:inline-block; margin-top:48px; font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.24em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:17px 38px;">{convite.cta}</a>
-      <p style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:16px; line-height:1.7; color:var(--ouroc); max-width:460px; margin-top:56px; text-wrap:pretty;" set:html={t(convite.frase)}></p>
+      <p class="tp-citacao" style="font-size:18px; color:var(--ouroc); max-width:480px; margin-top:56px;" set:html={t(convite.frase)}></p>
       <img id="tp-couple" src="/assets/casal.webp" alt="Ilustração de mãe e pai frente a frente — os vínculos familiares que nos formam na Visão Sistêmica" width="845" height="660" loading="lazy" decoding="async" style="display:block; width:min(560px,88vw); height:auto; margin:72px auto 0; opacity:0.97;">
       <img id="tp-roots-img" src="/assets/raizes.webp" alt="Árvore de raízes com retratos de várias gerações — os padrões familiares transgeracionais da constelação familiar" width="1536" height="844" loading="lazy" decoding="async" style="display:block; width:min(1080px,100%); height:auto; margin:10px auto 0; opacity:0.98;">
     </div>
@@ -1169,22 +1149,6 @@ const blocado = !!(config as any).secoesFechadas;
     if(!bts.length || bts.length !== cols.length) return;
     raiz.classList.add('js');
     function aplicar(i){ trocar(bts, cols, i, chave); }
-    for(var i=0;i<bts.length;i++) (function(idx){
-      bts[idx].addEventListener('click', function(){ aplicar(idx); });
-    })(i);
-    setas(bts, aplicar);
-    aplicar(0);
-  })();
-
-  // ---------- 4c) pilares como símbolos ----------
-  (function(){
-    var raiz = document.querySelector('[data-tp-pilares]');
-    if(!raiz) return;
-    var bts = raiz.querySelectorAll('.tp-pil-bt');
-    var txts = raiz.querySelectorAll('.tp-pil-txt');
-    if(!bts.length || bts.length !== txts.length) return;
-    raiz.classList.add('js');
-    function aplicar(i){ trocar(bts, txts, i, null); }
     for(var i=0;i<bts.length;i++) (function(idx){
       bts[idx].addEventListener('click', function(){ aplicar(idx); });
     })(i);

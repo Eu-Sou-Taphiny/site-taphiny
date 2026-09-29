@@ -29,5 +29,6 @@ a:hover{ color:var(--ouro); }
 .tp-prose li{ margin-top:10px; }
 .tp-prose li::marker{ color:var(--ouro); }
 .tp-prose img{ width:100%; height:auto; border-radius:10px; margin:34px 0; }
-.tp-prose blockquote{ font-family:'Playfair Display',serif; font-style:italic; font-size:20px; line-height:1.6; color:var(--terracota); border-left:2px solid var(--ouro); padding-left:24px; margin:40px 0; text-wrap:pretty; }
+/* citação sem itálico; terracota escurecida #8C5A4D para passar AA no creme (5,1:1) */
+.tp-prose blockquote{ font-family:'Playfair Display',serif; font-style:normal; font-weight:400; font-size:22px; line-height:1.5; color:#8C5A4D; border-left:2px solid var(--ouro); padding-left:24px; margin:40px 0; text-wrap:pretty; }
 .tp-prose hr{ border:none; border-top:1px solid var(--areia); margin:44px 0; }

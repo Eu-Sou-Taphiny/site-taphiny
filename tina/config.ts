@@ -95,7 +95,7 @@ export default defineConfig({
               { type: "string", name: "subtitulo", label: "Subtítulo (ex.: Mentora Sistêmica)" },
               { type: "string", name: "titulo", label: "Título principal" },
               prosa("paragrafo", "Parágrafo"),
-              prosa("frase", "Frase em destaque (itálico)"),
+              prosa("frase", "Frase em destaque (citação)"),
               { type: "string", name: "cta", label: "Texto do botão" },
             ],
           },
@@ -151,7 +151,7 @@ export default defineConfig({
               prosa("paragrafo1", "Parágrafo 1"),
               prosa("paragrafo2", "Parágrafo 2"),
               prosa("paragrafo3", "Parágrafo 3"),
-              prosa("frase", "Frase em destaque (itálico)"),
+              prosa("frase", "Frase em destaque (citação)"),
             ],
           },
           // ---------- COMPARAÇÃO ----------
@@ -287,7 +287,7 @@ export default defineConfig({
               { type: "string", name: "titulo", label: "Título" },
               prosa("paragrafo", "Parágrafo"),
               { type: "string", name: "cta", label: "Texto do botão" },
-              prosa("frase", "Frase em destaque (itálico)"),
+              prosa("frase", "Frase em destaque (citação)"),
             ],
           },
           // ---------- RODAPÉ ----------
