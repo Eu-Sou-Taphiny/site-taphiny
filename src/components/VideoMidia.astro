@@ -1,0 +1,87 @@
+---
+/**
+ * Vídeo do painel: arquivo enviado (mp4) OU link do YouTube/Vimeo, com capa
+ * opcional. Usado em "Quem conduz" e na Constelação.
+ *
+ * Preenche 100% do contêiner: quem chama define o formato (aspect-ratio).
+ *
+ * Nunca toca sozinho. Arquivo: <video> com controles. Link: se houver capa (ou
+ * for YouTube, que tem miniatura própria), mostra a imagem com um botão de
+ * play e só carrega o player quando a pessoa aperta; sem capa no Vimeo, o
+ * player entra direto, parado. Link preenchido tem prioridade sobre o arquivo.
+ */
+interface Props {
+  arquivo?: string;
+  url?: string;
+  capa?: string;
+  titulo?: string;
+}
+const { arquivo = '', url = '', capa = '', titulo = 'Vídeo' } = Astro.props;
+
+function embed(link: string): { src: string; miniatura?: string } | null {
+  const u = link.trim();
+  if (!u) return null;
+  const yt = u.match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/))([\w-]{11})/);
+  if (yt) return {
+    src: `https://www.youtube-nocookie.com/embed/${yt[1]}?rel=0&playsinline=1`,
+    miniatura: `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg`,
+  };
+  const vm = u.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([\da-f]+))?/);
+  if (vm) return { src: `https://player.vimeo.com/video/${vm[1]}?dnt=1${vm[2] ? `&h=${vm[2]}` : ''}` };
+  return null;
+}
+
+const player = embed(url);
+const imagem = capa || player?.miniatura || '';
+const comAutoplay = (src: string) => src + (src.includes('?') ? '&' : '?') + 'autoplay=1';
+---
+
+{player ? (
+  imagem ? (
+    <button type="button" class="tp-video-capa" data-tp-video={comAutoplay(player.src)} data-titulo={titulo}
+            aria-label={`Assistir: ${titulo}`}>
+      <img src={imagem} alt="" loading="lazy" decoding="async">
+      <span class="tp-video-play" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M8 5.5v13l11-6.5z" fill="currentColor"></path></svg>
+      </span>
+    </button>
+  ) : (
+    <iframe class="tp-video-quadro" src={player.src} title={titulo} loading="lazy"
+            allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+  )
+) : arquivo ? (
+  <video class="tp-video-quadro" src={arquivo} poster={capa || undefined} controls playsinline preload="metadata"></video>
+) : null}
+
+<style is:global>
+  .tp-video-quadro{ display:block; width:100%; height:100%; border:0; object-fit:cover; background:#3A0D0F; }
+  .tp-video-capa{ position:relative; display:block; width:100%; height:100%; padding:0; border:0;
+                  background:#3A0D0F; cursor:pointer; }
+  .tp-video-capa img{ width:100%; height:100%; object-fit:cover; }
+  .tp-video-play{ position:absolute; top:50%; left:50%; display:grid; place-items:center;
+                  width:68px; height:68px; margin:-34px 0 0 -34px; border-radius:50%;
+                  background:rgba(82,20,22,0.82); color:var(--creme); border:1px solid var(--ouroc);
+                  transition:transform .3s ease, background .3s ease; }
+  .tp-video-play svg{ margin-left:3px; }
+  .tp-video-capa:hover .tp-video-play, .tp-video-capa:focus-visible .tp-video-play{
+                  transform:scale(1.06); background:var(--marrom); }
+  @media (prefers-reduced-motion: reduce){ .tp-video-play{ transition:none; } }
+</style>
+
+<script>
+  // Capa → player, só depois do clique (o autoplay aqui é a resposta ao play
+  // que a pessoa apertou). Avisa a música de fundo para pausar.
+  document.addEventListener('click', (e) => {
+    const bt = (e.target as Element | null)?.closest<HTMLButtonElement>('[data-tp-video]');
+    if (!bt) return;
+    const f = document.createElement('iframe');
+    f.className = 'tp-video-quadro';
+    f.src = bt.dataset.tpVideo!;
+    f.title = bt.dataset.titulo || 'Vídeo';
+    f.allow = 'autoplay; fullscreen; picture-in-picture; encrypted-media';
+    f.allowFullscreen = true;
+    bt.replaceWith(f);
+    f.focus();
+    document.dispatchEvent(new CustomEvent('tp-video-play'));
+  });
+</script>

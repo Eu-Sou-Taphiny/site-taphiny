@@ -78,7 +78,11 @@
     "dica": "Arraste as pessoas. O sintoma e o destino não têm lugar marcado: ponha onde sentir e depois toque em Reordenar.\n",
     "fim": "Quando cada um ocupa o seu lugar, a vida volta a fluir.\n",
     "botaoReordenar": "Reordenar",
-    "botaoRecomecar": "Começar de novo"
+    "botaoRecomecar": "Começar de novo",
+    "videoUrl": "",
+    "video": "",
+    "videoCapa": "",
+    "videoFormato": "horizontal"
   },
   "jornadas": {
     "exibir": true,

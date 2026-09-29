@@ -5,10 +5,15 @@ import SiteFooter from '../components/SiteFooter.astro';
 // simples; `t()` cuida dos dois e devolve o HTML inline. Ver src/lib/texto.ts.
 import { inline as t } from '../lib/texto';
 import Bloco from '../components/Bloco.astro';
+import VideoMidia from '../components/VideoMidia.astro';
 import { jsonLdHtml, visivel } from '../lib/jsonld';
 const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, config } = site;
 const popup = (site as any).popup;
 const constelacao = (site as any).constelacao;
+// vídeo da constelação: sem link nem arquivo, a seção fica como sempre foi
+const constVideo = !!(constelacao?.videoUrl?.trim() || constelacao?.video);
+const FORMATOS: Record<string, string> = { horizontal: '16/9', vertical: '9/16', retrato: '4/5' };
+const constFormato = constelacao?.videoFormato || 'horizontal';
 const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(msg)}`;
 // Modo blocado: seções longas fechadas, a pessoa abre a que quiser. O topo, a
 // esteira de produtos (As Jornadas) e o convite final ficam sempre abertos.
@@ -223,6 +228,18 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-cards.js .tp-card.ativo{ display:block; animation:tp-troca .4s ease both; }
 
   /* ---------- 4a) Constelação interativa (seção própria) ---------- */
+  /* Com vídeo: celular empilha (vídeo em cima), desktop põe lado a lado. O
+     vídeo é outro elemento, então não disputa o toque com as bolinhas. */
+  .tp-const-duo{ display:flex; flex-direction:column; gap:40px; margin-top:34px; }
+  .tp-const-video{ margin:0 auto; width:100%; border:1px solid var(--ouro); overflow:hidden;
+                   background:#3A0D0F; }
+  .tp-const-video.tp-fmt-vertical{ max-width:320px; }
+  .tp-const-video.tp-fmt-retrato{ max-width:420px; }
+  @media (min-width:860px){
+    .tp-const-duo{ flex-direction:row; align-items:center; gap:56px; }
+    .tp-const-duo > *{ flex:1 1 0; min-width:0; }
+    .tp-const-video.tp-fmt-vertical{ flex:0 1 320px; }
+  }
   .tp-const-dica{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:13px;
                   line-height:1.8; color:var(--bordeaux); text-align:center; max-width:390px;
                   margin:0 auto; text-wrap:pretty; }
@@ -413,7 +430,7 @@ const blocado = !!(config as any).secoesFechadas;
       <Fragment slot="midia">
       <figure id="tp-retrato" style="margin:0 0 48px; width:100%; aspect-ratio:4/5; border:1px solid var(--ouro); overflow:hidden; position:relative; background-color:#3A0D0F;">
         {quemConduz.video ? (
-          <video src={quemConduz.video} poster={quemConduz.videoCapa || undefined} controls playsinline preload="metadata" style="width:100%; height:100%; object-fit:cover; display:block; background:#3A0D0F;"></video>
+          <VideoMidia arquivo={quemConduz.video} capa={quemConduz.videoCapa} titulo="Taphiny, Mentora Sistêmica" />
         ) : quemConduz.foto ? (
           <img src={quemConduz.foto} alt="Taphiny, Mentora Sistêmica" style="width:100%; height:100%; object-fit:cover; display:block;">
         ) : (
@@ -490,7 +507,7 @@ const blocado = !!(config as any).secoesFechadas;
        e separa o comparativo (creme) das Jornadas (creme). -->
   {visivel(constelacao) && (
   <section id="constelacao" data-screen-label="Constelacao" style="background:var(--rosa); padding:110px 30px;">
-    <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
+    <div data-reveal style={`position:relative; z-index:2; max-width:${constVideo ? '1040px' : '620px'}; margin:0 auto;`}>
       {/* `aberto`: a experiência nasce aberta mesmo no modo blocado, senão a
           pessoa precisaria descobrir que existe uma dinâmica atrás do "+" */}
       <Bloco blocado={blocado} aberto centro>
@@ -498,16 +515,24 @@ const blocado = !!(config as any).secoesFechadas;
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">{constelacao.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:18px; text-wrap:balance;">{constelacao.titulo}</h2>
       </Fragment>
-      <div class="tp-const" data-tp-const hidden>
-        <p class="tp-const-dica" set:html={t(constelacao.dica)}></p>
-        <svg class="tp-const-palco" viewBox="0 0 400 300" aria-hidden="true">
-          <g class="tp-const-alvos"></g>
-          <g class="tp-const-pecas"></g>
-        </svg>
-        <p class="tp-const-fim" role="status" set:html={t(constelacao.fim)}></p>
-        <div class="tp-const-bts">
-          <button type="button" class="tp-const-bt" data-const-resolver>{constelacao.botaoReordenar}</button>
-          <button type="button" class="tp-const-bt" data-const-embaralhar>{constelacao.botaoRecomecar}</button>
+      {/* sem vídeo, o invólucro não tem classe nenhuma: a seção fica igual a antes */}
+      <div class:list={[constVideo && 'tp-const-duo']}>
+        {constVideo && (
+        <figure class:list={['tp-const-video', `tp-fmt-${constFormato}`]} style={`aspect-ratio:${FORMATOS[constFormato] || '16/9'};`}>
+          <VideoMidia url={constelacao.videoUrl} arquivo={constelacao.video} capa={constelacao.videoCapa} titulo={constelacao.titulo} />
+        </figure>
+        )}
+        <div class="tp-const" data-tp-const hidden>
+          <p class="tp-const-dica" set:html={t(constelacao.dica)}></p>
+          <svg class="tp-const-palco" viewBox="0 0 400 300" aria-hidden="true">
+            <g class="tp-const-alvos"></g>
+            <g class="tp-const-pecas"></g>
+          </svg>
+          <p class="tp-const-fim" role="status" set:html={t(constelacao.fim)}></p>
+          <div class="tp-const-bts">
+            <button type="button" class="tp-const-bt" data-const-resolver>{constelacao.botaoReordenar}</button>
+            <button type="button" class="tp-const-bt" data-const-embaralhar>{constelacao.botaoRecomecar}</button>
+          </div>
         </div>
       </div>
       </Bloco>
@@ -1394,6 +1419,9 @@ const blocado = !!(config as any).secoesFechadas;
       wasPlaying = false;
     }
   }
+  document.addEventListener('tp-video-play', function(){
+    if(!audio.paused){ audio.pause(); paint(); }
+  });
   document.addEventListener('pause', videoStopped, true);
   document.addEventListener('ended', videoStopped, true);
 

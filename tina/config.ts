@@ -183,6 +183,25 @@ export default defineConfig({
               prosa("fim", "Frase que aparece quando todos estão no lugar"),
               { type: "string", name: "botaoReordenar", label: "Texto do botão Reordenar" },
               { type: "string", name: "botaoRecomecar", label: "Texto do botão Começar de novo" },
+              // vídeo ao lado das bolinhas; tudo vazio = seção como sempre foi
+              {
+                type: "string",
+                name: "videoUrl",
+                label: "Vídeo: link do YouTube ou Vimeo (opcional)",
+                description: "Cole o link do vídeo. Se preencher o link, ele vale mais que o arquivo abaixo. Deixe link e arquivo vazios para a seção ficar sem vídeo.",
+              },
+              { type: "image", name: "video", label: "Vídeo: arquivo mp4 (opcional, se não usar link)" },
+              { type: "image", name: "videoCapa", label: "Capa do vídeo (opcional)" },
+              {
+                type: "string",
+                name: "videoFormato",
+                label: "Formato do vídeo",
+                options: [
+                  { value: "horizontal", label: "Horizontal (16:9)" },
+                  { value: "vertical", label: "Vertical (9:16, gravado no celular)" },
+                  { value: "retrato", label: "Retrato (4:5)" },
+                ],
+              },
             ],
           },
           // ---------- JORNADAS ----------
