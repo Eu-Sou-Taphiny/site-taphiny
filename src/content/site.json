@@ -12,12 +12,14 @@
     "cta": "Quero conversar"
   },
   "provocacao": {
+    "exibir": true,
     "rotulo": "Autoconsciência",
     "titulo": "Por que fazemos o que fazemos?",
     "paragrafo1": "Tentamos mudar comportamentos e nos posicionar com firmeza, mas bloqueios invisíveis continuam nos travando.\n",
     "paragrafo2": "Enxergar essas dinâmicas não serve para nos prender a histórias do passado ou à trava atual, mas para revelar o que ainda opera no oculto e não destrava a nossa vida hoje - permitindo, assim, que assumamos o controle consciente das nossas decisões e o nosso verdadeiro lugar.\n"
   },
   "visao": {
+    "exibir": true,
     "rotulo": "A abordagem",
     "titulo": "O que é Visão Sistêmica?",
     "definicao": "É uma postura de autopercepção diária. Ela te convida a tirar o foco do problema externo e entender o que ele desperta dentro de você, trazendo maturidade para as suas escolhas práticas.\n",
@@ -38,6 +40,7 @@
     ]
   },
   "quemConduz": {
+    "exibir": true,
     "foto": "/uploads/Foto_Tahiny.jpeg",
     "video": "",
     "videoCapa": "",
@@ -49,6 +52,7 @@
     "frase": "“Por amor, aprendemos quem precisávamos ser; por consciência, lembramos quem realmente somos.”\n"
   },
   "comparacao": {
+    "exibir": true,
     "titulo": "Terapia Sistêmica e Terapia Convencional ",
     "subtitulo": "Não são caminhos opostos. São abordagens que se somam.\n",
     "col1Titulo": "Terapia Sistêmica",
@@ -67,7 +71,17 @@
     ],
     "fecho": "Enquanto a Terapia Convencional foca na sua jornada individual, a Visão Sistêmica amplia o mapa: ela revela o que está oculto nas suas relações para que você possa fazer escolhas mais livres e autênticas hoje.\n"
   },
+  "constelacao": {
+    "exibir": true,
+    "rotulo": "Experimente",
+    "titulo": "Leve cada um ao seu lugar",
+    "dica": "Arraste as pessoas. O sintoma e o destino não têm lugar marcado: ponha onde sentir e depois toque em Reordenar.\n",
+    "fim": "Quando cada um ocupa o seu lugar, a vida volta a fluir.\n",
+    "botaoReordenar": "Reordenar",
+    "botaoRecomecar": "Começar de novo"
+  },
   "jornadas": {
+    "exibir": true,
     "titulo": "As Jornadas Sistêmicas",
     "subtitulo": "Cada história tem o seu tempo. Encontre a melhor jornada para o seu momento.\n",
     "meditacoes": {
@@ -117,6 +131,7 @@
     ]
   },
   "paraQuem": {
+    "exibir": true,
     "titulo": "Para quem é esta jornada",
     "col1Titulo": "Esta jornada é para você se...",
     "col1": [
@@ -134,6 +149,7 @@
     ]
   },
   "faq": {
+    "exibir": true,
     "rotulo": "Perguntas frequentes",
     "titulo": "Visão Sistêmica, Terapia Sistêmica e Constelação Familiar",
     "itens": [
@@ -184,6 +200,7 @@
     ]
   },
   "empresas": {
+    "exibir": false,
     "rotulo": "Soluções Corporativas",
     "titulo": "Visão Sistêmica para Negócios",
     "paragrafo": "Empresas também são sistemas. Por isso, a Visão Sistêmica pode ser aplicada ao desenvolvimento de lideranças, alinhamento entre sócios, empresas familiares, equipes e cultura organizacional. Por meio de workshops, palestras e programas personalizados, ajudo empresas a fortalecerem relações, ampliar a consciência e criar ambientes mais saudáveis, colaborativos e preparados para crescer.\n",

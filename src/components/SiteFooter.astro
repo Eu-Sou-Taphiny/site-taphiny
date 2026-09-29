@@ -1,16 +1,19 @@
 ---
 import site from '../content/site.json';
+import { visivel } from '../lib/jsonld';
 const { footer } = site;
 const linkStyle = "font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;";
+// `secao`: o objeto do conteúdo por trás do link. Seção desligada no painel
+// tira o link do menu (aqui e no blog, que usa o mesmo rodapé).
 const nav = [
   { href: '/#inicio', label: 'Início' },
-  { href: '/#visao-sistemica', label: 'Visão Sistêmica' },
-  { href: '/#quem-conduz', label: 'Quem conduz' },
-  { href: '/#jornadas', label: 'As Jornadas' },
+  { href: '/#visao-sistemica', label: 'Visão Sistêmica', secao: 'visao' },
+  { href: '/#quem-conduz', label: 'Quem conduz', secao: 'quemConduz' },
+  { href: '/#jornadas', label: 'As Jornadas', secao: 'jornadas' },
   { href: '/blog', label: 'Blog' },
-  { href: '/#faq', label: 'Perguntas frequentes' },
+  { href: '/#faq', label: 'Perguntas frequentes', secao: 'faq' },
   { href: '/#convite', label: 'Contato' },
-];
+].filter((n) => !n.secao || visivel((site as any)[n.secao]));
 ---
 <footer style="position:relative; z-index:2; background:var(--marrom-escuro); padding:52px 30px 64px; text-align:center;">
   <nav aria-label="Navegação do site" style="margin-bottom:34px;">

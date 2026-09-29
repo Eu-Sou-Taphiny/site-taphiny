@@ -33,6 +33,16 @@ const prosa = (name: string, label: string, dica: string = DICA) => ({
 // sai pelos marcadores, que o renderizador entende igual.
 const DICA_LISTA = "Um tópico por linha. Formatação: **negrito**, _itálico_, ++sublinhado++.";
 
+// Chave "Exibir no site", a mesma do pop-up. Vai como primeiro campo de cada
+// seção. Desligada, a seção some da página, do menu do rodapé e do breadcrumb
+// do Google. Conteúdo antigo sem o campo conta como ligado (ver src/lib/jsonld.ts).
+const exibir = {
+  type: "boolean" as const,
+  name: "exibir",
+  label: "Exibir no site",
+  description: "Ligado: a seção aparece. Desligado: some da página e do menu do rodapé, sem apagar o texto.",
+};
+
 export default defineConfig({
   branch,
   clientId: process.env.TINA_CLIENT_ID || "", // Tina Cloud → Client ID
@@ -95,6 +105,7 @@ export default defineConfig({
             name: "provocacao",
             label: "Seção: O que carregamos",
             fields: [
+              exibir,
               { type: "string", name: "rotulo", label: "Rótulo (linha pequena)" },
               { type: "string", name: "titulo", label: "Título" },
               prosa("paragrafo1", "Parágrafo 1"),
@@ -107,6 +118,7 @@ export default defineConfig({
             name: "visao",
             label: "Seção: O que é Visão Sistêmica",
             fields: [
+              exibir,
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título" },
               prosa("definicao", "Definição (1º parágrafo)"),
@@ -130,6 +142,7 @@ export default defineConfig({
             name: "quemConduz",
             label: "Seção: Quem conduz (foto/vídeo)",
             fields: [
+              exibir,
               { type: "image", name: "foto", label: "Foto (4:5) — deixe vazio se for usar vídeo" },
               { type: "image", name: "video", label: "Vídeo (mp4) — deixe vazio se for usar foto" },
               { type: "image", name: "videoCapa", label: "Capa do vídeo (opcional)" },
@@ -147,6 +160,7 @@ export default defineConfig({
             name: "comparacao",
             label: "Seção: Psicoterapia x Visão Sistêmica",
             fields: [
+              exibir,
               { type: "string", name: "titulo", label: "Título" },
               prosa("subtitulo", "Subtítulo"),
               { type: "string", name: "col1Titulo", label: "Coluna 1 — título" },
@@ -156,12 +170,28 @@ export default defineConfig({
               prosa("fecho", "Frase de fechamento"),
             ],
           },
+          // ---------- CONSTELAÇÃO INTERATIVA ----------
+          {
+            type: "object",
+            name: "constelacao",
+            label: "Seção: Constelação interativa (Experimente)",
+            fields: [
+              exibir,
+              { type: "string", name: "rotulo", label: "Rótulo" },
+              { type: "string", name: "titulo", label: "Título" },
+              prosa("dica", "Instrução (acima das bolinhas)"),
+              prosa("fim", "Frase que aparece quando todos estão no lugar"),
+              { type: "string", name: "botaoReordenar", label: "Texto do botão Reordenar" },
+              { type: "string", name: "botaoRecomecar", label: "Texto do botão Começar de novo" },
+            ],
+          },
           // ---------- JORNADAS ----------
           {
             type: "object",
             name: "jornadas",
             label: "Seção: As Jornadas",
             fields: [
+              exibir,
               { type: "string", name: "titulo", label: "Título" },
               prosa("subtitulo", "Subtítulo"),
               {
@@ -203,6 +233,7 @@ export default defineConfig({
             name: "paraQuem",
             label: "Seção: Para quem é",
             fields: [
+              exibir,
               { type: "string", name: "titulo", label: "Título" },
               { type: "string", name: "col1Titulo", label: "Coluna 1 — título" },
               { type: "string", name: "col1", label: "Coluna 1 — itens", list: true, description: DICA_LISTA },
@@ -216,6 +247,7 @@ export default defineConfig({
             name: "faq",
             label: "Seção: Perguntas frequentes",
             fields: [
+              exibir,
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título" },
               {
@@ -237,6 +269,7 @@ export default defineConfig({
             name: "empresas",
             label: "Seção: Empresas e eventos",
             fields: [
+              exibir,
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título" },
               prosa("paragrafo", "Parágrafo"),

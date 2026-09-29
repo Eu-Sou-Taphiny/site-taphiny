@@ -5,8 +5,10 @@ import SiteFooter from '../components/SiteFooter.astro';
 // simples; `t()` cuida dos dois e devolve o HTML inline. Ver src/lib/texto.ts.
 import { inline as t } from '../lib/texto';
 import Bloco from '../components/Bloco.astro';
+import { jsonLdHtml, visivel } from '../lib/jsonld';
 const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, config } = site;
 const popup = (site as any).popup;
+const constelacao = (site as any).constelacao;
 const wa = (msg: string) => `https://wa.me/${config.whatsapp}?text=${encodeURIComponent(msg)}`;
 // Modo blocado: seções longas fechadas, a pessoa abre a que quiser. O topo, a
 // esteira de produtos (As Jornadas) e o convite final ficam sempre abertos.
@@ -264,34 +266,7 @@ const blocado = !!(config as any).secoesFechadas;
 </style>
 
 <!-- DADOS ESTRUTURADOS (schema.org / JSON-LD) -->
-<script type="application/ld+json" is:inline>
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    { "@type": "WebSite", "@id": "https://eusoutaphiny.com.br/#website", "url": "https://eusoutaphiny.com.br/", "name": "Taphiny — Visão Sistêmica", "description": "Visão Sistêmica, terapia sistêmica e constelação familiar com Taphiny.", "inLanguage": "pt-BR", "publisher": { "@id": "https://eusoutaphiny.com.br/#business" }, "potentialAction": { "@type": "SearchAction", "target": { "@type": "EntryPoint", "urlTemplate": "https://eusoutaphiny.com.br/?s={search_term_string}" }, "query-input": "required name=search_term_string" } },
-    { "@type": "Person", "@id": "https://eusoutaphiny.com.br/#taphiny", "name": "Taphiny", "jobTitle": "Mentora Sistêmica", "description": "Terapeuta e mentora sistêmica. Conduz processos de Visão Sistêmica e constelação familiar para reconhecer padrões familiares transgeracionais, restaurar a ordem dos vínculos e permitir que a vida volte a fluir.", "knowsAbout": ["Visão Sistêmica", "Terapia Sistêmica", "Constelação Familiar", "Padrões familiares transgeracionais", "Empresas familiares"], "url": "https://eusoutaphiny.com.br/", "worksFor": { "@id": "https://eusoutaphiny.com.br/#business" }, "sameAs": ["https://instagram.com/eu.sou.taphiny"] },
-    { "@type": "ProfessionalService", "@id": "https://eusoutaphiny.com.br/#business", "name": "Taphiny — Visão Sistêmica", "description": "Terapia sistêmica e Visão Sistêmica, abordagem que dialoga com a constelação familiar para reconhecer padrões familiares transgeracionais e restaurar a ordem dos vínculos. Atendimento a pessoas, empresas familiares e eventos.", "url": "https://eusoutaphiny.com.br/", "image": "https://eusoutaphiny.com.br/assets/og-image.png", "logo": "https://eusoutaphiny.com.br/assets/favicon-512.png", "founder": { "@id": "https://eusoutaphiny.com.br/#taphiny" }, "priceRange": "$$", "areaServed": "BR", "availableLanguage": "Portuguese", "knowsLanguage": "pt-BR", "keywords": "visão sistêmica, terapia sistêmica, constelação familiar, terapia sistêmica para empresas familiares, padrões familiares transgeracionais", "sameAs": ["https://instagram.com/eu.sou.taphiny"], "makesOffer": [ { "@type": "Offer", "itemOffered": { "@id": "https://eusoutaphiny.com.br/#servico-sessao" }, "price": "450", "priceCurrency": "BRL" }, { "@type": "Offer", "itemOffered": { "@id": "https://eusoutaphiny.com.br/#servico-essencia" } }, { "@type": "Offer", "itemOffered": { "@id": "https://eusoutaphiny.com.br/#servico-raizes" } }, { "@type": "Offer", "itemOffered": { "@id": "https://eusoutaphiny.com.br/#servico-negocios" } }, { "@type": "Offer", "itemOffered": { "@id": "https://eusoutaphiny.com.br/#servico-workshops" } } ] },
-    { "@type": "Service", "@id": "https://eusoutaphiny.com.br/#servico-sessao", "name": "Sessão Sistêmica (Olhar)", "serviceType": "Terapia Sistêmica", "description": "Encontro individual direcionado a um tema específico — uma decisão, um relacionamento, carreira, dinheiro ou um padrão que se repete. Ideal para quem busca clareza sobre um momento.", "provider": { "@id": "https://eusoutaphiny.com.br/#business" }, "areaServed": "BR", "offers": { "@type": "Offer", "price": "450", "priceCurrency": "BRL" } },
-    { "@type": "Service", "@id": "https://eusoutaphiny.com.br/#servico-essencia", "name": "Jornada Essência", "serviceType": "Terapia Sistêmica", "description": "Quatro encontros para reorganizar o eixo interno, fortalecer o lugar de adulto e construir uma vida mais alinhada com quem realmente se é.", "provider": { "@id": "https://eusoutaphiny.com.br/#business" }, "areaServed": "BR" },
-    { "@type": "Service", "@id": "https://eusoutaphiny.com.br/#servico-raizes", "name": "Jornada Raízes", "serviceType": "Constelação Familiar", "description": "Sete encontros de investigação profunda das dinâmicas familiares e dos padrões transgeracionais, no espírito da constelação familiar, para recuperar a força necessária para construir o futuro.", "provider": { "@id": "https://eusoutaphiny.com.br/#business" }, "areaServed": "BR" },
-    { "@type": "Service", "@id": "https://eusoutaphiny.com.br/#servico-negocios", "name": "Terapias para Negócios", "serviceType": "Terapia Sistêmica para empresas familiares", "description": "Visão Sistêmica aplicada a empresas familiares, relação entre sócios, liderança e equipes, trabalhando pertencimento, cultura e prosperidade.", "provider": { "@id": "https://eusoutaphiny.com.br/#business" }, "areaServed": "BR" },
-    { "@type": "Service", "@id": "https://eusoutaphiny.com.br/#servico-workshops", "name": "Workshops & Palestras", "serviceType": "Terapia Sistêmica", "description": "Workshops e palestras sobre Visão Sistêmica, pertencimento, cultura e prosperidade para empresas e eventos.", "provider": { "@id": "https://eusoutaphiny.com.br/#business" }, "areaServed": "BR" },
-    { "@type": "FAQPage", "@id": "https://eusoutaphiny.com.br/#faq", "mainEntity": [
-      { "@type": "Question", "name": "O que é Visão Sistêmica?", "acceptedAnswer": { "@type": "Answer", "text": "A Visão Sistêmica é uma abordagem terapêutica que enxerga a pessoa dentro dos sistemas a que pertence — família, vínculos e história. Ela parte do princípio de que nem tudo o que vivemos começou em nós: muitos padrões, lealdades e bloqueios são herdados ao longo das gerações. O trabalho reconhece essas dinâmicas para restaurar a ordem dos vínculos e permitir que a vida volte a fluir." } },
-      { "@type": "Question", "name": "Visão Sistêmica é a mesma coisa que constelação familiar?", "acceptedAnswer": { "@type": "Answer", "text": "São práticas irmãs, da mesma raiz. A constelação familiar é uma das ferramentas mais conhecidas da abordagem sistêmica, geralmente feita em grupo, enquanto a Visão Sistêmica é o olhar mais amplo que fundamenta esse trabalho e pode ser conduzido também de forma individual. Quem busca constelação familiar encontra aqui esse mesmo princípio, aplicado de maneira profunda e personalizada." } },
-      { "@type": "Question", "name": "Qual a diferença entre psicoterapia e Visão Sistêmica?", "acceptedAnswer": { "@type": "Answer", "text": "Não são caminhos opostos, e sim complementares. A psicoterapia amplia a consciência sobre a experiência individual — pensamentos, emoções e comportamentos. A Visão Sistêmica observa a pessoa dentro dos sistemas a que pertence, revelando lealdades invisíveis e dinâmicas familiares para restaurar a ordem dos vínculos." } },
-      { "@type": "Question", "name": "Como funciona uma sessão?", "acceptedAnswer": { "@type": "Answer", "text": "Cada encontro é individual e direcionado a um tema específico: uma decisão, um relacionamento, a carreira, o dinheiro ou um padrão que se repete. Em um espaço seguro, aquilo que permaneceu invisível é reconhecido, respeitado e reorganizado. A Sessão Sistêmica (Olhar) parte de R$ 450 por encontro, e há também jornadas mais profundas, como a Essência e a Raízes." } },
-      { "@type": "Question", "name": "Para quem é indicado?", "acceptedAnswer": { "@type": "Answer", "text": "É indicado para quem percebe padrões que se repetem, sente que compreender já não basta e deseja ocupar o próprio lugar com mais leveza. Também se aplica a empresas familiares, relação entre sócios e liderança. Não é indicado para quem busca soluções imediatas ou espera que o caminho seja feito por outra pessoa." } }
-    ] },
-    { "@type": "BreadcrumbList", "@id": "https://eusoutaphiny.com.br/#breadcrumb", "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://eusoutaphiny.com.br/" },
-      { "@type": "ListItem", "position": 2, "name": "Visão Sistêmica", "item": "https://eusoutaphiny.com.br/#visao-sistemica" },
-      { "@type": "ListItem", "position": 3, "name": "As Jornadas", "item": "https://eusoutaphiny.com.br/#jornadas" },
-      { "@type": "ListItem", "position": 4, "name": "Perguntas Frequentes", "item": "https://eusoutaphiny.com.br/#faq" }
-    ] }
-  ]
-}
-</script>
+<script type="application/ld+json" is:inline set:html={jsonLdHtml(site)}></script>
 
 <!-- Google Analytics 4 -->
 <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-H58M107G7T"></script>
@@ -371,6 +346,7 @@ const blocado = !!(config as any).secoesFechadas;
   <main id="conteudo">
 
   <!-- 2) A PROVOCAÇÃO -->
+  {visivel(provocacao) && (
   <section id="o-que-carregamos" data-screen-label="Provocacao" style="background:var(--creme); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -383,8 +359,10 @@ const blocado = !!(config as any).secoesFechadas;
       </Bloco>
     </div>
   </section>
+  )}
 
   <!-- 3) A ABORDAGEM -->
+  {visivel(visao) && (
   <section id="visao-sistemica" data-screen-label="Abordagem" style="background:var(--rosa); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -445,8 +423,10 @@ const blocado = !!(config as any).secoesFechadas;
       </Bloco>
     </div>
   </section>
+  )}
 
   <!-- 4) QUEM CONDUZ -->
+  {visivel(quemConduz) && (
   <article id="quem-conduz" data-screen-label="QuemConduz" style="background:var(--bordeaux); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -474,8 +454,10 @@ const blocado = !!(config as any).secoesFechadas;
       </Bloco>
     </div>
   </article>
+  )}
 
   <!-- 5) PSICOTERAPIA E VISÃO SISTÊMICA -->
+  {visivel(comparacao) && (
   <section id="psicoterapia-e-visao-sistemica" data-screen-label="Comparacao" style="background:var(--creme); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -515,6 +497,7 @@ const blocado = !!(config as any).secoesFechadas;
       </Bloco>
     </div>
   </section>
+  )}
 
   <!-- 5b) A EXPERIÊNCIA: CONSTELAÇÃO INTERATIVA
        Bloco próprio, logo depois do comparativo. Peças e ordem conforme a
@@ -525,35 +508,38 @@ const blocado = !!(config as any).secoesFechadas;
        pais). O Reordenar é que revela a ordem, com o sintoma menor e ao lado.
        Fundo rosa de propósito: é a cor sobre a qual as peças foram desenhadas,
        e separa o comparativo (creme) das Jornadas (creme). -->
+  {visivel(constelacao) && (
   <section id="constelacao" data-screen-label="Constelacao" style="background:var(--rosa); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
       {/* `aberto`: a experiência nasce aberta mesmo no modo blocado, senão a
           pessoa precisaria descobrir que existe uma dinâmica atrás do "+" */}
       <Bloco blocado={blocado} aberto centro>
       <Fragment slot="cabeca">
-      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">Experimente</div>
-      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:18px; text-wrap:balance;">Leve cada um ao seu lugar</h2>
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">{constelacao.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:18px; text-wrap:balance;">{constelacao.titulo}</h2>
       </Fragment>
       <div class="tp-const" data-tp-const hidden>
-        <p class="tp-const-dica">Arraste as pessoas. O sintoma e o destino não têm lugar marcado — ponha onde sentir, e depois toque em Reordenar.</p>
+        <p class="tp-const-dica" set:html={t(constelacao.dica)}></p>
         <svg class="tp-const-palco" viewBox="0 0 400 300" aria-hidden="true">
           <g class="tp-const-alvos"></g>
           <g class="tp-const-pecas"></g>
         </svg>
-        <p class="tp-const-fim" role="status">Quando cada um ocupa o seu lugar, a vida volta a fluir.</p>
+        <p class="tp-const-fim" role="status" set:html={t(constelacao.fim)}></p>
         <div class="tp-const-bts">
-          <button type="button" class="tp-const-bt" data-const-resolver>Reordenar</button>
-          <button type="button" class="tp-const-bt" data-const-embaralhar>Começar de novo</button>
+          <button type="button" class="tp-const-bt" data-const-resolver>{constelacao.botaoReordenar}</button>
+          <button type="button" class="tp-const-bt" data-const-embaralhar>{constelacao.botaoRecomecar}</button>
         </div>
       </div>
       </Bloco>
     </div>
   </section>
+  )}
 
   <!-- 6) AS JORNADAS -->
   <!-- padding do topo é 110px (e não os 40px de antes) porque agora existe a
        seção da constelação, em rosa, imediatamente acima — antes esta seção
        encostava no comparativo, também creme, e as duas liam como um bloco só -->
+  {visivel(jornadas) && (
   <section id="jornadas" data-screen-label="Jornadas" style="background:var(--creme); padding:110px 30px;">
     <div style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <div data-reveal style="text-align:center; margin-bottom:56px;">
@@ -612,8 +598,10 @@ const blocado = !!(config as any).secoesFechadas;
       </div>
     </div>
   </section>
+  )}
 
   <!-- 7) PARA QUEM É -->
+  {visivel(paraQuem) && (
   <section id="para-quem" data-screen-label="ParaQuemE" style="background:var(--rosa); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -641,8 +629,10 @@ const blocado = !!(config as any).secoesFechadas;
       </Bloco>
     </div>
   </section>
+  )}
 
   <!-- 7b) PERGUNTAS FREQUENTES -->
+  {visivel(faq) && (
   <section id="faq" data-screen-label="FAQ" style="background:var(--creme); padding:110px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:660px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -664,8 +654,10 @@ const blocado = !!(config as any).secoesFechadas;
       </Bloco>
     </div>
   </section>
+  )}
 
   <!-- 8) EMPRESAS E EVENTOS -->
+  {visivel(empresas) && (
   <section id="empresas" data-screen-label="Empresas" style="background:var(--areia); padding:96px 30px;">
     <div data-reveal style="position:relative; z-index:2; max-width:520px; margin:0 auto; text-align:center;">
       <Bloco blocado={blocado} centro>
@@ -678,6 +670,7 @@ const blocado = !!(config as any).secoesFechadas;
       </Bloco>
     </div>
   </section>
+  )}
 
   <!-- 9) CONVITE FINAL -->
   <section id="convite" data-screen-label="Convite" style="position:relative; min-height:100vh; background:var(--marrom); display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:110px 30px; overflow:hidden;">
