@@ -51,19 +51,19 @@
   "comparacao": {
     "titulo": "Terapia Convencional e Visão Sistêmica",
     "subtitulo": "Não são caminhos opostos. São abordagens que se somam.\n",
-    "col1Titulo": "Terapia Convencional",
+    "col1Titulo": "Visão Sistêmica",
     "col1": [
-      "Compreende a experiência e o comportamento individual.",
-      "Favorece a elaboração emocional e o autoconhecimento.",
-      "Trabalha pensamentos, sentimentos e rotinas.",
-      "Ajuda a desenvolver recursos internos para o dia a dia."
-    ],
-    "col2Titulo": "Visão Sistêmica",
-    "col2": [
       "Amplia o olhar para o contexto dos vínculos e das relações.",
       "Ilumina os padrões e as dinâmicas invisíveis do inconsciente.",
       "Compreende o lugar que você ocupa na sua história familiar.",
       "Traz clareza para destravar escolhas e decisões no presente."
+    ],
+    "col2Titulo": "Terapia Convencional",
+    "col2": [
+      "Compreende a experiência e o comportamento individual.",
+      "Favorece a elaboração emocional e o autoconhecimento.",
+      "Trabalha pensamentos, sentimentos e rotinas.",
+      "Ajuda a desenvolver recursos internos para o dia a dia."
     ],
     "fecho": "Enquanto a Terapia Convencional foca na sua jornada individual, a Visão Sistêmica amplia o mapa: ela revela o que está oculto nas suas relações para que você possa fazer escolhas mais livres e autênticas hoje.\n"
   },
