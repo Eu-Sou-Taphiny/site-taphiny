@@ -203,3 +203,12 @@ export function puro(valor: Texto): string {
     .replace(/\s+/g, ' ')
     .trim();
 }
+
+
+/** Numeral romano minúsculo (1 → i, 4 → iv): numera os produtos pela posição. */
+export function romano(n: number): string {
+  const tabela: [number, string][] = [[1000,'m'],[900,'cm'],[500,'d'],[400,'cd'],[100,'c'],[90,'xc'],[50,'l'],[40,'xl'],[10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']];
+  let r = '';
+  for (const [v, l] of tabela) while (n >= v) { r += l; n -= v; }
+  return r;
+}

@@ -3,7 +3,7 @@ import site from '../content/site.json';
 import SiteFooter from '../components/SiteFooter.astro';
 // Campos de prosa vêm do Tina como rich-text (árvore) e os curtos como texto
 // simples; `t()` cuida dos dois e devolve o HTML inline. Ver src/lib/texto.ts.
-import { inline as t } from '../lib/texto';
+import { inline as t, romano } from '../lib/texto';
 import Bloco from '../components/Bloco.astro';
 import VideoMidia from '../components/VideoMidia.astro';
 import { jsonLdHtml, visivel } from '../lib/jsonld';
@@ -552,23 +552,13 @@ const blocado = !!(config as any).secoesFechadas;
         <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); max-width:420px; margin:0 auto; text-wrap:pretty;" set:html={t(jornadas.subtitulo)}></p>
       </div>
 
-      <div data-reveal style="border:1px dashed var(--ouro); padding:38px 30px; text-align:center; margin-bottom:44px;">
-        <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.32em; text-transform:uppercase; color:var(--ouro); margin-bottom:16px;">{jornadas.meditacoes.rotulo}</div>
-        <div style={`font-family:'Playfair Display',serif; font-size:23px; color:var(--marrom); margin-bottom:${jornadas.meditacoes.subtitulo ? '10px' : '16px'};`}>{jornadas.meditacoes.titulo}</div>
-        {jornadas.meditacoes.subtitulo && (
-        <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{jornadas.meditacoes.subtitulo}</div>
-        )}
-        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); max-width:400px; margin:0 auto 26px; text-wrap:pretty;" set:html={t(jornadas.meditacoes.texto)}></p>
-        <a href={wa(config.mensagemMeditacoes)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota); text-decoration:none; border-bottom:1px solid var(--areia); padding-bottom:6px;">{jornadas.meditacoes.cta}</a>
-      </div>
-
       <!-- 4d) TRILHA: os degraus na linha de ouro; toca num degrau e vê a jornada.
            Sem JavaScript os cartões continuam empilhados como hoje. -->
       <div class="tp-trilha" data-tp-trilha aria-hidden="true">
         <span class="tp-trilha-linha"></span>
         {jornadas.cards.map((card, i) => (
         <button type="button" class:list={['tp-trilha-no', i === 0 && 'ativo']} data-trilha={String(i)} tabindex="-1">
-          <span class="tp-trilha-bola">{card.num}</span>
+          <span class="tp-trilha-bola">{romano(i + 1)}</span>
           <span class="tp-trilha-nome">{card.titulo}</span>
         </button>
         ))}
@@ -582,7 +572,7 @@ const blocado = !!(config as any).secoesFechadas;
         return (
         <div data-reveal class:list={['tp-card', i === 0 && 'ativo']} data-trilha={String(i)} style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
           <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
-            <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro);">{card.num}</span>
+            <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro);">{romano(i + 1)}</span>
             <span style="font-family:'Playfair Display',serif; font-size:22px; color:var(--marrom);">{card.titulo}</span>
           </div>
           <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{card.rotulo}</div>

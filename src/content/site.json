@@ -88,16 +88,8 @@
     "exibir": true,
     "titulo": "As Jornadas Sistêmicas",
     "subtitulo": "Cada história tem o seu tempo. Encontre a melhor jornada para o seu momento.\n",
-    "meditacoes": {
-      "rotulo": "Primeiro Passo",
-      "titulo": "Meditações Sistêmicas Guiadas",
-      "subtitulo": "",
-      "texto": "Uma ferramenta de vivência prática para você acessar a Visão Sistêmica no seu tempo. Para soltar tensões do presente, acalmar a mente e resgatar a sua força interna.\n",
-      "cta": "Lançamento em Breve"
-    },
     "cards": [
       {
-        "num": "i",
         "titulo": "Sessão Sistêmica",
         "rotulo": "Olhar para um tema específico",
         "texto": "Encontro único e individual focado na questão que mais precisa de atenção no seu momento atual. Trazemos à luz as dinâmicas invisíveis por trás desse tema para que você ganhe clareza imediata e consiga destravar suas decisões no presente.\n",
@@ -109,7 +101,6 @@
         "mensagem": "Olá, Taphiny! Vim pelo site e gostaria de agendar a minha Sessão Sistêmica."
       },
       {
-        "num": "ii",
         "titulo": "Jornada Essência",
         "rotulo": "Reorganização e Foco",
         "texto": "Quatro encontros individuais direcionados para transformar a relação com a área da sua vida que hoje mais te afeta. Um espaço para soltar pesos antigos, organizar seu mundo interno e assumir a sua postura adulta no dia a dia.\n",
@@ -121,7 +112,6 @@
         "mensagem": "Olá, Taphiny! Tenho interesse na mentoria de *4 encontros (Jornada Essência)* e saber mais detalhes."
       },
       {
-        "num": "iii",
         "titulo": "Jornada Raízes",
         "rotulo": "Transformação Profunda",
         "texto": "Sete encontros individuais para um acompanhamento amplo, calmo e customizado. Além do olhar sistêmico, integramos vivências práticas, meditações guiadas e exercícios direcionados de acordo com a sua necessidade. Um processo com tempo para assimilar cada etapa, soltar padrões do inconsciente e consolidar transformações reais no seu presente.\n",
@@ -227,8 +217,7 @@
     "secoesFechadas": true,
     "musica": "",
     "whatsapp": "5511925027759",
-    "mensagemConversa": "Olá, Taphiny! Cheguei pelo seu site e gostaria de começar uma conversa sobre a Visão Sistêmica.",
-    "mensagemMeditacoes": "Olá, Taphiny! Gostaria de acessar as meditações guiadas."
+    "mensagemConversa": "Olá, Taphiny! Cheguei pelo seu site e gostaria de começar uma conversa sobre a Visão Sistêmica."
   },
   "popup": {
     "ativo": true,

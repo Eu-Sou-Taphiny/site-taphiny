@@ -215,30 +215,28 @@ export default defineConfig({
               prosa("subtitulo", "Subtítulo"),
               {
                 type: "object",
-                name: "meditacoes",
-                label: "Card — Meditações guiadas",
-                fields: [
-                  { type: "string", name: "rotulo", label: "Rótulo" },
-                  { type: "string", name: "titulo", label: "Título" },
-                  { type: "string", name: "subtitulo", label: "Subtítulo em destaque (opcional)" },
-                  prosa("texto", "Texto"),
-                  { type: "string", name: "cta", label: "Texto do link" },
-                ],
-              },
-              {
-                type: "object",
                 name: "cards",
-                label: "Cards das jornadas",
+                label: "Produtos (sessões e jornadas)",
+                description:
+                  "Cada item é um produto, todos com o mesmo layout. Para criar um novo, use o + e preencha os campos. A ordem da lista define a numeração (i, ii, iii, iv...) e a posição na trilha; arraste para reordenar. Produto novo também entra sozinho no Google (dados estruturados).",
                 list: true,
-                ui: { itemProps: (i) => ({ label: i?.titulo || "Jornada" }) },
+                ui: {
+                  itemProps: (i) => ({ label: i?.titulo || "Novo produto" }),
+                  defaultItem: () => ({
+                    titulo: "Novo produto",
+                    resultadoRotulo: "Resultado esperado",
+                    precoNota: "consulte valores e disponibilidade",
+                    cta: "Saber mais",
+                    mensagem: "Olá, Taphiny! Vim pelo site e gostaria de saber mais sobre este produto.",
+                  }),
+                },
                 fields: [
-                  { type: "string", name: "num", label: "Numeral (i, ii, iii)" },
                   { type: "string", name: "titulo", label: "Título" },
                   { type: "string", name: "rotulo", label: "Rótulo" },
                   prosa("texto", "Texto"),
                   { type: "string", name: "resultadoRotulo", label: "Rótulo do resultado (padrão: Resultado esperado)" },
                   prosa("resultado", "Resultado esperado (opcional)"),
-                  { type: "string", name: "preco", label: "Preço / destaque (ex.: R$ 450)" },
+                  { type: "string", name: "preco", label: "Preço / destaque (ex.: R$ 450,00 ou 4 Encontros)" },
                   { type: "string", name: "precoNota", label: "Nota ao lado do preço" },
                   { type: "string", name: "cta", label: "Texto do botão" },
                   { type: "string", name: "mensagem", label: "Mensagem do WhatsApp" },
@@ -336,7 +334,6 @@ export default defineConfig({
               { type: "image", name: "musica", label: "Música de fundo (mp3)" },
               { type: "string", name: "whatsapp", label: "WhatsApp (só números, com DDI+DDD, ex.: 5511925027759)" },
               { type: "string", name: "mensagemConversa", label: "Mensagem do botão 'começar uma conversa'", ui: { component: "textarea" } },
-              { type: "string", name: "mensagemMeditacoes", label: "Mensagem do botão 'meditações'", ui: { component: "textarea" } },
             ],
           },
           // ---------- POP-UP DE ENTRADA ----------

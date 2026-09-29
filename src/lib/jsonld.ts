@@ -4,8 +4,13 @@
 // painel: seção desligada sai do breadcrumb (e o FAQ sai inteiro), e os serviços
 // de negócios só entram enquanto a seção Empresas estiver no ar.
 
+import { puro } from './texto';
+
 export const URL_SITE = 'https://eusoutaphiny.com.br/';
 const id = (frag: string) => `${URL_SITE}#${frag}`;
+
+const slug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
 /** Seção ligada? Campo ausente (conteúdo antigo) conta como ligada. */
 export const visivel = (secao: any) => secao?.exibir !== false;
@@ -18,10 +23,20 @@ export function montarJsonLd(site: any) {
     { '@type': 'Service', '@id': id('servico-workshops'), name: 'Workshops & Palestras', serviceType: 'Terapia Sistêmica', description: 'Workshops e palestras sobre Visão Sistêmica, pertencimento, cultura e prosperidade para empresas e eventos.', provider: { '@id': id('business') }, areaServed: 'BR' },
   ] : [];
 
+  // Um Service por card de produto: produto novo no painel entra no SEO sozinho.
+  // Preço só vai quando o campo é um valor em reais (ex.: "R$ 450,00").
   const servicos = [
-    { '@type': 'Service', '@id': id('servico-sessao'), name: 'Sessão Sistêmica (Olhar)', serviceType: 'Terapia Sistêmica', description: 'Encontro individual direcionado a um tema específico — uma decisão, um relacionamento, carreira, dinheiro ou um padrão que se repete. Ideal para quem busca clareza sobre um momento.', provider: { '@id': id('business') }, areaServed: 'BR', offers: { '@type': 'Offer', price: '450', priceCurrency: 'BRL' } },
-    { '@type': 'Service', '@id': id('servico-essencia'), name: 'Jornada Essência', serviceType: 'Terapia Sistêmica', description: 'Quatro encontros para reorganizar o eixo interno, fortalecer o lugar de adulto e construir uma vida mais alinhada com quem realmente se é.', provider: { '@id': id('business') }, areaServed: 'BR' },
-    { '@type': 'Service', '@id': id('servico-raizes'), name: 'Jornada Raízes', serviceType: 'Constelação Familiar', description: 'Sete encontros de investigação profunda das dinâmicas familiares e dos padrões transgeracionais, no espírito da constelação familiar, para recuperar a força necessária para construir o futuro.', provider: { '@id': id('business') }, areaServed: 'BR' },
+    ...(visivel(jornadas) ? jornadas?.cards || [] : []).map((c: any) => {
+      const valor = String(c.preco || '').match(/R\$\s*([\d.]+)(?:,(\d{2}))?/);
+      const preco = valor ? `${valor[1].replace(/\./g, '')}${valor[2] && valor[2] !== '00' ? '.' + valor[2] : ''}` : '';
+      return {
+        '@type': 'Service', '@id': id(`servico-${slug(c.titulo || 'produto')}`),
+        name: c.titulo, serviceType: 'Terapia Sistêmica',
+        description: [c.rotulo, puro(c.texto)].filter(Boolean).join('. '),
+        provider: { '@id': id('business') }, areaServed: 'BR',
+        ...(preco ? { offers: { '@type': 'Offer', price: preco, priceCurrency: 'BRL' } } : {}),
+      };
+    }),
     ...servicosNegocios,
   ];
 
