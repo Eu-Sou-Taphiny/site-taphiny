@@ -5,7 +5,8 @@
   "private": true,
   "description": "Site da Taphiny — Visão Sistêmica e Mentoria Sistêmica (Astro + TinaCMS)",
   "scripts": {
-    "dev": "tinacms dev -c \"astro dev\"",
+    "dev": "tinacms dev -c \"ASTRO_DEV_BACKGROUND=1 astro dev\"",
+    "dev:rede": "tinacms dev -c \"ASTRO_DEV_BACKGROUND=1 astro dev --host\"",
     "dev:site": "astro dev",
     "build": "node ./scripts/tina-build.mjs && astro build",
     "build:site": "astro build",

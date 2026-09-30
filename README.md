@@ -7,9 +7,16 @@ Site de página única da **Taphiny** (Visão Sistêmica / Mentoria Sistêmica),
 ```bash
 npm install
 npm run dev        # site + painel do Tina (http://localhost:4321 e /admin)
+npm run dev:rede   # o mesmo, aberto na rede local (para testar no celular no mesmo Wi-Fi)
 # ou
 npm run dev:site   # só o site, sem o Tina
 ```
+
+O Astro 7 manda o `astro dev` para segundo plano quando detecta que foi
+chamado por um agente de IA, e aí o `tinacms dev` encerra junto. O
+`ASTRO_DEV_BACKGROUND=1` no script (a mesma variável que o Astro usa no
+próprio processo de fundo) mantém o servidor em primeiro plano, com o Tina
+de pé, em qualquer terminal.
 
 ## Build
 
