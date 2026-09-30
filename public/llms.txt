@@ -1,4 +1,4 @@
-# Taphiny — Visão Sistêmica e Mentoria Sistêmica
+# Taphiny · Visão Sistêmica e Mentoria Sistêmica
 
 > Taphiny é mentora e terapeuta sistêmica. Conduz processos de Visão Sistêmica e
 > constelação familiar para reconhecer padrões familiares transgeracionais,
@@ -8,7 +8,7 @@
 
 ## O que é Visão Sistêmica
 A Visão Sistêmica é uma abordagem terapêutica que enxerga a pessoa dentro dos
-sistemas a que pertence — família, vínculos e história. Parte do princípio de
+sistemas a que pertence: família, vínculos e história. Parte do princípio de
 que nem tudo o que vivemos começou em nós: muitos padrões, lealdades e bloqueios
 são herdados ao longo das gerações.
 

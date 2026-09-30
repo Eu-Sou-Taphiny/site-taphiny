@@ -1,4 +1,4 @@
-# robots.txt — Taphiny (Visão Sistêmica)
+# robots.txt · Taphiny (Visão Sistêmica)
 # >>> Troque o domínio na linha Sitemap pelo domínio final. <<<
 
 # Buscadores tradicionais

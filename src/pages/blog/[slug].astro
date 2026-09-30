@@ -13,7 +13,7 @@ const { Content } = await render(post);
 const fmt = (d?: Date) =>
   d ? new Intl.DateTimeFormat('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }).format(d) : '';
 
-const desc = post.data.resumo || `${post.data.titulo} — por Taphiny, Visão Sistêmica.`;
+const desc = post.data.resumo || `${post.data.titulo} | Taphiny, Visão Sistêmica.`;
 ---
 <BlogLayout
   title={`${post.data.titulo} | Taphiny`}
