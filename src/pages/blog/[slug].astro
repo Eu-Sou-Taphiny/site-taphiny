@@ -23,12 +23,12 @@ const desc = post.data.resumo || `${post.data.titulo} | Taphiny, Visão Sistêmi
   type="article"
 >
   <article style="max-width:720px; margin:0 auto; padding:70px 30px 40px;">
-    <a href="/blog" style="display:inline-block; font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracota); text-decoration:none; margin-bottom:34px;">← Blog</a>
+    <a href="/blog" style="display:inline-block; font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--terracota-t); text-decoration:none; margin-bottom:34px;">← Blog</a>
 
-    <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota); margin-bottom:16px;">{fmt(post.data.data)}</div>
+    <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--terracota-t); margin-bottom:16px;">{fmt(post.data.data)}</div>
     <h1 style="font-family:'Playfair Display',serif; font-weight:400; font-size:36px; line-height:1.2; color:var(--marrom); margin-bottom:14px; text-wrap:balance;">{post.data.titulo}</h1>
     {post.data.resumo && (
-      <p style="font-family:'Playfair Display',serif; font-weight:400; font-size:21px; line-height:1.5; color:#8C5A4D; margin-bottom:8px; text-wrap:pretty;">{post.data.resumo}</p>
+      <p style="font-family:'Playfair Display',serif; font-weight:400; font-size:21px; line-height:1.5; color:var(--terracota-t); margin-bottom:8px; text-wrap:pretty;">{post.data.resumo}</p>
     )}
 
     {post.data.capa && (

@@ -70,6 +70,8 @@ const blocado = !!(config as any).secoesFechadas;
     --creme:#F6F1EA; --rosa:#DCC4BB; --areia:#BFA79A; --marrom:#521416;
     --bordeaux:#6A3F4B; --terracota:#A56E5F; --ouro:#B7905B; --ouroc:#D9B67A;
     --marrom-escuro:#3A0D0F;
+    /* tons de texto para fundo claro (AA): terracota 5,1:1 e ouro 5,3:1 no creme */
+    --terracota-t:#8C5A4D; --ouro-t:#7E5E33;
   }
   *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
@@ -125,7 +127,7 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-num-cards{ list-style:none; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:18px; }
   .tp-num-card{ background:#FBF8F3; border-top:2px solid var(--ouro); padding:30px 26px 32px; }
   .tp-num{ display:block; font-family:'Playfair Display',serif; font-size:40px; line-height:1;
-           color:#7E5E33; margin-bottom:18px; }
+           color:var(--ouro-t); margin-bottom:18px; }
   .tp-num-card h4{ font-family:'Playfair Display',serif; font-weight:500; font-size:20px; line-height:1.3;
                    color:var(--marrom); margin-bottom:12px; text-wrap:balance; }
   .tp-num-card p{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:14.5px; line-height:1.85;
@@ -199,7 +201,7 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-faq-q::-webkit-details-marker{ display:none; }
   .tp-faq-q h3{ font-family:'Playfair Display',serif; font-weight:400; font-size:21px; line-height:1.35;
                 color:var(--marrom); text-wrap:pretty; transition:color .3s; }
-  .tp-faq-q:hover h3{ color:var(--terracota); }
+  .tp-faq-q:hover h3{ color:var(--terracota-t); }
   .tp-faq-i{ flex:none; width:22px; height:22px; margin-top:4px; position:relative;
              transition:transform .35s ease; }
   .tp-faq-i::before, .tp-faq-i::after{ content:''; position:absolute; top:50%; left:50%; background:var(--ouro);
@@ -316,13 +318,14 @@ const blocado = !!(config as any).secoesFechadas;
                     background:linear-gradient(90deg, transparent, var(--areia) 12%, var(--areia) 88%, transparent); }
   .tp-trilha-no{ position:relative; z-index:1; flex:1 1 0; display:flex; flex-direction:column;
                  align-items:center; gap:12px; border:none; background:none; cursor:pointer;
-                 padding:0; opacity:0.55; transition:opacity .35s ease; }
-  .tp-trilha-no.ativo, .tp-trilha-no:hover{ opacity:1; }
+                 padding:0; }
   .tp-trilha-bola{ display:grid; place-items:center; width:38px; height:38px; border-radius:50%;
                    border:1px solid var(--areia); background:var(--creme);
                    font-family:'Playfair Display',serif; font-style:italic; font-size:15px;
-                   color:var(--ouro); transition:border-color .35s ease, background .35s ease; }
-  .tp-trilha-no.ativo .tp-trilha-bola{ border-color:var(--ouro); background:#FBF3E6; }
+                   color:var(--ouro-t); transition:border-color .35s ease, background .35s ease, color .35s ease; }
+  .tp-trilha-no:hover .tp-trilha-bola{ border-color:var(--ouro); }
+  .tp-trilha-no.ativo .tp-trilha-bola{ border-color:var(--ouro); background:var(--ouro); color:var(--marrom); }
+  .tp-trilha-no.ativo .tp-trilha-nome{ color:var(--marrom); font-weight:500; }
   .tp-trilha-nome{ font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.14em;
                    text-transform:uppercase; color:var(--bordeaux); text-align:center;
                    line-height:1.5; max-width:11ch; }
@@ -669,7 +672,7 @@ const blocado = !!(config as any).secoesFechadas;
           </div>
         </div>
       </div>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--terracota); text-align:center; max-width:520px; margin:56px auto 0; text-wrap:pretty;" set:html={t(comparacao.fecho)}></p>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--terracota-t); text-align:center; max-width:520px; margin:56px auto 0; text-wrap:pretty;" set:html={t(comparacao.fecho)}></p>
       </Bloco>
     </div>
   </section>
@@ -751,19 +754,19 @@ const blocado = !!(config as any).secoesFechadas;
         return (
         <div data-reveal class:list={['tp-card', i === 0 && 'ativo']} data-trilha={String(i)} style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
           <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
-            <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro);">{romano(i + 1)}</span>
+            <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro-t);">{romano(i + 1)}</span>
             <span style="font-family:'Playfair Display',serif; font-size:22px; color:var(--marrom);">{card.titulo}</span>
           </div>
-          <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{card.rotulo}</div>
+          <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota-t); margin-bottom:18px;">{card.rotulo}</div>
           <p style={`font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); margin-bottom:${resultado ? '22px' : '26px'}; text-wrap:pretty;`} set:html={t(card.texto)}></p>
           {resultado && (
           <div style="border-left:2px solid var(--ouro); background:var(--creme); padding:18px 22px; margin-bottom:26px;">
-            <div style="font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouro); margin-bottom:9px;">{card.resultadoRotulo || 'Resultado esperado'}</div>
+            <div style="font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouro-t); margin-bottom:9px;">{card.resultadoRotulo || 'Resultado esperado'}</div>
             <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:13.5px; line-height:1.85; color:var(--bordeaux); margin:0; text-wrap:pretty;" set:html={resultado}></p>
           </div>
           )}
           <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:22px; border-top:1px solid var(--areia);">
-            <span style="font-family:'Playfair Display',serif; font-size:18px; color:var(--ouro);">{card.preco} <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12px; color:var(--bordeaux);">{card.precoNota}</span></span>
+            <span style="font-family:'Playfair Display',serif; font-size:18px; color:var(--ouro-t);">{card.preco} <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12px; color:var(--bordeaux);">{card.precoNota}</span></span>
             <a href={wa(card.mensagem)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:13px 26px;">{card.cta}</a>
           </div>
         </div>
@@ -811,7 +814,7 @@ const blocado = !!(config as any).secoesFechadas;
     <div data-reveal style="position:relative; z-index:2; max-width:660px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
-      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); text-align:center; margin-bottom:24px;">{faq.rotulo}</div>
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota-t); text-align:center; margin-bottom:24px;">{faq.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:29px; line-height:1.3; color:var(--marrom); text-align:center; margin-bottom:56px; text-wrap:balance;">{faq.titulo}</h2>
       </Fragment>
       <div>
@@ -836,7 +839,7 @@ const blocado = !!(config as any).secoesFechadas;
     <div data-reveal style="position:relative; z-index:2; max-width:520px; margin:0 auto; text-align:center;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
-      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--marrom); margin-bottom:28px; opacity:0.7;">{empresas.rotulo}</div>
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--marrom); margin-bottom:28px;">{empresas.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:26px; line-height:1.3; color:var(--marrom); margin-bottom:26px; text-wrap:balance;">{empresas.titulo}</h2>
       </Fragment>
       <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95; color:var(--marrom); margin-bottom:40px; text-wrap:pretty;" set:html={t(empresas.paragrafo)}></p>
@@ -883,7 +886,7 @@ const blocado = !!(config as any).secoesFechadas;
           <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:24px; line-height:1.3; color:var(--marrom); margin-bottom:14px; text-wrap:balance;">{popup.titulo}</h2>
         )}
         {popup.subtitulo && (
-          <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--terracota); margin-bottom:18px;">{popup.subtitulo}</div>
+          <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:var(--terracota-t); margin-bottom:18px;">{popup.subtitulo}</div>
         )}
         {t(popup.texto) && (
           <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.8; color:var(--bordeaux); text-wrap:pretty;" set:html={t(popup.texto)}></p>

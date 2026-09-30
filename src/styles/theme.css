@@ -4,13 +4,14 @@
   --creme:#F6F1EA; --rosa:#DCC4BB; --areia:#BFA79A; --marrom:#521416;
   --bordeaux:#6A3F4B; --terracota:#A56E5F; --ouro:#B7905B; --ouroc:#D9B67A;
   --marrom-escuro:#3A0D0F;
+  --terracota-t:#8C5A4D; --ouro-t:#7E5E33;   /* tons de texto AA no creme */
 }
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{ background:var(--creme); color:var(--marrom); font-family:'Montserrat',sans-serif; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
 img{ display:block; max-width:100%; }
-a{ color:var(--terracota); }
-a:hover{ color:var(--ouro); }
+a{ color:var(--terracota-t); }
+a:hover{ color:var(--ouro-t); }
 :focus-visible{ outline:2px solid var(--ouroc); outline-offset:3px; border-radius:2px; }
 ::selection{ background:var(--ouro); color:var(--creme); }
 @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
@@ -23,12 +24,12 @@ a:hover{ color:var(--ouro); }
 .tp-prose p{ text-wrap:pretty; }
 .tp-prose strong{ font-weight:600; color:var(--bordeaux); }
 .tp-prose em{ font-style:italic; }
-.tp-prose a{ color:var(--terracota); text-decoration:none; border-bottom:1px solid var(--areia); transition:border-color .3s, color .3s; }
-.tp-prose a:hover{ color:var(--ouro); border-color:var(--ouro); }
+.tp-prose a{ color:var(--terracota-t); text-decoration:none; border-bottom:1px solid var(--areia); transition:border-color .3s, color .3s; }
+.tp-prose a:hover{ color:var(--ouro-t); border-color:var(--ouro-t); }
 .tp-prose ul, .tp-prose ol{ padding-left:1.4em; }
 .tp-prose li{ margin-top:10px; }
-.tp-prose li::marker{ color:var(--ouro); }
+.tp-prose li::marker{ color:var(--ouro-t); }
 .tp-prose img{ width:100%; height:auto; border-radius:10px; margin:34px 0; }
 /* citação sem itálico; terracota escurecida #8C5A4D para passar AA no creme (5,1:1) */
-.tp-prose blockquote{ font-family:'Playfair Display',serif; font-style:normal; font-weight:400; font-size:22px; line-height:1.5; color:#8C5A4D; border-left:2px solid var(--ouro); padding-left:24px; margin:40px 0; text-wrap:pretty; }
+.tp-prose blockquote{ font-family:'Playfair Display',serif; font-style:normal; font-weight:400; font-size:22px; line-height:1.5; color:var(--terracota-t); border-left:2px solid var(--ouro); padding-left:24px; margin:40px 0; text-wrap:pretty; }
 .tp-prose hr{ border:none; border-top:1px solid var(--areia); margin:44px 0; }
