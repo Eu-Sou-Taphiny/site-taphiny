@@ -33,6 +33,21 @@ const prosa = (name: string, label: string, dica: string = DICA) => ({
 // sai pelos marcadores, que o renderizador entende igual.
 const DICA_LISTA = "Um tópico por linha. Formatação: **negrito**, _itálico_, ++sublinhado++.";
 
+// Lista de itens com título e texto (cartões, etapas): ela adiciona, remove
+// e reordena pelo painel.
+const itens = (name: string, label: string, rotuloItem: string, description?: string) => ({
+  type: "object" as const,
+  name,
+  label,
+  description,
+  list: true,
+  ui: { itemProps: (i: any) => ({ label: i?.titulo || rotuloItem }) },
+  fields: [
+    { type: "string" as const, name: "titulo", label: "Título" },
+    prosa("texto", "Texto"),
+  ],
+});
+
 // Chave "Exibir no site", a mesma do pop-up. Vai como primeiro campo de cada
 // seção. Desligada, a seção some da página, do menu do rodapé e do breadcrumb
 // do Google. Conteúdo antigo sem o campo conta como ligado (ver src/lib/jsonld.ts).
@@ -99,34 +114,62 @@ export default defineConfig({
               { type: "string", name: "cta", label: "Texto do botão" },
             ],
           },
-          // ---------- PROVOCAÇÃO ----------
+          // ---------- AUTOCONSCIÊNCIA ----------
           {
             type: "object",
             name: "provocacao",
-            label: "Seção: O que carregamos",
+            label: "Seção: Autoconsciência (Por que fazemos o que fazemos?)",
             fields: [
               exibir,
               { type: "string", name: "rotulo", label: "Rótulo (linha pequena)" },
               { type: "string", name: "titulo", label: "Título" },
-              prosa("paragrafo1", "Parágrafo 1"),
-              prosa("paragrafo2", "Parágrafo 2"),
+              prosa("abertura", "Texto de abertura"),
+              { type: "string", name: "col1Titulo", label: "Contraste: coluna 1 (clara), título" },
+              prosa("col1Texto", "Contraste: coluna 1, texto"),
+              { type: "string", name: "col2Titulo", label: "Contraste: coluna 2 (escura, em destaque), título" },
+              prosa("col2Texto", "Contraste: coluna 2, texto"),
+              { type: "string", name: "pilaresTitulo", label: "Subtítulo dos cards numerados" },
+              itens("pilares", "Cards numerados", "Card", "A numeração (01, 02, 03...) segue a ordem da lista."),
+              prosa("fecho", "Frase de fechamento em destaque"),
+            ],
+          },
+          // ---------- MINHA ABORDAGEM ----------
+          {
+            type: "object",
+            name: "abordagem",
+            label: "Seção: Minha abordagem",
+            fields: [
+              exibir,
+              { type: "string", name: "rotulo", label: "Rótulo (linha pequena)" },
+              { type: "string", name: "titulo", label: "Título" },
+              prosa("abertura", "Texto de abertura"),
+              { type: "string", name: "chipsTitulo", label: "Título dos chips (ex.: Para qualquer área da vida)" },
+              { type: "string", name: "chips", label: "Chips (um por item)", list: true },
+              prosa("destaque", "Bloco em destaque"),
+              { type: "string", name: "etapasTitulo", label: "Título da linha do tempo" },
+              itens("etapas", "Linha do tempo: etapas", "Etapa", "A numeração segue a ordem da lista. Horizontal no computador, vertical no celular."),
+              prosa("fecho", "Frase de fechamento"),
             ],
           },
           // ---------- VISÃO SISTÊMICA ----------
           {
             type: "object",
             name: "visao",
-            label: "Seção: O que é Visão Sistêmica",
+            label: "Seção: O que é a Visão Sistêmica",
             fields: [
               exibir,
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título" },
-              prosa("definicao", "Definição (1º parágrafo)"),
-              prosa("paragrafo", "Parágrafo complementar"),
+              prosa("abertura", "Texto de abertura"),
+              { type: "string", name: "col1Titulo", label: "Coluna 1 (clara), título (ex.: O que ela não é)" },
+              { type: "string", name: "col1", label: "Coluna 1, itens", list: true, description: DICA_LISTA },
+              { type: "string", name: "col2Titulo", label: "Coluna 2 (escura, em destaque), título (ex.: O que ela faz)" },
+              { type: "string", name: "col2", label: "Coluna 2, itens", list: true, description: DICA_LISTA },
               {
                 type: "object",
                 name: "pilares",
-                label: "Pilares (Pertencer / Ordenar / Fluir)",
+                label: "Pilares (Pertencimento / Ordem / Equilíbrio)",
+                description: "Cartões coloridos, na ordem: terracota, ouro, bordeaux. Mantenha os textos curtos.",
                 list: true,
                 ui: { itemProps: (i) => ({ label: i?.titulo || "Pilar" }) },
                 fields: [
@@ -134,6 +177,8 @@ export default defineConfig({
                   prosa("texto", "Texto"),
                 ],
               },
+              prosa("destaque", "Frase em destaque grande"),
+              prosa("fecho", "Texto de fechamento"),
             ],
           },
           // ---------- QUEM CONDUZ ----------
@@ -148,10 +193,16 @@ export default defineConfig({
               { type: "image", name: "videoCapa", label: "Capa do vídeo (opcional)" },
               { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título (itálico)" },
-              prosa("paragrafo1", "Parágrafo 1"),
-              prosa("paragrafo2", "Parágrafo 2"),
-              prosa("paragrafo3", "Parágrafo 3"),
-              prosa("frase", "Frase em destaque (citação)"),
+              {
+                type: "string",
+                name: "trajetoria",
+                label: "Linha do tempo da trajetória (um passo por item)",
+                list: true,
+                description: "O último item aparece como o ponto de hoje, com destaque. " + DICA_LISTA,
+              },
+              prosa("texto", "Texto"),
+              prosa("destaque", "Frase em destaque"),
+              prosa("frase", "Citação (fecha a seção)"),
             ],
           },
           // ---------- COMPARAÇÃO ----------

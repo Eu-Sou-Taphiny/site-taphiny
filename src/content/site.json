@@ -15,15 +15,77 @@
     "exibir": true,
     "rotulo": "Autoconsciência",
     "titulo": "Por que fazemos o que fazemos?",
-    "paragrafo1": "Tentamos mudar comportamentos e nos posicionar com firmeza, mas bloqueios invisíveis continuam nos travando.\n",
-    "paragrafo2": "Enxergar essas dinâmicas não serve para nos prender a histórias do passado ou à trava atual, mas para revelar o que ainda opera no oculto e não destrava a nossa vida hoje - permitindo, assim, que assumamos o controle consciente das nossas decisões e o nosso verdadeiro lugar.\n"
+    "abertura": "Nossas escolhas racionais são governadas por uma lógica invisível: os registros guardados no inconsciente, no corpo e na nossa forma de ver o mundo. Tudo o que vivemos criou um mecanismo automático de defesa e ação.\n",
+    "col1Titulo": "Insistir no automático",
+    "col1Texto": "Mudar de rota na força bruta cobra uma conta alta: exaustão, saúde física, rupturas abruptas e relações desgastadas.\n",
+    "col2Titulo": "Compreender a mecânica",
+    "col2Texto": "Olhar para a verdade da nossa história não é viver preso ao passado. É entender como o inconsciente opera hoje, para parar de repetir padrões e destravar o presente.\n",
+    "pilaresTitulo": "Os três pilares da maturidade",
+    "pilares": [
+      {
+        "titulo": "Respeito ao próprio ritmo",
+        "texto": "Não existe fórmula mágica nem tempo igual para todo mundo. A solução do outro não é a sua.\n"
+      },
+      {
+        "titulo": "Ilusão x realidade",
+        "texto": "Distinguir o desejo idealizado da necessidade real e da condição atual. Sem essa maturidade, tudo parece urgente ao mesmo tempo.\n"
+      },
+      {
+        "titulo": "Ordem antes do progresso",
+        "texto": "Para sustentar grandes resultados fora, é preciso sustentar quem somos por dentro.\n"
+      }
+    ],
+    "fecho": "Toda estrutura começa por dentro para depois despontar para fora.\n"
+  },
+  "abordagem": {
+    "exibir": true,
+    "rotulo": "Minha abordagem",
+    "titulo": "Eu nunca começo pelo problema visível.",
+    "abertura": "Quando alguém chega travado ou diante de uma grande decisão, o ponto de partida é a estrutura interna, invisível e inconsciente. É ela que move nossas ações por trás da lógica.\n",
+    "chipsTitulo": "Para qualquer área da vida",
+    "chips": [
+      "Finanças",
+      "Carreira",
+      "Relacionamentos",
+      "Saúde",
+      "Família",
+      "Negócios"
+    ],
+    "destaque": "Quando as atitudes do dia a dia caminham na direção oposta ao que desejamos, o objetivo não acontece. E esse desalinhamento traz exaustão, culpa e a sensação de nadar contra a maré.\n",
+    "etapasTitulo": "O tempo do processo",
+    "etapas": [
+      {
+        "titulo": "Entender",
+        "texto": "O que está por trás da razão.\n"
+      },
+      {
+        "titulo": "Assimilar e transformar",
+        "texto": "Dar tempo para a mudança acontecer de verdade.\n"
+      },
+      {
+        "titulo": "Sustentar a base",
+        "texto": "Só então criar e expandir.\n"
+      }
+    ],
+    "fecho": "Saber em que momento do processo estamos muda o jogo. Por isso fórmulas mágicas não funcionam.\n"
   },
   "visao": {
     "exibir": true,
-    "rotulo": "A abordagem",
-    "titulo": "O que é Visão Sistêmica?",
-    "definicao": "É uma postura de autopercepção diária. Ela te convida a tirar o foco do problema externo e entender o que ele desperta dentro de você, trazendo maturidade para as suas escolhas práticas.\n",
-    "paragrafo": "Através da Constelação Familiar, identificamos histórias que se repetem no seu sistema. Um olhar que acolhe a origem, solta repetições antigas e abre espaço para uma vida verdadeiramente consciente e livre.\n",
+    "rotulo": "Visão Sistêmica",
+    "titulo": "O que é a Visão Sistêmica?",
+    "abertura": "Uma ferramenta que traduz a dinâmica do inconsciente para a clareza do consciente. Entre tantas abordagens, escolhi me aprofundar na Constelação Familiar, aplicando esse olhar primeiro na minha própria vida e nos meus negócios.\n",
+    "col1Titulo": "O que ela não é",
+    "col1": [
+      "Não traz respostas prontas.",
+      "Não salva ninguém.",
+      "Não é atalho."
+    ],
+    "col2Titulo": "O que ela faz",
+    "col2": [
+      "Mostra onde a vida realmente travou.",
+      "Diferencia um passo firme de uma reação impulsiva.",
+      "Coloca ordem na história para que o oculto pare de interferir nas escolhas."
+    ],
     "pilares": [
       {
         "titulo": "Pertencimento",
@@ -37,7 +99,9 @@
         "titulo": "Equilíbrio",
         "texto": "Trocas saudáveis, vida fluindo.\n"
       }
-    ]
+    ],
+    "destaque": "Vítimas não prosperam. A Visão Sistêmica nos devolve o protagonismo.\n",
+    "fecho": "Ser protagonista é construir uma estrutura interna forte o suficiente para sustentar os próprios passos, qualquer que seja o resultado das nossas escolhas.\n"
   },
   "quemConduz": {
     "exibir": true,
@@ -45,10 +109,16 @@
     "video": "",
     "videoCapa": "",
     "rotulo": "A Taphiny",
-    "titulo": "Realizar muito e, ainda assim, sentir que algo falta",
-    "paragrafo1": "Sempre fui uma pessoa prática e realizadora. Mas, por dentro, existia uma sensação incômoda de que as conquistas externas não preenchiam meu mundo interno.\n",
-    "paragrafo2": "Na busca por respostas, encontrei a Visão Sistêmica. Compreendi o que operava no meu inconsciente, reorganizei meu mundo interno e assumi meu verdadeiro protagonismo.\n",
-    "paragrafo3": "Hoje, como mentora e consteladora, conduzo pessoas a enxergarem o invisível das suas histórias, soltando repetições automáticas para ocuparem o seu próprio lugar com clareza, força e autenticidade.\n",
+    "titulo": "Realizar muito e, ainda assim, sentir que algo falta.",
+    "trajetoria": [
+      "Liderei equipes e ocupei cargos importantes em grandes empresas.",
+      "Fundei meu primeiro negócio, em arquitetura e investimentos imobiliários.",
+      "Entreguei resultados concretos, mas as conquistas de fora não preenchiam o mundo de dentro.",
+      "Passei por diversas abordagens terapêuticas até encontrar a Constelação Familiar.",
+      "Hoje, como mentora e terapeuta sistêmica, conduzo pessoas a enxergarem o invisível das suas histórias."
+    ],
+    "texto": "Para mim, a visão sistêmica não é um evento com começo, meio e fim. É uma postura diária: sair do lugar de buscar culpados do lado de fora, voltar para dentro e assumir a autorresponsabilidade por tudo o que construo.\n",
+    "destaque": "Eu jamais conduziria alguém pelas suas dores e profundidades se não habitasse, todos os dias, a minha própria maturidade.\n",
     "frase": "“Por amor, aprendemos quem precisávamos ser; por consciência, lembramos quem realmente somos.”\n"
   },
   "comparacao": {

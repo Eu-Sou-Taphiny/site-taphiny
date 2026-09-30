@@ -10,6 +10,7 @@ import { jsonLdHtml, visivel } from '../lib/jsonld';
 const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, config } = site;
 const popup = (site as any).popup;
 const constelacao = (site as any).constelacao;
+const abordagem = (site as any).abordagem;
 // vídeo da constelação: sem link nem arquivo, a seção fica como sempre foi
 const constVideo = !!(constelacao?.videoUrl?.trim() || constelacao?.video);
 const FORMATOS: Record<string, string> = { horizontal: '16/9', vertical: '9/16', retrato: '4/5' };
@@ -88,6 +89,107 @@ const blocado = !!(config as any).secoesFechadas;
      uso, porque dependem do fundo. */
   .tp-citacao{ font-family:'Playfair Display',serif; font-style:normal; font-weight:400;
                line-height:1.5; text-wrap:pretty; }
+
+  /* ============================================================
+     COMPONENTES EDITORIAIS (seções de texto mais visuais)
+     Autoconsciência, Minha abordagem, Visão Sistêmica e Quem conduz.
+     Cores de texto conferidas em AA sobre creme, rosa e bordeaux.
+     ============================================================ */
+  .tp-larga{ max-width:760px; margin:0 auto; }
+  .tp-abertura{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:17px; line-height:1.95;
+                color:var(--marrom); text-align:center; max-width:580px; margin:0 auto; text-wrap:pretty; }
+  .tp-rotulo-mini{ font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.28em;
+                   text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:22px; }
+  .tp-subtit{ font-family:'Playfair Display',serif; font-weight:400; font-size:25px; line-height:1.3;
+              color:var(--marrom); text-align:center; margin-bottom:34px; text-wrap:balance; }
+  .tp-subtit::before{ content:''; display:block; width:36px; height:1px; background:var(--ouro);
+                      margin:0 auto 22px; }
+
+  /* contraste em duas colunas: a de cá (fraca) e a de lá (forte) */
+  .tp-contraste{ display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:18px; }
+  .tp-contraste-col{ padding:34px 30px; }
+  .tp-contraste-col.fraca{ background:#FBF8F3; border:1px solid var(--areia); color:var(--marrom); }
+  .tp-contraste-col.forte{ background:var(--bordeaux); color:var(--creme); }
+  .tp-contraste-tit{ font-family:'Playfair Display',serif; font-weight:500; font-size:22px; line-height:1.3;
+                     margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--areia); }
+  .tp-contraste-col.forte .tp-contraste-tit{ border-bottom-color:rgba(217,182,122,0.55); }
+  .tp-contraste-col p, .tp-contraste-col li{ font-family:'Montserrat',sans-serif; font-weight:300;
+                     font-size:15px; line-height:1.85; text-wrap:pretty; }
+  .tp-contraste-col.forte p, .tp-contraste-col.forte li{ font-weight:400; }
+  .tp-contraste-col ul{ list-style:none; display:flex; flex-direction:column; gap:12px; }
+  .tp-contraste-col li{ position:relative; padding-left:20px; }
+  .tp-contraste-col li::before{ content:''; position:absolute; left:0; top:0.85em; width:9px; height:1px;
+                     background:currentColor; opacity:0.7; }
+
+  /* cartões numerados */
+  .tp-num-cards{ list-style:none; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:18px; }
+  .tp-num-card{ background:#FBF8F3; border-top:2px solid var(--ouro); padding:30px 26px 32px; }
+  .tp-num{ display:block; font-family:'Playfair Display',serif; font-size:40px; line-height:1;
+           color:#7E5E33; margin-bottom:18px; }
+  .tp-num-card h4{ font-family:'Playfair Display',serif; font-weight:500; font-size:20px; line-height:1.3;
+                   color:var(--marrom); margin-bottom:12px; text-wrap:balance; }
+  .tp-num-card p{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:14.5px; line-height:1.85;
+                  color:var(--bordeaux); text-wrap:pretty; }
+
+  /* bloco em destaque (fio de ouro à esquerda) */
+  .tp-destaque{ border-left:3px solid var(--ouro); padding:8px 0 8px 28px; font-size:21px; color:var(--marrom);
+                max-width:620px; margin:0 auto; }
+  .tp-destaque.escuro{ border-left-color:var(--ouroc); color:var(--creme); }
+
+  /* frase de fechamento (e a frase grande da Visão Sistêmica) */
+  .tp-fecho{ font-size:24px; color:var(--marrom); text-align:center; max-width:560px; margin:0 auto; }
+  .tp-fecho.grande{ font-size:clamp(26px, 5vw, 34px); line-height:1.35; max-width:640px; text-wrap:balance; }
+  .tp-fecho::before{ content:''; display:block; width:36px; height:1px; background:var(--ouro); margin:0 auto 26px; }
+
+  /* chips */
+  .tp-chips{ list-style:none; display:flex; flex-wrap:wrap; justify-content:center; gap:10px; max-width:560px; margin:0 auto; }
+  .tp-chips li{ font-family:'Montserrat',sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+                color:var(--marrom); background:var(--creme); border:1px solid var(--ouro); border-radius:999px;
+                padding:11px 20px; }
+
+  /* linha do tempo: vertical no celular, horizontal a partir de 720px */
+  .tp-etapas{ list-style:none; display:flex; flex-direction:column; }
+  .tp-etapas li{ position:relative; display:grid; grid-template-columns:44px 1fr; column-gap:20px; padding-bottom:30px; }
+  .tp-etapas li:last-child{ padding-bottom:0; }
+  .tp-etapas li:not(:last-child)::after{ content:''; position:absolute; left:21.5px; top:44px; bottom:0;
+                width:1px; background:var(--ouro); opacity:0.6; }
+  .tp-etapa-bola{ grid-row:span 2; display:grid; place-items:center; width:44px; height:44px; border-radius:50%;
+                  border:1px solid var(--ouro); background:var(--creme); font-family:'Playfair Display',serif;
+                  font-size:18px; color:var(--marrom); }
+  .tp-etapas h4{ font-family:'Playfair Display',serif; font-weight:500; font-size:20px; line-height:1.3;
+                 color:var(--marrom); padding-top:9px; margin-bottom:6px; }
+  .tp-etapas p{ font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.8;
+                color:var(--bordeaux); text-wrap:pretty; }
+  @media (min-width:720px){
+    .tp-etapas{ display:grid; grid-template-columns:repeat(var(--n, 3), 1fr); column-gap:28px; }
+    .tp-etapas li{ display:block; text-align:center; padding-bottom:0; }
+    .tp-etapas li:not(:last-child)::after{ left:calc(50% + 34px); right:calc(-50% + 6px); top:22px; bottom:auto; width:auto; height:1px; }
+    .tp-etapa-bola{ margin:0 auto 18px; }
+    .tp-etapas h4{ padding-top:0; }
+  }
+
+  /* trajetória (Quem conduz, fundo bordeaux) */
+  .tp-traj{ list-style:none; position:relative; padding-left:34px; }
+  .tp-traj li{ position:relative; font-family:'Montserrat',sans-serif; font-weight:300; font-size:15.5px;
+               line-height:1.85; color:var(--rosa); padding-bottom:22px; text-wrap:pretty; }
+  .tp-traj li:last-child{ padding-bottom:0; color:var(--creme); font-weight:400; }
+  .tp-traj li::before{ content:''; position:absolute; left:-34px; top:0.55em; width:11px; height:11px;
+                       border-radius:50%; border:1px solid var(--ouroc); background:var(--bordeaux); }
+  .tp-traj li:last-child::before{ background:var(--ouroc); }
+  /* fio de um ponto ao seguinte (termina no último, não passa dele) */
+  .tp-traj li:not(:last-child)::after{ content:''; position:absolute; left:-29px; top:calc(0.55em + 11px);
+                       bottom:-0.55em; width:1px; background:rgba(217,182,122,0.75); }
+
+  /* espaço entre blocos: vem por último para vencer o `margin:0 auto` dos blocos centralizados */
+  .tp-espaco{ margin-top:72px; }
+
+  @media (max-width:480px){
+    .tp-abertura{ font-size:16px; }
+    .tp-contraste-col{ padding:28px 24px; }
+    .tp-destaque{ font-size:19px; padding-left:22px; }
+    .tp-fecho{ font-size:21px; }
+    .tp-espaco{ margin-top:56px; }
+  }
 
   /* ---------- FAQ em sanfona (clique para expandir) ---------- */
   .tp-faq-item{ border-bottom:1px solid var(--areia); }
@@ -360,33 +462,106 @@ const blocado = !!(config as any).secoesFechadas;
 
   <main id="conteudo">
 
-  <!-- 2) A PROVOCAÇÃO -->
+  <!-- 2) AUTOCONSCIÊNCIA: abertura, contraste em duas colunas, três cartões
+       numerados (os pilares da maturidade) e a frase de fechamento -->
   {visivel(provocacao) && (
   <section id="o-que-carregamos" data-screen-label="Provocacao" style="background:var(--creme); padding:110px 30px;">
-    <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
+    <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
-      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota); text-align:center; margin-bottom:36px;">{provocacao.rotulo}</div>
-      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); text-align:center; max-width:480px; margin:0 auto 40px; text-wrap:balance;">{provocacao.titulo}</h2>
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">{provocacao.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); text-align:center; max-width:560px; margin:0 auto 32px; text-wrap:balance;">{provocacao.titulo}</h2>
       </Fragment>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); margin-bottom:26px; text-wrap:pretty;" set:html={t(provocacao.paragrafo1)}></p>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); text-wrap:pretty;" set:html={t(provocacao.paragrafo2)}></p>
+      <p class="tp-abertura" set:html={t(provocacao.abertura)}></p>
+      <div class="tp-contraste tp-espaco">
+        <div class="tp-contraste-col fraca">
+          <h3 class="tp-contraste-tit">{provocacao.col1Titulo}</h3>
+          <p set:html={t(provocacao.col1Texto)}></p>
+        </div>
+        <div class="tp-contraste-col forte">
+          <h3 class="tp-contraste-tit">{provocacao.col2Titulo}</h3>
+          <p set:html={t(provocacao.col2Texto)}></p>
+        </div>
+      </div>
+      <div class="tp-espaco">
+        <h3 class="tp-subtit">{provocacao.pilaresTitulo}</h3>
+        <ol class="tp-num-cards">
+          {(provocacao.pilares || []).map((c, i) => (
+          <li class="tp-num-card">
+            <span class="tp-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h4>{c.titulo}</h4>
+            <p set:html={t(c.texto)}></p>
+          </li>
+          ))}
+        </ol>
+      </div>
+      <p class="tp-citacao tp-fecho tp-espaco" set:html={t(provocacao.fecho)}></p>
       </Bloco>
     </div>
   </section>
   )}
 
-  <!-- 3) A ABORDAGEM -->
+  <!-- 2b) MINHA ABORDAGEM: abertura, chips das áreas da vida, bloco em
+       destaque, linha do tempo do processo e frase de fechamento -->
+  {abordagem && visivel(abordagem) && (
+  <section id="minha-abordagem" data-screen-label="MinhaAbordagem" style="background:var(--rosa); padding:110px 30px;">
+    <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
+      <Bloco blocado={blocado} centro>
+      <Fragment slot="cabeca">
+      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">{abordagem.rotulo}</div>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); text-align:center; max-width:560px; margin:0 auto 32px; text-wrap:balance;">{abordagem.titulo}</h2>
+      </Fragment>
+      <p class="tp-abertura" set:html={t(abordagem.abertura)}></p>
+      {(abordagem.chips || []).length > 0 && (
+      <div class="tp-espaco">
+        <div class="tp-rotulo-mini">{abordagem.chipsTitulo}</div>
+        <ul class="tp-chips">
+          {abordagem.chips.map((c) => (<li>{c}</li>))}
+        </ul>
+      </div>
+      )}
+      <p class="tp-citacao tp-destaque tp-espaco" set:html={t(abordagem.destaque)}></p>
+      <div class="tp-espaco">
+        <h3 class="tp-subtit">{abordagem.etapasTitulo}</h3>
+        <ol class="tp-etapas" style={`--n:${(abordagem.etapas || []).length || 1};`}>
+          {(abordagem.etapas || []).map((e, i) => (
+          <li>
+            <span class="tp-etapa-bola" aria-hidden="true">{i + 1}</span>
+            <h4>{e.titulo}</h4>
+            <p set:html={t(e.texto)}></p>
+          </li>
+          ))}
+        </ol>
+      </div>
+      <p class="tp-citacao tp-fecho tp-espaco" set:html={t(abordagem.fecho)}></p>
+      </Bloco>
+    </div>
+  </section>
+  )}
+
+  <!-- 3) O QUE É A VISÃO SISTÊMICA: abertura, o que ela não é x o que faz, os
+       três pilares, a frase grande e o fechamento. Fundo creme para alternar
+       com a Minha abordagem (rosa) logo acima. -->
   {visivel(visao) && (
-  <section id="visao-sistemica" data-screen-label="Abordagem" style="background:var(--rosa); padding:110px 30px;">
-    <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
+  <section id="visao-sistemica" data-screen-label="VisaoSistemica" style="background:var(--creme); padding:110px 30px;">
+    <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--bordeaux); text-align:center; margin-bottom:24px;">{visao.rotulo}</div>
-      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); text-align:center; max-width:520px; margin:0 auto 28px; text-wrap:balance;">{visao.titulo}</h2>
+      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.35; color:var(--marrom); text-align:center; max-width:560px; margin:0 auto 32px; text-wrap:balance;">{visao.titulo}</h2>
       </Fragment>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:26px; text-wrap:pretty;" set:html={t(visao.definicao)}></p>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:16px; line-height:2; color:var(--marrom); max-width:520px; margin-bottom:64px; text-wrap:pretty;" set:html={t(visao.paragrafo)}></p>
+      <p class="tp-abertura" set:html={t(visao.abertura)}></p>
+      <div class="tp-contraste tp-espaco">
+        <div class="tp-contraste-col fraca">
+          <h3 class="tp-contraste-tit">{visao.col1Titulo}</h3>
+          <ul>{(visao.col1 || []).map((item) => (<li set:html={t(item)}></li>))}</ul>
+        </div>
+        <div class="tp-contraste-col forte">
+          <h3 class="tp-contraste-tit">{visao.col2Titulo}</h3>
+          <ul>{(visao.col2 || []).map((item) => (<li set:html={t(item)}></li>))}</ul>
+        </div>
+      </div>
+      <div class="tp-espaco"></div>
       <!-- PILARES: três cartões de cor sólida, todos à vista. O símbolo segue o
            índice: 0 = Pertencimento (um círculo que acolhe os outros),
            1 = Ordem (cada um no seu lugar), 2 = Equilíbrio (a vida correndo). -->
@@ -416,7 +591,8 @@ const blocado = !!(config as any).secoesFechadas;
         </div>
         ))}
       </div>
-
+      <p class="tp-citacao tp-fecho grande tp-espaco" set:html={t(visao.destaque)}></p>
+      <p class="tp-abertura" style="margin-top:28px;" set:html={t(visao.fecho)}></p>
       </Bloco>
     </div>
   </section>
@@ -444,10 +620,13 @@ const blocado = !!(config as any).secoesFechadas;
       <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouroc); text-align:center; margin-bottom:28px;">{quemConduz.rotulo}</div>
       <h2 style="font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:25px; line-height:1.45; color:var(--creme); text-align:center; margin-bottom:30px; text-wrap:pretty;">{quemConduz.titulo}</h2>
       </Fragment>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo1)}></p>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); margin-bottom:24px; text-wrap:pretty;" set:html={t(quemConduz.paragrafo2)}></p>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:2; color:var(--rosa); text-wrap:pretty;" set:html={t(quemConduz.paragrafo3)}></p>
-      <p class="tp-citacao" style="font-size:21px; color:#E3C58E; margin-top:40px;" set:html={t(quemConduz.frase)}></p>
+      {/* trajetória: linha do tempo vertical; o último ponto (o hoje) vem cheio */}
+      <ol class="tp-traj" style="margin-top:8px;">
+        {(quemConduz.trajetoria || []).map((item) => (<li set:html={t(item)}></li>))}
+      </ol>
+      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15.5px; line-height:1.95; color:var(--rosa); margin-top:48px; text-wrap:pretty;" set:html={t(quemConduz.texto)}></p>
+      <p class="tp-citacao tp-destaque escuro" style="margin-top:44px;" set:html={t(quemConduz.destaque)}></p>
+      <p class="tp-citacao" style="font-size:21px; color:#E3C58E; text-align:center; margin-top:56px;" set:html={t(quemConduz.frase)}></p>
       </Bloco>
     </div>
   </article>
