@@ -53,13 +53,11 @@ export function montarJsonLd(site: any) {
     visivel(faq) && { name: 'Perguntas Frequentes', item: id('faq') },
   ].filter(Boolean) as { name: string; item: string }[];
 
-  const faqPage = visivel(faq) ? [{ '@type': 'FAQPage', '@id': id('faq'), mainEntity: [
-    { '@type': 'Question', name: 'O que é Visão Sistêmica?', acceptedAnswer: { '@type': 'Answer', text: 'A Visão Sistêmica é uma abordagem terapêutica que enxerga a pessoa dentro dos sistemas a que pertence: família, vínculos e história. Ela parte do princípio de que nem tudo o que vivemos começou em nós: muitos padrões, lealdades e bloqueios são herdados ao longo das gerações. O trabalho reconhece essas dinâmicas para restaurar a ordem dos vínculos e permitir que a vida volte a fluir.' } },
-    { '@type': 'Question', name: 'Visão Sistêmica é a mesma coisa que constelação familiar?', acceptedAnswer: { '@type': 'Answer', text: 'São práticas irmãs, da mesma raiz. A constelação familiar é uma das ferramentas mais conhecidas da abordagem sistêmica, geralmente feita em grupo, enquanto a Visão Sistêmica é o olhar mais amplo que fundamenta esse trabalho e pode ser conduzido também de forma individual. Quem busca constelação familiar encontra aqui esse mesmo princípio, aplicado de maneira profunda e personalizada.' } },
-    { '@type': 'Question', name: 'Qual a diferença entre psicoterapia e Visão Sistêmica?', acceptedAnswer: { '@type': 'Answer', text: 'Não são caminhos opostos, e sim complementares. A psicoterapia amplia a consciência sobre a experiência individual: pensamentos, emoções e comportamentos. A Visão Sistêmica observa a pessoa dentro dos sistemas a que pertence, revelando lealdades invisíveis e dinâmicas familiares para restaurar a ordem dos vínculos.' } },
-    { '@type': 'Question', name: 'Como funciona uma sessão?', acceptedAnswer: { '@type': 'Answer', text: 'Cada encontro é individual e direcionado a um tema específico: uma decisão, um relacionamento, a carreira, o dinheiro ou um padrão que se repete. Em um espaço seguro, aquilo que permaneceu invisível é reconhecido, respeitado e reorganizado. A Sessão Sistêmica (Olhar) parte de R$ 450 por encontro, e há também jornadas mais profundas, como a Essência e a Raízes.' } },
-    { '@type': 'Question', name: 'Para quem é indicado?', acceptedAnswer: { '@type': 'Answer', text: 'É indicado para quem percebe padrões que se repetem, sente que compreender já não basta e deseja ocupar o próprio lugar com mais leveza. Também se aplica a empresas familiares, relação entre sócios e liderança. Não é indicado para quem busca soluções imediatas ou espera que o caminho seja feito por outra pessoa.' } },
-  ] }] : [];
+  // Perguntas e respostas saem do FAQ do painel (texto puro, sem marcação).
+  const perguntas = (faq?.itens || []).filter((q: any) => q?.pergunta && puro(q.resposta));
+  const faqPage = visivel(faq) && perguntas.length ? [{ '@type': 'FAQPage', '@id': id('faq'), mainEntity:
+    perguntas.map((q: any) => ({ '@type': 'Question', name: q.pergunta, acceptedAnswer: { '@type': 'Answer', text: puro(q.resposta) } })),
+  }] : [];
 
   return {
     '@context': 'https://schema.org',
