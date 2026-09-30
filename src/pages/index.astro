@@ -11,6 +11,24 @@ const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem
 const popup = (site as any).popup;
 const constelacao = (site as any).constelacao;
 const abordagem = (site as any).abordagem;
+
+// FUNDOS ALTERNADOS pela ordem das seções VISÍVEIS: desligar uma seção nunca
+// deixa duas vizinhas da mesma cor. Quem conduz (bordeaux) e Empresas (areia)
+// têm cor própria; as demais alternam creme e rosa, começando em creme depois
+// do topo e depois de cada seção de cor própria. Com todas ligadas, dá
+// exatamente as cores de sempre. Topo e Convite ficam no marrom.
+const ORDEM_SECOES = ['provocacao', 'abordagem', 'visao', 'quemConduz', 'comparacao', 'constelacao', 'jornadas', 'paraQuem', 'faq', 'empresas'];
+const COR_PROPRIA: Record<string, string> = { quemConduz: 'bordeaux', empresas: 'areia' };
+const fundos: Record<string, string> = {};
+{
+  let anterior = 'marrom';
+  for (const k of ORDEM_SECOES) {
+    const secao = (site as any)[k];
+    if (!secao || !visivel(secao)) continue;
+    anterior = fundos[k] = COR_PROPRIA[k] || (anterior === 'creme' ? 'rosa' : 'creme');
+  }
+}
+const fundo = (k: string) => `background:var(--${fundos[k]});`;
 // vídeo da constelação: sem link nem arquivo, a seção fica como sempre foi
 const constVideo = !!(constelacao?.videoUrl?.trim() || constelacao?.video);
 const FORMATOS: Record<string, string> = { horizontal: '16/9', vertical: '9/16', retrato: '4/5' };
@@ -89,6 +107,10 @@ const blocado = !!(config as any).secoesFechadas;
   /* ---------- Citações e frases em destaque ----------
      Sem itálico: Playfair regular, entrelinha 1,5. Tamanho e cor ficam em cada
      uso, porque dependem do fundo. */
+  /* seção que cai no rosa: terracota e ouro de texto um pouco mais escuros
+     (4,8:1 e 4,9:1 no rosa; o creme já passava com os tons de :root) */
+  .tp-fundo-rosa{ --terracota-t:#734538; --ouro-t:#654A26; }
+
   .tp-citacao{ font-family:'Playfair Display',serif; font-style:normal; font-weight:400;
                line-height:1.5; text-wrap:pretty; }
 
@@ -468,7 +490,7 @@ const blocado = !!(config as any).secoesFechadas;
   <!-- 2) AUTOCONSCIÊNCIA: abertura, contraste em duas colunas, três cartões
        numerados (os pilares da maturidade) e a frase de fechamento -->
   {visivel(provocacao) && (
-  <section id="o-que-carregamos" data-screen-label="Provocacao" style="background:var(--creme); padding:110px 30px;">
+  <section id="o-que-carregamos" data-screen-label="Provocacao" class={`tp-fundo-${fundos.provocacao}`} style={`${fundo('provocacao')} padding:110px 30px;`}>
     <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
@@ -507,7 +529,7 @@ const blocado = !!(config as any).secoesFechadas;
   <!-- 2b) MINHA ABORDAGEM: abertura, chips das áreas da vida, bloco em
        destaque, linha do tempo do processo e frase de fechamento -->
   {abordagem && visivel(abordagem) && (
-  <section id="minha-abordagem" data-screen-label="MinhaAbordagem" style="background:var(--rosa); padding:110px 30px;">
+  <section id="minha-abordagem" data-screen-label="MinhaAbordagem" class={`tp-fundo-${fundos.abordagem}`} style={`${fundo('abordagem')} padding:110px 30px;`}>
     <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
@@ -546,7 +568,7 @@ const blocado = !!(config as any).secoesFechadas;
        três pilares, a frase grande e o fechamento. Fundo creme para alternar
        com a Minha abordagem (rosa) logo acima. -->
   {visivel(visao) && (
-  <section id="visao-sistemica" data-screen-label="VisaoSistemica" style="background:var(--creme); padding:110px 30px;">
+  <section id="visao-sistemica" data-screen-label="VisaoSistemica" class={`tp-fundo-${fundos.visao}`} style={`${fundo('visao')} padding:110px 30px;`}>
     <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
@@ -603,7 +625,7 @@ const blocado = !!(config as any).secoesFechadas;
 
   <!-- 4) QUEM CONDUZ -->
   {visivel(quemConduz) && (
-  <article id="quem-conduz" data-screen-label="QuemConduz" style="background:var(--bordeaux); padding:110px 30px;">
+  <article id="quem-conduz" data-screen-label="QuemConduz" class={`tp-fundo-${fundos.quemConduz}`} style={`${fundo('quemConduz')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="midia">
@@ -637,7 +659,7 @@ const blocado = !!(config as any).secoesFechadas;
 
   <!-- 5) PSICOTERAPIA E VISÃO SISTÊMICA -->
   {visivel(comparacao) && (
-  <section id="psicoterapia-e-visao-sistemica" data-screen-label="Comparacao" style="background:var(--creme); padding:110px 30px;">
+  <section id="psicoterapia-e-visao-sistemica" data-screen-label="Comparacao" class={`tp-fundo-${fundos.comparacao}`} style={`${fundo('comparacao')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
@@ -688,7 +710,7 @@ const blocado = !!(config as any).secoesFechadas;
        Fundo rosa de propósito: é a cor sobre a qual as peças foram desenhadas,
        e separa o comparativo (creme) das Jornadas (creme). -->
   {visivel(constelacao) && (
-  <section id="constelacao" data-screen-label="Constelacao" style="background:var(--rosa); padding:110px 30px;">
+  <section id="constelacao" data-screen-label="Constelacao" class={`tp-fundo-${fundos.constelacao}`} style={`${fundo('constelacao')} padding:110px 30px;`}>
     <div data-reveal style={`position:relative; z-index:2; max-width:${constVideo ? '1040px' : '620px'}; margin:0 auto;`}>
       {/* `aberto`: a experiência nasce aberta mesmo no modo blocado, senão a
           pessoa precisaria descobrir que existe uma dinâmica atrás do "+" */}
@@ -727,7 +749,7 @@ const blocado = !!(config as any).secoesFechadas;
        seção da constelação, em rosa, imediatamente acima — antes esta seção
        encostava no comparativo, também creme, e as duas liam como um bloco só -->
   {visivel(jornadas) && (
-  <section id="jornadas" data-screen-label="Jornadas" style="background:var(--creme); padding:110px 30px;">
+  <section id="jornadas" data-screen-label="Jornadas" class={`tp-fundo-${fundos.jornadas}`} style={`${fundo('jornadas')} padding:110px 30px;`}>
     <div style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <div data-reveal style="text-align:center; margin-bottom:56px;">
         <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.3; color:var(--marrom); margin-bottom:16px;">{jornadas.titulo}</h2>
@@ -779,7 +801,7 @@ const blocado = !!(config as any).secoesFechadas;
 
   <!-- 7) PARA QUEM É -->
   {visivel(paraQuem) && (
-  <section id="para-quem" data-screen-label="ParaQuemE" style="background:var(--rosa); padding:110px 30px;">
+  <section id="para-quem" data-screen-label="ParaQuemE" class={`tp-fundo-${fundos.paraQuem}`} style={`${fundo('paraQuem')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
@@ -810,7 +832,7 @@ const blocado = !!(config as any).secoesFechadas;
 
   <!-- 7b) PERGUNTAS FREQUENTES -->
   {visivel(faq) && (
-  <section id="faq" data-screen-label="FAQ" style="background:var(--creme); padding:110px 30px;">
+  <section id="faq" data-screen-label="FAQ" class={`tp-fundo-${fundos.faq}`} style={`${fundo('faq')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:660px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
@@ -835,7 +857,7 @@ const blocado = !!(config as any).secoesFechadas;
 
   <!-- 8) EMPRESAS E EVENTOS -->
   {visivel(empresas) && (
-  <section id="empresas" data-screen-label="Empresas" style="background:var(--areia); padding:96px 30px;">
+  <section id="empresas" data-screen-label="Empresas" class={`tp-fundo-${fundos.empresas}`} style={`${fundo('empresas')} padding:96px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:520px; margin:0 auto; text-align:center;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
