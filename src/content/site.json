@@ -212,7 +212,7 @@
       },
       {
         "pergunta": "Preciso acreditar em Constelação Familiar para fazer uma sessão ou a jornada?",
-        "resposta": "**Não.** \n\nA Constelação Familiar é apenas uma das ferramentas que utilizo em todos atendimentos. O foco do nosso trabalho é trazer clareza para aquilo que ainda governa de forma oculta em você. Tudo o que você precisa é de curiosidade e compromisso com o seu próprio desenvolvimento.\n"
+        "resposta": "**Não.**\n\nA Constelação Familiar é apenas uma das ferramentas que utilizo em todos atendimentos. O foco do nosso trabalho é trazer clareza para aquilo que ainda governa de forma oculta em você. Tudo o que você precisa é de curiosidade e compromisso com o seu próprio desenvolvimento.\n"
       },
       {
         "pergunta": "Preciso conhecer toda a minha história familiar?",
@@ -249,7 +249,7 @@
     ]
   },
   "empresas": {
-    "exibir": false,
+    "exibir": true,
     "rotulo": "Soluções Corporativas",
     "titulo": "Visão Sistêmica para Negócios",
     "paragrafo": "Empresas também são sistemas. Por isso, a Visão Sistêmica pode ser aplicada ao desenvolvimento de lideranças, alinhamento entre sócios, empresas familiares, equipes e cultura organizacional. Por meio de workshops, palestras e programas personalizados, ajudo empresas a fortalecerem relações, ampliar a consciência e criar ambientes mais saudáveis, colaborativos e preparados para crescer.\n",
