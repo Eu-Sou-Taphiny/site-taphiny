@@ -1,0 +1,64 @@
+---
+/**
+ * Esteira de cards com trilha (As Jornadas e Empresas).
+ *
+ * Mesmo card nas duas seções: numeral romano pela posição na lista, título,
+ * rótulo, texto, bloco de resultado (opcional), preço com nota (opcional) e
+ * botão do WhatsApp. A trilha em cima mostra os degraus; com JavaScript, tocar
+ * num degrau troca o card. Sem JavaScript os cards ficam empilhados.
+ *
+ * Campo vazio não deixa buraco: rótulo, resultado e preço só aparecem quando
+ * preenchidos.
+ */
+import site from '../content/site.json';
+import { inline as t, romano } from '../lib/texto';
+
+interface Props {
+  cards: any[];
+}
+const cards = Astro.props.cards || [];
+const wa = (msg: string) => `https://wa.me/${site.config.whatsapp}?text=${encodeURIComponent(msg || '')}`;
+---
+<div data-tp-esteira>
+  <div class="tp-trilha" data-tp-trilha aria-hidden="true">
+    <span class="tp-trilha-linha"></span>
+    {cards.map((card, i) => (
+    <button type="button" class:list={['tp-trilha-no', i === 0 && 'ativo']} data-trilha={String(i)} tabindex="-1">
+      <span class="tp-trilha-bola">{romano(i + 1)}</span>
+      <span class="tp-trilha-nome">{card.titulo}</span>
+    </button>
+    ))}
+  </div>
+
+  <div class="tp-cards" data-tp-cards style="display:flex; flex-direction:column; gap:22px;">
+    {cards.map((card, i) => {
+    // rich-text vazio ainda é um objeto (portanto "verdadeiro"): quem decide
+    // se o bloco de resultado aparece é o HTML já renderizado, não o campo.
+    const resultado = t(card.resultado);
+    return (
+    <div data-reveal class:list={['tp-card', i === 0 && 'ativo']} data-trilha={String(i)} style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
+        <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro-t);">{romano(i + 1)}</span>
+        <span style="font-family:'Playfair Display',serif; font-size:22px; color:var(--marrom);">{card.titulo}</span>
+      </div>
+      {card.rotulo && (
+      <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota-t); margin-bottom:18px;">{card.rotulo}</div>
+      )}
+      <p style={`font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); margin-bottom:${resultado ? '22px' : '26px'}; text-wrap:pretty;`} set:html={t(card.texto)}></p>
+      {resultado && (
+      <div style="border-left:2px solid var(--ouro); background:var(--creme); padding:18px 22px; margin-bottom:26px;">
+        <div style="font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouro-t); margin-bottom:9px;">{card.resultadoRotulo || 'Resultado esperado'}</div>
+        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:13.5px; line-height:1.85; color:var(--bordeaux); margin:0; text-wrap:pretty;" set:html={resultado}></p>
+      </div>
+      )}
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:22px; border-top:1px solid var(--areia);">
+        {(card.preco || card.precoNota) && (
+        <span style="font-family:'Playfair Display',serif; font-size:18px; color:var(--ouro-t);">{card.preco} <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12px; color:var(--bordeaux);">{card.precoNota}</span></span>
+        )}
+        <a href={wa(card.mensagem)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:13px 26px;">{card.cta}</a>
+      </div>
+    </div>
+    );
+    })}
+  </div>
+</div>

@@ -6,6 +6,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import { inline as t, romano } from '../lib/texto';
 import Bloco from '../components/Bloco.astro';
 import VideoMidia from '../components/VideoMidia.astro';
+import Esteira from '../components/Esteira.astro';
 import { jsonLdHtml, visivel } from '../lib/jsonld';
 const { seo, hero, provocacao, visao, quemConduz, comparacao, jornadas, paraQuem, faq, empresas, convite, config } = site;
 const popup = (site as any).popup;
@@ -17,6 +18,13 @@ const abordagem = (site as any).abordagem;
 // têm cor própria; as demais alternam creme e rosa, começando em creme depois
 // do topo e depois de cada seção de cor própria. Com todas ligadas, dá
 // exatamente as cores de sempre. Topo e Convite ficam no marrom.
+// PRÉVIA LOCAL: `PREVIA=empresas npm run dev` (ou várias chaves separadas por
+// vírgula: `PREVIA=empresas,faq`) mostra seções desligadas sem mexer na chave
+// do painel. Só vale no modo de desenvolvimento; o site publicado continua
+// obedecendo só ao "Exibir no site". (Não dá para ser `?ver=` na URL: o Astro
+// apaga os parâmetros da URL em página estática, até no dev.)
+const previa = new Set(import.meta.env.DEV ? String(process.env.PREVIA || '').split(',').map((k) => k.trim()).filter(Boolean) : []);
+const mostra = (k: string) => visivel((site as any)[k]) || previa.has(k);
 const ORDEM_SECOES = ['provocacao', 'abordagem', 'visao', 'quemConduz', 'comparacao', 'constelacao', 'jornadas', 'paraQuem', 'faq', 'empresas'];
 const COR_PROPRIA: Record<string, string> = { quemConduz: 'bordeaux', empresas: 'areia' };
 const fundos: Record<string, string> = {};
@@ -24,7 +32,7 @@ const fundos: Record<string, string> = {};
   let anterior = 'marrom';
   for (const k of ORDEM_SECOES) {
     const secao = (site as any)[k];
-    if (!secao || !visivel(secao)) continue;
+    if (!secao || !mostra(k)) continue;
     anterior = fundos[k] = COR_PROPRIA[k] || (anterior === 'creme' ? 'rosa' : 'creme');
   }
 }
@@ -100,7 +108,6 @@ const blocado = !!(config as any).secoesFechadas;
   :focus-visible{ outline:2px solid var(--ouroc); outline-offset:3px; border-radius:2px; }
   ::selection{ background:var(--ouro); color:var(--creme); }
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
-  .tp-corp:hover{ background:var(--marrom) !important; color:var(--ouroc) !important; border-color:var(--marrom) !important; }
   .tp-btn{ transition:opacity .4s; }
   .tp-btn:hover{ opacity:.85; }
 
@@ -351,6 +358,9 @@ const blocado = !!(config as any).secoesFechadas;
   .tp-trilha-nome{ font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.14em;
                    text-transform:uppercase; color:var(--bordeaux); text-align:center;
                    line-height:1.5; max-width:11ch; }
+  /* no fundo areia (Empresas) a linha e os nomes da trilha vão para o marrom */
+  .tp-fundo-areia .tp-trilha-linha{ background:linear-gradient(90deg, transparent, rgba(82,20,22,0.35) 12%, rgba(82,20,22,0.35) 88%, transparent); }
+  .tp-fundo-areia .tp-trilha-nome{ color:var(--marrom); }
   .tp-cards.js .tp-card{ display:none; }
   .tp-cards.js .tp-card.ativo{ display:block; animation:tp-troca .4s ease both; }
 
@@ -489,7 +499,7 @@ const blocado = !!(config as any).secoesFechadas;
 
   <!-- 2) AUTOCONSCIÊNCIA: abertura, contraste em duas colunas, três cartões
        numerados (os pilares da maturidade) e a frase de fechamento -->
-  {visivel(provocacao) && (
+  {mostra('provocacao') && (
   <section id="o-que-carregamos" data-screen-label="Provocacao" class={`tp-fundo-${fundos.provocacao}`} style={`${fundo('provocacao')} padding:110px 30px;`}>
     <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
       <Bloco blocado={blocado} centro>
@@ -528,7 +538,7 @@ const blocado = !!(config as any).secoesFechadas;
 
   <!-- 2b) MINHA ABORDAGEM: abertura, chips das áreas da vida, bloco em
        destaque, linha do tempo do processo e frase de fechamento -->
-  {abordagem && visivel(abordagem) && (
+  {abordagem && mostra('abordagem') && (
   <section id="minha-abordagem" data-screen-label="MinhaAbordagem" class={`tp-fundo-${fundos.abordagem}`} style={`${fundo('abordagem')} padding:110px 30px;`}>
     <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
       <Bloco blocado={blocado} centro>
@@ -567,7 +577,7 @@ const blocado = !!(config as any).secoesFechadas;
   <!-- 3) O QUE É A VISÃO SISTÊMICA: abertura, o que ela não é x o que faz, os
        três pilares, a frase grande e o fechamento. Fundo creme para alternar
        com a Minha abordagem (rosa) logo acima. -->
-  {visivel(visao) && (
+  {mostra('visao') && (
   <section id="visao-sistemica" data-screen-label="VisaoSistemica" class={`tp-fundo-${fundos.visao}`} style={`${fundo('visao')} padding:110px 30px;`}>
     <div data-reveal class="tp-larga" style="position:relative; z-index:2;">
       <Bloco blocado={blocado} centro>
@@ -624,7 +634,7 @@ const blocado = !!(config as any).secoesFechadas;
   )}
 
   <!-- 4) QUEM CONDUZ -->
-  {visivel(quemConduz) && (
+  {mostra('quemConduz') && (
   <article id="quem-conduz" data-screen-label="QuemConduz" class={`tp-fundo-${fundos.quemConduz}`} style={`${fundo('quemConduz')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:560px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -658,7 +668,7 @@ const blocado = !!(config as any).secoesFechadas;
   )}
 
   <!-- 5) PSICOTERAPIA E VISÃO SISTÊMICA -->
-  {visivel(comparacao) && (
+  {mostra('comparacao') && (
   <section id="psicoterapia-e-visao-sistemica" data-screen-label="Comparacao" class={`tp-fundo-${fundos.comparacao}`} style={`${fundo('comparacao')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -709,7 +719,7 @@ const blocado = !!(config as any).secoesFechadas;
        pais). O Reordenar é que revela a ordem, com o sintoma menor e ao lado.
        Fundo rosa de propósito: é a cor sobre a qual as peças foram desenhadas,
        e separa o comparativo (creme) das Jornadas (creme). -->
-  {visivel(constelacao) && (
+  {mostra('constelacao') && (
   <section id="constelacao" data-screen-label="Constelacao" class={`tp-fundo-${fundos.constelacao}`} style={`${fundo('constelacao')} padding:110px 30px;`}>
     <div data-reveal style={`position:relative; z-index:2; max-width:${constVideo ? '1040px' : '620px'}; margin:0 auto;`}>
       {/* `aberto`: a experiência nasce aberta mesmo no modo blocado, senão a
@@ -748,7 +758,7 @@ const blocado = !!(config as any).secoesFechadas;
   <!-- padding do topo é 110px (e não os 40px de antes) porque agora existe a
        seção da constelação, em rosa, imediatamente acima — antes esta seção
        encostava no comparativo, também creme, e as duas liam como um bloco só -->
-  {visivel(jornadas) && (
+  {mostra('jornadas') && (
   <section id="jornadas" data-screen-label="Jornadas" class={`tp-fundo-${fundos.jornadas}`} style={`${fundo('jornadas')} padding:110px 30px;`}>
     <div style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <div data-reveal style="text-align:center; margin-bottom:56px;">
@@ -756,51 +766,14 @@ const blocado = !!(config as any).secoesFechadas;
         <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--bordeaux); max-width:420px; margin:0 auto; text-wrap:pretty;" set:html={t(jornadas.subtitulo)}></p>
       </div>
 
-      <!-- 4d) TRILHA: os degraus na linha de ouro; toca num degrau e vê a jornada.
-           Sem JavaScript os cartões continuam empilhados como hoje. -->
-      <div class="tp-trilha" data-tp-trilha aria-hidden="true">
-        <span class="tp-trilha-linha"></span>
-        {jornadas.cards.map((card, i) => (
-        <button type="button" class:list={['tp-trilha-no', i === 0 && 'ativo']} data-trilha={String(i)} tabindex="-1">
-          <span class="tp-trilha-bola">{romano(i + 1)}</span>
-          <span class="tp-trilha-nome">{card.titulo}</span>
-        </button>
-        ))}
-      </div>
-
-      <div class="tp-cards" data-tp-cards style="display:flex; flex-direction:column; gap:22px;">
-        {jornadas.cards.map((card, i) => {
-        // rich-text vazio ainda é um objeto (portanto "verdadeiro"): quem decide
-        // se o bloco de resultado aparece é o HTML já renderizado, não o campo.
-        const resultado = t(card.resultado);
-        return (
-        <div data-reveal class:list={['tp-card', i === 0 && 'ativo']} data-trilha={String(i)} style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
-          <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
-            <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:20px; color:var(--ouro-t);">{romano(i + 1)}</span>
-            <span style="font-family:'Playfair Display',serif; font-size:22px; color:var(--marrom);">{card.titulo}</span>
-          </div>
-          <div style="font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.3em; text-transform:uppercase; color:var(--terracota-t); margin-bottom:18px;">{card.rotulo}</div>
-          <p style={`font-family:'Montserrat',sans-serif; font-weight:300; font-size:14px; line-height:1.9; color:var(--bordeaux); margin-bottom:${resultado ? '22px' : '26px'}; text-wrap:pretty;`} set:html={t(card.texto)}></p>
-          {resultado && (
-          <div style="border-left:2px solid var(--ouro); background:var(--creme); padding:18px 22px; margin-bottom:26px;">
-            <div style="font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:0.3em; text-transform:uppercase; color:var(--ouro-t); margin-bottom:9px;">{card.resultadoRotulo || 'Resultado esperado'}</div>
-            <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:13.5px; line-height:1.85; color:var(--bordeaux); margin:0; text-wrap:pretty;" set:html={resultado}></p>
-          </div>
-          )}
-          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:22px; border-top:1px solid var(--areia);">
-            <span style="font-family:'Playfair Display',serif; font-size:18px; color:var(--ouro-t);">{card.preco} <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12px; color:var(--bordeaux);">{card.precoNota}</span></span>
-            <a href={wa(card.mensagem)} target="_blank" rel="noopener" style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--marrom); background:var(--ouro); text-decoration:none; padding:13px 26px;">{card.cta}</a>
-          </div>
-        </div>
-        );
-        })}
-      </div>
+      <!-- 4d) TRILHA + cards (componente compartilhado com Empresas) -->
+      <Esteira cards={jornadas.cards} />
     </div>
   </section>
   )}
 
   <!-- 7) PARA QUEM É -->
-  {visivel(paraQuem) && (
+  {mostra('paraQuem') && (
   <section id="para-quem" data-screen-label="ParaQuemE" class={`tp-fundo-${fundos.paraQuem}`} style={`${fundo('paraQuem')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:620px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -831,7 +804,7 @@ const blocado = !!(config as any).secoesFechadas;
   )}
 
   <!-- 7b) PERGUNTAS FREQUENTES -->
-  {visivel(faq) && (
+  {mostra('faq') && (
   <section id="faq" data-screen-label="FAQ" class={`tp-fundo-${fundos.faq}`} style={`${fundo('faq')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:660px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
@@ -855,17 +828,19 @@ const blocado = !!(config as any).secoesFechadas;
   </section>
   )}
 
-  <!-- 8) EMPRESAS E EVENTOS -->
-  {visivel(empresas) && (
-  <section id="empresas" data-screen-label="Empresas" class={`tp-fundo-${fundos.empresas}`} style={`${fundo('empresas')} padding:96px 30px;`}>
-    <div data-reveal style="position:relative; z-index:2; max-width:520px; margin:0 auto; text-align:center;">
+  <!-- 8) EMPRESAS E EVENTOS: mesmos cards e trilha das Jornadas, no fundo
+       areia. Texto fora dos cards em marrom (bordeaux no areia não passa AA). -->
+  {mostra('empresas') && (
+  <section id="empresas" data-screen-label="Empresas" class={`tp-fundo-${fundos.empresas}`} style={`${fundo('empresas')} padding:110px 30px;`}>
+    <div data-reveal style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
       <Bloco blocado={blocado} centro>
       <Fragment slot="cabeca">
-      <div style="font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:var(--marrom); margin-bottom:28px;">{empresas.rotulo}</div>
-      <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:26px; line-height:1.3; color:var(--marrom); margin-bottom:26px; text-wrap:balance;">{empresas.titulo}</h2>
+      <div style="text-align:center; margin-bottom:56px;">
+        <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.3; color:var(--marrom); margin-bottom:16px; text-wrap:balance;">{empresas.titulo}</h2>
+        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--marrom); max-width:420px; margin:0 auto; text-wrap:pretty;" set:html={t(empresas.subtitulo)}></p>
+      </div>
       </Fragment>
-      <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.95; color:var(--marrom); margin-bottom:40px; text-wrap:pretty;" set:html={t(empresas.paragrafo)}></p>
-      <a href={wa(empresas.mensagem)} target="_blank" rel="noopener" class="tp-corp" style="display:inline-block; font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--marrom); text-decoration:none; border:1px solid var(--marrom); padding:15px 32px; transition:background .4s,color .4s,border-color .4s;">{empresas.cta}</a>
+      <Esteira cards={empresas.cards} />
       </Bloco>
     </div>
   </section>
@@ -1375,10 +1350,10 @@ const blocado = !!(config as any).secoesFechadas;
     aplicar(0);
   })();
 
-  // ---------- 4d) esteira como trilha ----------
-  (function(){
-    var trilha = document.querySelector('[data-tp-trilha]');
-    var caixa  = document.querySelector('[data-tp-cards]');
+  // ---------- 4d) esteira como trilha (Jornadas e Empresas) ----------
+  Array.prototype.forEach.call(document.querySelectorAll('[data-tp-esteira]'), function(esteira){
+    var trilha = esteira.querySelector('[data-tp-trilha]');
+    var caixa  = esteira.querySelector('[data-tp-cards]');
     if(!trilha || !caixa) return;
     var nos = trilha.querySelectorAll('.tp-trilha-no');
     var cards = caixa.querySelectorAll('.tp-card');
@@ -1393,7 +1368,7 @@ const blocado = !!(config as any).secoesFechadas;
     })(j);
     setas(nos, aplicar);
     aplicar(0);
-  })();
+  });
 
   // ---------- 4a) constelação interativa ----------
   (function(){

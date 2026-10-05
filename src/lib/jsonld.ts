@@ -21,10 +21,16 @@ export function montarJsonLd(site: any) {
   // perfis preenchidos no rodapé do painel (Instagram e as redes com ícone)
   const sameAs = perfis(footer);
 
-  const servicosNegocios = visivel(empresas) ? [
-    { '@type': 'Service', '@id': id('servico-negocios'), name: 'Terapias para Negócios', serviceType: 'Terapia Sistêmica para empresas familiares', description: 'Visão Sistêmica aplicada a empresas familiares, relação entre sócios, liderança e equipes, trabalhando pertencimento, cultura e prosperidade.', provider: { '@id': id('business') }, areaServed: 'BR' },
-    { '@type': 'Service', '@id': id('servico-workshops'), name: 'Workshops & Palestras', serviceType: 'Terapia Sistêmica', description: 'Workshops e palestras sobre Visão Sistêmica, pertencimento, cultura e prosperidade para empresas e eventos.', provider: { '@id': id('business') }, areaServed: 'BR' },
-  ] : [];
+  // Um Service por card da seção Empresas, só enquanto ela estiver ligada.
+  // O "Para quem é" do card vira a descrição.
+  const servicosNegocios = (visivel(empresas) ? empresas?.cards || [] : [])
+    .filter((c: any) => c?.titulo)
+    .map((c: any) => ({
+      '@type': 'Service', '@id': id(`servico-empresas-${slug(c.titulo)}`),
+      name: c.titulo, serviceType: 'Terapia Sistêmica para empresas',
+      description: puro(c.texto) || c.titulo,
+      provider: { '@id': id('business') }, areaServed: 'BR',
+    }));
 
   // Um Service por card de produto: produto novo no painel entra no SEO sozinho.
   // Preço só vai quando o campo é um valor em reais (ex.: "R$ 450,00").

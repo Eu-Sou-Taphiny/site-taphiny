@@ -250,11 +250,43 @@
   },
   "empresas": {
     "exibir": false,
-    "rotulo": "Soluções Corporativas",
-    "titulo": "Visão Sistêmica para Negócios",
-    "paragrafo": "Empresas também são sistemas. Por isso, a Visão Sistêmica pode ser aplicada ao desenvolvimento de lideranças, alinhamento entre sócios, empresas familiares, equipes e cultura organizacional. Por meio de workshops, palestras e programas personalizados, ajudo empresas a fortalecerem relações, ampliar a consciência e criar ambientes mais saudáveis, colaborativos e preparados para crescer.\n",
-    "cta": "Falar sobre projetos corporativos",
-    "mensagem": "Olá, Taphiny! Tenho interesse em levar a Visão Sistêmica para a minha empresa/equipe e gostaria de conversar sobre um projeto."
+    "titulo": "Visão Sistêmica para empresas e eventos",
+    "subtitulo": "Empresas também são sistemas. Vínculos, lugares e histórias influenciam a forma como uma empresa decide, cresce e se relaciona.\n",
+    "cards": [
+      {
+        "titulo": "Empresas familiares e sócios",
+        "rotulo": "Para quem é",
+        "texto": "Para empresas familiares e sociedades que precisam organizar papéis, sucessão e a relação entre família, sócios e negócio.\n",
+        "resultadoRotulo": "",
+        "resultado": "",
+        "preco": "",
+        "precoNota": "",
+        "cta": "Conversar sobre um trabalho para empresas",
+        "mensagem": "Olá, Taphiny! Vim pelo site e gostaria de conversar sobre um trabalho para empresas: Empresas familiares e sócios."
+      },
+      {
+        "titulo": "Liderança e carreira",
+        "rotulo": "Para quem é",
+        "texto": "Para líderes, equipes e profissionais em momentos de mudança: transição de carreira, saída da CLT para o empreendedorismo, construção e expansão de negócios e posicionamento profissional.\n",
+        "resultadoRotulo": "",
+        "resultado": "",
+        "preco": "",
+        "precoNota": "",
+        "cta": "Conversar sobre um trabalho para empresas",
+        "mensagem": "Olá, Taphiny! Vim pelo site e gostaria de conversar sobre um trabalho para empresas: Liderança e carreira."
+      },
+      {
+        "titulo": "Workshops e Palestras",
+        "rotulo": "Para quem é",
+        "texto": "Para empresas, equipes e eventos que buscam conteúdos personalizados sobre liderança, pertencimento, cultura organizacional, relações humanas, carreira e prosperidade.\n",
+        "resultadoRotulo": "",
+        "resultado": "",
+        "preco": "",
+        "precoNota": "",
+        "cta": "Conversar sobre um trabalho para empresas",
+        "mensagem": "Olá, Taphiny! Vim pelo site e gostaria de conversar sobre um trabalho para empresas: Workshops e Palestras."
+      }
+    ]
   },
   "convite": {
     "rotulo": "O convite",

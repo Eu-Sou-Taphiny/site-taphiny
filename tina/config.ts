@@ -48,6 +48,32 @@ const itens = (name: string, label: string, rotuloItem: string, description?: st
   ],
 });
 
+// Cards das esteiras (As Jornadas e Empresas): os mesmos campos nas duas, e o
+// mesmo componente no site (src/components/Esteira.astro). A numeração vem da
+// posição na lista.
+const cardsEsteira = (label: string, description: string, rotuloItem: string, novo: Record<string, string>) => ({
+  type: "object" as const,
+  name: "cards",
+  label,
+  description,
+  list: true,
+  ui: {
+    itemProps: (i: any) => ({ label: i?.titulo || rotuloItem }),
+    defaultItem: () => ({ ...novo }),
+  },
+  fields: [
+    { type: "string" as const, name: "titulo", label: "Título" },
+    { type: "string" as const, name: "rotulo", label: "Rótulo" },
+    prosa("texto", "Texto"),
+    { type: "string" as const, name: "resultadoRotulo", label: "Rótulo do resultado (padrão: Resultado esperado)" },
+    prosa("resultado", "Resultado esperado (opcional)"),
+    { type: "string" as const, name: "preco", label: "Preço / destaque (ex.: R$ 450,00 ou 4 Encontros)" },
+    { type: "string" as const, name: "precoNota", label: "Nota ao lado do preço" },
+    { type: "string" as const, name: "cta", label: "Texto do botão" },
+    { type: "string" as const, name: "mensagem", label: "Mensagem do WhatsApp" },
+  ],
+});
+
 // Chave "Exibir no site", a mesma do pop-up. Vai como primeiro campo de cada
 // seção. Desligada, a seção some da página, do menu do rodapé e do breadcrumb
 // do Google. Conteúdo antigo sem o campo conta como ligado (ver src/lib/jsonld.ts).
@@ -264,35 +290,18 @@ export default defineConfig({
               exibir,
               { type: "string", name: "titulo", label: "Título" },
               prosa("subtitulo", "Subtítulo"),
-              {
-                type: "object",
-                name: "cards",
-                label: "Produtos (sessões e jornadas)",
-                description:
-                  "Cada item é um produto, todos com o mesmo layout. Para criar um novo, use o + e preencha os campos. A ordem da lista define a numeração (i, ii, iii, iv...) e a posição na trilha; arraste para reordenar. Produto novo também entra sozinho no Google (dados estruturados).",
-                list: true,
-                ui: {
-                  itemProps: (i) => ({ label: i?.titulo || "Novo produto" }),
-                  defaultItem: () => ({
-                    titulo: "Novo produto",
-                    resultadoRotulo: "Resultado esperado",
-                    precoNota: "consulte valores e disponibilidade",
-                    cta: "Saber mais",
-                    mensagem: "Olá, Taphiny! Vim pelo site e gostaria de saber mais sobre este produto.",
-                  }),
+              cardsEsteira(
+                "Produtos (sessões e jornadas)",
+                "Cada item é um produto, todos com o mesmo layout. Para criar um novo, use o + e preencha os campos. A ordem da lista define a numeração (i, ii, iii, iv...) e a posição na trilha; arraste para reordenar. Produto novo também entra sozinho no Google (dados estruturados).",
+                "Novo produto",
+                {
+                  titulo: "Novo produto",
+                  resultadoRotulo: "Resultado esperado",
+                  precoNota: "consulte valores e disponibilidade",
+                  cta: "Saber mais",
+                  mensagem: "Olá, Taphiny! Vim pelo site e gostaria de saber mais sobre este produto.",
                 },
-                fields: [
-                  { type: "string", name: "titulo", label: "Título" },
-                  { type: "string", name: "rotulo", label: "Rótulo" },
-                  prosa("texto", "Texto"),
-                  { type: "string", name: "resultadoRotulo", label: "Rótulo do resultado (padrão: Resultado esperado)" },
-                  prosa("resultado", "Resultado esperado (opcional)"),
-                  { type: "string", name: "preco", label: "Preço / destaque (ex.: R$ 450,00 ou 4 Encontros)" },
-                  { type: "string", name: "precoNota", label: "Nota ao lado do preço" },
-                  { type: "string", name: "cta", label: "Texto do botão" },
-                  { type: "string", name: "mensagem", label: "Mensagem do WhatsApp" },
-                ],
-              },
+              ),
             ],
           },
           // ---------- PARA QUEM ----------
@@ -338,11 +347,19 @@ export default defineConfig({
             label: "Seção: Empresas e eventos",
             fields: [
               exibir,
-              { type: "string", name: "rotulo", label: "Rótulo" },
               { type: "string", name: "titulo", label: "Título" },
-              prosa("paragrafo", "Parágrafo"),
-              { type: "string", name: "cta", label: "Texto do botão" },
-              { type: "string", name: "mensagem", label: "Mensagem do WhatsApp" },
+              prosa("subtitulo", "Subtítulo (texto de abertura)"),
+              cardsEsteira(
+                "Cards (mesmo layout das Jornadas)",
+                "Cada item é um card. Use o + para criar e arraste para reordenar: a ordem define a numeração (i, ii, iii...) e a posição na trilha. Resultado e preço são opcionais; vazios, não aparecem. Cada card também entra no Google como serviço enquanto a seção estiver ligada.",
+                "Novo card",
+                {
+                  titulo: "Novo card",
+                  rotulo: "Para quem é",
+                  cta: "Conversar sobre um trabalho para empresas",
+                  mensagem: "Olá, Taphiny! Vim pelo site e gostaria de conversar sobre um trabalho para empresas.",
+                },
+              ),
             ],
           },
           // ---------- CONVITE ----------
