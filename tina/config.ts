@@ -381,10 +381,9 @@ export default defineConfig({
             name: "footer",
             label: "Rodapé",
             fields: [
-              { type: "string", name: "instagramTexto", label: "Texto do Instagram" },
-              { type: "string", name: "instagramUrl", label: "Link do Instagram" },
-              // Outras redes: o ícone só aparece no rodapé com o link preenchido,
-              // e o link preenchido também entra no Google (sameAs do JSON-LD).
+              { type: "string", name: "instagramUrl", label: "Link do Instagram (opcional)", description: "Deixe vazio para não mostrar o ícone." },
+              // Redes: o ícone só aparece no rodapé com o link preenchido, e o
+              // link preenchido também entra no Google (sameAs) e no llms.txt.
               { type: "string", name: "facebookUrl", label: "Link do Facebook (opcional)", description: "Deixe vazio para não mostrar o ícone." },
               { type: "string", name: "tiktokUrl", label: "Link do TikTok (opcional)", description: "Deixe vazio para não mostrar o ícone." },
               { type: "string", name: "threadsUrl", label: "Link do Threads (opcional)", description: "Deixe vazio para não mostrar o ícone." },
