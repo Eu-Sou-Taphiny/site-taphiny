@@ -25,7 +25,7 @@ const abordagem = (site as any).abordagem;
 // apaga os parâmetros da URL em página estática, até no dev.)
 const previa = new Set(import.meta.env.DEV ? String(process.env.PREVIA || '').split(',').map((k) => k.trim()).filter(Boolean) : []);
 const mostra = (k: string) => visivel((site as any)[k]) || previa.has(k);
-const ORDEM_SECOES = ['provocacao', 'abordagem', 'visao', 'quemConduz', 'comparacao', 'constelacao', 'jornadas', 'paraQuem', 'faq', 'empresas'];
+const ORDEM_SECOES = ['provocacao', 'abordagem', 'visao', 'quemConduz', 'comparacao', 'constelacao', 'jornadas', 'paraQuem', 'empresas', 'faq'];
 const COR_PROPRIA: Record<string, string> = { quemConduz: 'bordeaux', empresas: 'areia' };
 const fundos: Record<string, string> = {};
 {
@@ -803,7 +803,22 @@ const blocado = !!(config as any).secoesFechadas;
   </section>
   )}
 
-  <!-- 7b) PERGUNTAS FREQUENTES -->
+  <!-- 7b) EMPRESAS E EVENTOS: mesmos cards e trilha das Jornadas, no fundo
+       areia, e como elas sempre aberta (fora da sanfona). Texto fora dos cards
+       em marrom (bordeaux no areia não passa AA). -->
+  {mostra('empresas') && (
+  <section id="empresas" data-screen-label="Empresas" class={`tp-fundo-${fundos.empresas}`} style={`${fundo('empresas')} padding:110px 30px;`}>
+    <div style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
+      <div data-reveal style="text-align:center; margin-bottom:56px;">
+        <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.3; color:var(--marrom); margin-bottom:16px; text-wrap:balance;">{empresas.titulo}</h2>
+        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--marrom); max-width:420px; margin:0 auto; text-wrap:pretty;" set:html={t(empresas.subtitulo)}></p>
+      </div>
+      <Esteira cards={empresas.cards} />
+    </div>
+  </section>
+  )}
+
+  <!-- 8) PERGUNTAS FREQUENTES: última seção antes do convite (e da imagem das raízes) -->
   {mostra('faq') && (
   <section id="faq" data-screen-label="FAQ" class={`tp-fundo-${fundos.faq}`} style={`${fundo('faq')} padding:110px 30px;`}>
     <div data-reveal style="position:relative; z-index:2; max-width:660px; margin:0 auto;">
@@ -824,21 +839,6 @@ const blocado = !!(config as any).secoesFechadas;
         ))}
       </div>
       </Bloco>
-    </div>
-  </section>
-  )}
-
-  <!-- 8) EMPRESAS E EVENTOS: mesmos cards e trilha das Jornadas, no fundo
-       areia, e como elas sempre aberta (fora da sanfona). Texto fora dos cards
-       em marrom (bordeaux no areia não passa AA). -->
-  {mostra('empresas') && (
-  <section id="empresas" data-screen-label="Empresas" class={`tp-fundo-${fundos.empresas}`} style={`${fundo('empresas')} padding:110px 30px;`}>
-    <div style="position:relative; z-index:2; max-width:640px; margin:0 auto;">
-      <div data-reveal style="text-align:center; margin-bottom:56px;">
-        <h2 style="font-family:'Playfair Display',serif; font-weight:400; font-size:30px; line-height:1.3; color:var(--marrom); margin-bottom:16px; text-wrap:balance;">{empresas.titulo}</h2>
-        <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:15px; line-height:1.9; color:var(--marrom); max-width:420px; margin:0 auto; text-wrap:pretty;" set:html={t(empresas.subtitulo)}></p>
-      </div>
-      <Esteira cards={empresas.cards} />
     </div>
   </section>
   )}
