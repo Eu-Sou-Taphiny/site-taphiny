@@ -16,10 +16,12 @@ const slug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u
 /** Seção ligada? Campo ausente (conteúdo antigo) conta como ligada. */
 export const visivel = (secao: any) => secao?.exibir !== false;
 
-export function montarJsonLd(site: any) {
-  const { visao, jornadas, faq, empresas, footer } = site;
-  // perfis preenchidos no rodapé do painel (Instagram e as redes com ícone)
-  const sameAs = perfis(footer);
+/**
+ * Serviços do site, um por card: As Jornadas (se ligada) e Empresas (se
+ * ligada). Usado pelo JSON-LD e pelo llms.txt, para os dois dizerem o mesmo.
+ */
+export function listarServicos(site: any) {
+  const { jornadas, empresas } = site;
 
   // Um Service por card da seção Empresas, só enquanto ela estiver ligada.
   // O "Para quem é" do card vira a descrição.
@@ -34,7 +36,7 @@ export function montarJsonLd(site: any) {
 
   // Um Service por card de produto: produto novo no painel entra no SEO sozinho.
   // Preço só vai quando o campo é um valor em reais (ex.: "R$ 450,00").
-  const servicos = [
+  return [
     ...(visivel(jornadas) ? jornadas?.cards || [] : []).map((c: any) => {
       const valor = String(c.preco || '').match(/R\$\s*([\d.]+)(?:,(\d{2}))?/);
       const preco = valor ? `${valor[1].replace(/\./g, '')}${valor[2] && valor[2] !== '00' ? '.' + valor[2] : ''}` : '';
@@ -48,6 +50,14 @@ export function montarJsonLd(site: any) {
     }),
     ...servicosNegocios,
   ];
+}
+
+export function montarJsonLd(site: any) {
+  const { visao, jornadas, faq, footer } = site;
+  // perfis preenchidos no rodapé do painel (só as redes com link)
+  const sameAs = perfis(footer);
+
+  const servicos = listarServicos(site);
 
   const oferta = (s: any) => ({
     '@type': 'Offer',

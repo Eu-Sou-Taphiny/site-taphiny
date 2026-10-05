@@ -1,10 +1,39 @@
-# Taphiny · Visão Sistêmica e Mentoria Sistêmica
+import type { APIRoute } from 'astro';
+import site from '../content/site.json';
+import { listarServicos, visivel, URL_SITE } from '../lib/jsonld';
+import { redes } from '../lib/redes';
+
+// llms.txt montado a partir do conteúdo, no mesmo padrão do JSON-LD: os
+// serviços são os cards das Jornadas e de Empresas (os de Empresas só com a
+// seção ligada) e os links são as redes preenchidas no rodapé do painel. Os
+// blocos explicativos são fixos.
+
+/** Garante ponto final, para emendar o preço depois. */
+const frase = (t: string) => (/[.!?]$/.test(t) ? t : `${t}.`);
+
+/** "450" ou "450.5" do JSON-LD → "R$ 450,00" / "R$ 450,50". */
+const reais = (v: string) => `R$ ${Number(v).toFixed(2).replace('.', ',')}`;
+
+export const GET: APIRoute = () => {
+  const empresas = visivel((site as any).empresas);
+
+  const servicos = listarServicos(site).map((s: any) => {
+    const preco = s.offers ? ` Investimento: ${reais(s.offers.price)}.` : '';
+    return `- ${s.name}: ${frase(s.description)}${preco}`;
+  });
+
+  const links = [
+    `- Site: ${URL_SITE}`,
+    ...redes((site as any).footer).map((r) => `- ${r.nome}: ${r.url}`),
+  ];
+
+  const body = `# Taphiny · Visão Sistêmica e Mentoria Sistêmica
 
 > Taphiny é mentora e terapeuta sistêmica. Conduz processos de Visão Sistêmica e
 > constelação familiar para reconhecer padrões familiares transgeracionais,
 > restaurar a ordem dos vínculos e permitir que a vida volte a fluir. Atende
 > pessoas, empresas familiares e eventos.
-> Site: https://eusoutaphiny.com.br
+> Site: ${URL_SITE.replace(/\/$/, '')}
 
 ## O que é Visão Sistêmica
 A Visão Sistêmica é uma abordagem terapêutica que enxerga a pessoa dentro dos
@@ -22,22 +51,21 @@ fundamenta esse trabalho e pode ser conduzido também de forma individual.
 Não são opostas, e sim complementares. A psicoterapia amplia a consciência sobre
 a experiência individual. A Visão Sistêmica observa a pessoa dentro dos sistemas
 a que pertence, revelando lealdades invisíveis e dinâmicas familiares.
-
+${servicos.length ? `
 ## Serviços
-- Sessão Sistêmica (Olhar): encontro individual sobre um tema específico. A partir de R$ 450 por encontro.
-- Jornada Essência: quatro encontros para reorganizar o eixo interno.
-- Jornada Raízes: sete encontros de investigação profunda das dinâmicas familiares e padrões transgeracionais.
-- Terapias para Negócios: Visão Sistêmica para empresas familiares, sócios, liderança e equipes.
-- Workshops & Palestras: sobre pertencimento, cultura e prosperidade, para empresas e eventos.
-
+${servicos.join('\n')}
+` : ''}
 ## Para quem é
 Para quem percebe padrões que se repetem, sente que compreender já não basta e
-deseja ocupar o próprio lugar. Também para empresas familiares e liderança.
+deseja ocupar o próprio lugar.${empresas ? ' Também para empresas familiares e liderança.' : ''}
 
 ## Palavras-chave
 visão sistêmica, terapia sistêmica, constelação familiar, terapia sistêmica para
 empresas familiares, padrões familiares transgeracionais, mentoria sistêmica.
 
 ## Links
-- Site: https://eusoutaphiny.com.br/
-- Instagram: https://instagram.com/eu.sou.taphiny
+${links.join('\n')}
+`;
+
+  return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+};
