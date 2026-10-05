@@ -26,7 +26,8 @@
  *
  * `inline()` devolve HTML SEM tags de bloco, porque no site cada campo já está
  * dentro de um <p>/<li>/<span> com o estilo da seção. Mais de um parágrafo no
- * mesmo campo sai separado por quebra de linha.
+ * mesmo campo sai separado por um respiro, e a quebra simples (uma linha
+ * embaixo da outra, sem linha em branco) vira quebra de linha, como no painel.
  */
 
 type No = {
@@ -101,18 +102,25 @@ function paragrafo(txt: string): string {
 
   h = marcadores(h);
 
-  // linha simples é continuação do mesmo parágrafo, como em markdown
-  h = h.replace(/\n+/g, ' ');
+  // quebra de linha simples (Enter no painel) vira quebra no site, do jeito
+  // que foi digitada; espaços nas pontas da linha e a barra invertida do
+  // "hard break" do markdown (\ no fim da linha) não sobram na página
+  h = h.replace(/[ \t]*\\?[ \t]*\n[ \t]*/g, '<br>');
 
   return h.replace(new RegExp(SEP + '(\\d+)' + SEP, 'g'), (_m, i) => guardados[Number(i)]);
 }
 
+// Entre parágrafos (linha em branco no painel) entra um respiro, como o painel
+// mostra; a quebra simples continua sendo só <br>. O campo vive dentro de um
+// <p>, então o respiro é um <span> em bloco, que pode morar ali dentro.
+const ENTRE_PARAGRAFOS = '<span style="display:block; height:0.7em" aria-hidden="true"></span>';
+
 function textoSimples(s: string): string {
   return s
-    .split(/\n{2,}/)
+    .split(/\n[ \t]*\n\s*/)
     .map((p) => paragrafo(p.trim()))
     .filter((p) => p !== '')
-    .join('<br>');
+    .join(ENTRE_PARAGRAFOS);
 }
 
 /** Nós de texto do rich-text, com as marcas que o Tina grava. */
@@ -195,6 +203,7 @@ export function puro(valor: Texto): string {
   if (valor == null) return '';
   const bruto = typeof valor === 'string' ? valor : (valor.children || []).map(colhe).join(' ');
   return bruto
+    .replace(/\\\n/g, '\n')                               // "hard break" do markdown
     .replace(/\\([\\`*_{}[\]()#+\-.!~<>|])/g, '$1')     // desfaz os escapes
     .replace(/\[([^\]\n]+)\]\([^)\s]+\)/g, '$1')        // link vira só o texto
     .replace(/\+\+([^+]+)\+\+/g, '$1')
