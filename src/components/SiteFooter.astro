@@ -1,7 +1,10 @@
 ---
 import site from '../content/site.json';
 import { visivel } from '../lib/jsonld';
+import { redesComIcone } from '../lib/redes';
 const { footer } = site;
+// Facebook, TikTok e Threads: só aparece o ícone da rede com link no painel
+const redes = redesComIcone(footer);
 const linkStyle = "font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--areia); text-decoration:none;";
 // `secao`: o objeto do conteúdo por trás do link. Seção desligada no painel
 // tira o link do menu (aqui e no blog, que usa o mesmo rodapé).
@@ -22,6 +25,15 @@ const nav = [
     </ul>
   </nav>
   <a href={footer.instagramUrl} rel="me" style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:12px; letter-spacing:0.28em; text-transform:uppercase; color:var(--ouroc); text-decoration:none;">{footer.instagramTexto}</a>
+  {redes.length > 0 && (
+  <ul aria-label="Outras redes sociais" style="list-style:none; display:flex; justify-content:center; gap:22px; padding:0; margin-top:18px;">
+    {redes.map((r) => (
+    <li><a href={r.url} target="_blank" rel="me noopener" aria-label={`${r.nome} da Taphiny (abre em nova aba)`} title={r.nome} style="display:block; color:var(--ouroc); line-height:0;">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><path d={r.icone} /></svg>
+    </a></li>
+    ))}
+  </ul>
+  )}
   <div style="font-family:'Playfair Display',serif; font-weight:500; font-size:15px; letter-spacing:0.3em; color:var(--areia); margin-top:26px; padding-left:0.3em;">TAPHINY</div>
   <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:11px; letter-spacing:0.05em; color:var(--areia); margin-top:22px;">{footer.copyright}</p>
 </footer>

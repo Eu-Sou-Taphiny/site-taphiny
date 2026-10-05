@@ -5,6 +5,7 @@
 // de negócios só entram enquanto a seção Empresas estiver no ar.
 
 import { puro } from './texto';
+import { perfis } from './redes';
 
 export const URL_SITE = 'https://eusoutaphiny.com.br/';
 const id = (frag: string) => `${URL_SITE}#${frag}`;
@@ -16,7 +17,9 @@ const slug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u
 export const visivel = (secao: any) => secao?.exibir !== false;
 
 export function montarJsonLd(site: any) {
-  const { visao, jornadas, faq, empresas } = site;
+  const { visao, jornadas, faq, empresas, footer } = site;
+  // perfis preenchidos no rodapé do painel (Instagram e as redes com ícone)
+  const sameAs = perfis(footer);
 
   const servicosNegocios = visivel(empresas) ? [
     { '@type': 'Service', '@id': id('servico-negocios'), name: 'Terapias para Negócios', serviceType: 'Terapia Sistêmica para empresas familiares', description: 'Visão Sistêmica aplicada a empresas familiares, relação entre sócios, liderança e equipes, trabalhando pertencimento, cultura e prosperidade.', provider: { '@id': id('business') }, areaServed: 'BR' },
@@ -63,8 +66,8 @@ export function montarJsonLd(site: any) {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'WebSite', '@id': id('website'), url: URL_SITE, name: 'Taphiny · Visão Sistêmica', description: 'Visão Sistêmica, terapia sistêmica e constelação familiar com Taphiny.', inLanguage: 'pt-BR', publisher: { '@id': id('business') }, potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: `${URL_SITE}?s={search_term_string}` }, 'query-input': 'required name=search_term_string' } },
-      { '@type': 'Person', '@id': id('taphiny'), name: 'Taphiny', jobTitle: 'Mentora Sistêmica', description: 'Terapeuta e mentora sistêmica. Conduz processos de Visão Sistêmica e constelação familiar para reconhecer padrões familiares transgeracionais, restaurar a ordem dos vínculos e permitir que a vida volte a fluir.', knowsAbout: ['Visão Sistêmica', 'Terapia Sistêmica', 'Constelação Familiar', 'Padrões familiares transgeracionais', 'Empresas familiares'], url: URL_SITE, worksFor: { '@id': id('business') }, sameAs: ['https://instagram.com/eu.sou.taphiny'] },
-      { '@type': 'ProfessionalService', '@id': id('business'), name: 'Taphiny · Visão Sistêmica', description: 'Terapia sistêmica e Visão Sistêmica, abordagem que dialoga com a constelação familiar para reconhecer padrões familiares transgeracionais e restaurar a ordem dos vínculos. Atendimento a pessoas, empresas familiares e eventos.', url: URL_SITE, image: `${URL_SITE}assets/og-image.png`, logo: `${URL_SITE}assets/favicon-512.png`, founder: { '@id': id('taphiny') }, priceRange: '$$', areaServed: 'BR', availableLanguage: 'Portuguese', knowsLanguage: 'pt-BR', keywords: 'visão sistêmica, terapia sistêmica, constelação familiar, terapia sistêmica para empresas familiares, padrões familiares transgeracionais', sameAs: ['https://instagram.com/eu.sou.taphiny'], makesOffer: servicos.map(oferta) },
+      { '@type': 'Person', '@id': id('taphiny'), name: 'Taphiny', jobTitle: 'Mentora Sistêmica', description: 'Terapeuta e mentora sistêmica. Conduz processos de Visão Sistêmica e constelação familiar para reconhecer padrões familiares transgeracionais, restaurar a ordem dos vínculos e permitir que a vida volte a fluir.', knowsAbout: ['Visão Sistêmica', 'Terapia Sistêmica', 'Constelação Familiar', 'Padrões familiares transgeracionais', 'Empresas familiares'], url: URL_SITE, worksFor: { '@id': id('business') }, sameAs },
+      { '@type': 'ProfessionalService', '@id': id('business'), name: 'Taphiny · Visão Sistêmica', description: 'Terapia sistêmica e Visão Sistêmica, abordagem que dialoga com a constelação familiar para reconhecer padrões familiares transgeracionais e restaurar a ordem dos vínculos. Atendimento a pessoas, empresas familiares e eventos.', url: URL_SITE, image: `${URL_SITE}assets/og-image.png`, logo: `${URL_SITE}assets/favicon-512.png`, founder: { '@id': id('taphiny') }, priceRange: '$$', areaServed: 'BR', availableLanguage: 'Portuguese', knowsLanguage: 'pt-BR', keywords: 'visão sistêmica, terapia sistêmica, constelação familiar, terapia sistêmica para empresas familiares, padrões familiares transgeracionais', sameAs, makesOffer: servicos.map(oferta) },
       ...servicos,
       ...faqPage,
       { '@type': 'BreadcrumbList', '@id': id('breadcrumb'), itemListElement: trilha.map((t, i) => ({ '@type': 'ListItem', position: i + 1, ...t })) },
