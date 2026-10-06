@@ -265,26 +265,15 @@
         "mensagem": "Olá, Taphiny! Vim pelo site, empreendedores e empresários, e gostaria de conversar sobre o atendimento de Sessão Única."
       },
       {
-        "titulo": "Liderança e carreira",
+        "titulo": "Jornada Empreendedora",
         "rotulo": "Para quem é",
-        "texto": "Para líderes, equipes e profissionais em momentos de mudança: transição de carreira, saída da CLT para o empreendedorismo, construção e expansão de negócios e posicionamento profissional.\n",
-        "resultadoRotulo": "",
-        "resultado": "",
-        "preco": "",
-        "precoNota": "",
-        "cta": "Conversar sobre um trabalho para empresas",
-        "mensagem": "Olá, Taphiny! Vim pelo site e gostaria de conversar sobre um trabalho para empresas: Liderança e carreira."
-      },
-      {
-        "titulo": "Workshops e Palestras",
-        "rotulo": "Para quem é",
-        "texto": "Para empresas, equipes e eventos que buscam conteúdos personalizados sobre liderança, pertencimento, cultura organizacional, relações humanas, carreira e prosperidade.\n",
-        "resultadoRotulo": "",
-        "resultado": "",
-        "preco": "",
-        "precoNota": "",
-        "cta": "Conversar sobre um trabalho para empresas",
-        "mensagem": "Olá, Taphiny! Vim pelo site e gostaria de conversar sobre um trabalho para empresas: Workshops e Palestras."
+        "texto": "Um acompanhamento contínuo de sete encontros semanais focado na raiz do negócio: o inconsciente da liderança. Mapeamos as travas invisíveis para depois reordenar os movimentos práticos e a estrutura da empresa.\n",
+        "resultadoRotulo": "Resultado Esperado",
+        "resultado": "Alinhamento do padrão interno da liderança, reorganização da postura na gestão e base firme para o negócio crescer de forma saudável e próspera.\n",
+        "preco": "7 encontros",
+        "precoNota": "consulte valores e disponibilidade",
+        "cta": "Quero atendimento para o meu negócio",
+        "mensagem": "Olá, Taphiny! Vim pelo site, empreendedores e empresários, e gostaria de conversar sobre a Jornada Empreendedora."
       }
     ]
   },
