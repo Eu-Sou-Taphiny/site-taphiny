@@ -309,7 +309,7 @@
     "mensagemConversa": "Olá, Taphiny! Cheguei pelo seu site e gostaria de começar uma conversa sobre a Visão Sistêmica."
   },
   "popup": {
-    "ativo": true,
+    "ativo": false,
     "titulo": "Que bom ter você por aqui!",
     "subtitulo": "Um convite para olhar a vida com mais consciência",
     "texto": "A Visão Sistêmica amplia a compreensão sobre o que influencia as suas escolhas e relações para que você ocupe o seu lugar e construa uma vida mais alinhada a quem realmente é.\n",
