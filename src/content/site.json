@@ -249,7 +249,7 @@
     ]
   },
   "empresas": {
-    "exibir": false,
+    "exibir": true,
     "titulo": "Atendimento para Empreendedores",
     "subtitulo": "Empresas também são sistemas. Vínculos, lugares e histórias influenciam a forma como uma empresa decide, cresce e se relaciona.\n",
     "cards": [
