@@ -301,7 +301,10 @@
             "titulo": "+1 Sessão Extra de Sustentação (Check-in após 30 dias)",
             "descricao": "Ponto de checagem pós-processo para medir a absorção da nova governança na operação, na equipe e nos resultados do negócio.\n"
           },
-          {}
+          {
+            "titulo": "Mapeamento Sistêmico de Governança & Liderança",
+            "descricao": "Raio-X executivo identificando a Alavanca Master travada (Hierarquia, Societário, Finanças ou Processos) e a matriz de decisão da liderança, no momento presente.\n"
+          }
         ],
         "entregaveisNota": "Os documentos entregues constituem uma síntese de direcionamento prático e sistêmico de postura, ***não configurando laudo psicológico ou diagnóstico clínico.***\n",
         "preco": "7 encontros",
