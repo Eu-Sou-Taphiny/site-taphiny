@@ -122,9 +122,9 @@
     "frase": "“Por amor, aprendemos quem precisávamos ser; por consciência, lembramos quem realmente somos.”\n"
   },
   "comparacao": {
-    "exibir": false,
+    "exibir": true,
     "titulo": "Terapia Sistêmica e Terapia Convencional ",
-    "subtitulo": "Não são caminhos opostos. São abordagens que se somam.\n",
+    "subtitulo": "Não são caminhos opostos. **São abordagens que se somam**.\n",
     "col1Titulo": "Terapia Sistêmica",
     "col1": [
       "Amplia o olhar para o contexto dos vínculos e das relações.",
