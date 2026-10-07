@@ -67,6 +67,22 @@ const cardsEsteira = (label: string, description: string, rotuloItem: string, no
     prosa("texto", "Texto"),
     { type: "string" as const, name: "resultadoRotulo", label: "Rótulo do resultado (padrão: Resultado esperado)" },
     prosa("resultado", "Resultado esperado (opcional)"),
+    // Entregáveis: aparecem entre o resultado e o preço. Numeração pela
+    // posição na lista. Os três são opcionais; vazios, não aparecem.
+    { type: "string" as const, name: "entregaveisTitulo", label: "Título dos entregáveis (opcional, ex.: O que está incluído)" },
+    {
+      type: "object" as const,
+      name: "entregaveis",
+      label: "Entregáveis (opcional)",
+      description: "Cada item é um entregável, numerado pela posição na lista. Arraste para reordenar.",
+      list: true,
+      ui: { itemProps: (i: any) => ({ label: i?.titulo || "Novo entregável" }) },
+      fields: [
+        { type: "string" as const, name: "titulo", label: "Título" },
+        prosa("descricao", "Descrição"),
+      ],
+    },
+    prosa("entregaveisNota", "Nota de rodapé dos entregáveis (opcional)"),
     { type: "string" as const, name: "preco", label: "Preço / destaque (ex.: R$ 450,00 ou 4 Encontros)" },
     { type: "string" as const, name: "precoNota", label: "Nota ao lado do preço" },
     { type: "string" as const, name: "cta", label: "Texto do botão" },

@@ -7,8 +7,11 @@
  * botão do WhatsApp. A trilha em cima mostra os degraus; com JavaScript, tocar
  * num degrau troca o card. Sem JavaScript os cards ficam empilhados.
  *
- * Campo vazio não deixa buraco: rótulo, resultado e preço só aparecem quando
- * preenchidos.
+ * Depois do resultado vêm os entregáveis (opcionais), numa sanfona fechada que
+ * abre no "+": título, lista numerada pela posição e nota de rodapé.
+ *
+ * Campo vazio não deixa buraco: rótulo, resultado, entregáveis e preço só
+ * aparecem quando preenchidos.
  */
 import site from '../content/site.json';
 import { inline as t, romano } from '../lib/texto';
@@ -35,6 +38,11 @@ const wa = (msg: string) => `https://wa.me/${site.config.whatsapp}?text=${encode
     // rich-text vazio ainda é um objeto (portanto "verdadeiro"): quem decide
     // se o bloco de resultado aparece é o HTML já renderizado, não o campo.
     const resultado = t(card.resultado);
+    // Entregáveis: item sem título e sem descrição não conta.
+    const entregaveis = (card.entregaveis || [])
+      .map((e: any) => ({ titulo: e?.titulo, descricaoHtml: t(e?.descricao) }))
+      .filter((e: any) => e.titulo || e.descricaoHtml);
+    const nota = t(card.entregaveisNota);
     return (
     <div data-reveal class:list={['tp-card', i === 0 && 'ativo']} data-trilha={String(i)} style="border:1px solid var(--areia); background:#FBF8F3; padding:36px 30px;">
       <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:10px;">
@@ -51,6 +59,30 @@ const wa = (msg: string) => `https://wa.me/${site.config.whatsapp}?text=${encode
         <p style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:13.5px; line-height:1.85; color:var(--bordeaux); margin:0; text-wrap:pretty;" set:html={resultado}></p>
       </div>
       )}
+      {(entregaveis.length > 0 || card.entregaveisTitulo || nota) && (
+      <details class="tp-entregaveis">
+        <summary class="tp-entregaveis-cab">
+          <span class="tp-entregaveis-titulo">{card.entregaveisTitulo || 'O que está incluído'}</span>
+          <span class="tp-entregaveis-i" aria-hidden="true"></span>
+        </summary>
+        <div class="tp-entregaveis-corpo">
+        {entregaveis.length > 0 && (
+        <ol class="tp-entregaveis-lista">
+          {entregaveis.map((e: any, j: number) => (
+          <li>
+            <span class="tp-entregaveis-num" aria-hidden="true">{String(j + 1).padStart(2, '0')}</span>
+            <div>
+              {e.titulo && <div class="tp-entregaveis-item">{e.titulo}</div>}
+              {e.descricaoHtml && <p class="tp-entregaveis-desc" set:html={e.descricaoHtml}></p>}
+            </div>
+          </li>
+          ))}
+        </ol>
+        )}
+        {nota && <p class="tp-entregaveis-nota" set:html={nota}></p>}
+        </div>
+      </details>
+      )}
       <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:22px; border-top:1px solid var(--areia);">
         {(card.preco || card.precoNota) && (
         <span style="font-family:'Playfair Display',serif; font-size:18px; color:var(--ouro-t);">{card.preco} <span style="font-family:'Montserrat',sans-serif; font-weight:300; font-size:12px; color:var(--bordeaux);">{card.precoNota}</span></span>
@@ -62,3 +94,63 @@ const wa = (msg: string) => `https://wa.me/${site.config.whatsapp}?text=${encode
     })}
   </div>
 </div>
+
+<style>
+  /* Entregáveis: lista numerada sem bordas, entre o resultado e o preço. */
+  /* Fechada de saída: abre no "+", como o FAQ e as seções. */
+  .tp-entregaveis { margin-bottom: 26px; border-top: 1px solid var(--areia); border-bottom: 1px solid var(--areia); }
+  .tp-entregaveis-cab {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 16px 0; cursor: pointer; list-style: none;
+  }
+  /* some com a seta nativa do navegador em todos (Chrome, Safari, Firefox) */
+  .tp-entregaveis-cab::-webkit-details-marker { display: none; }
+  .tp-entregaveis-cab::marker { content: ''; }
+  .tp-entregaveis-titulo {
+    font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--ouro-t); transition: color .3s;
+  }
+  .tp-entregaveis-cab:hover .tp-entregaveis-titulo { color: var(--terracota-t); }
+  /* mesmo "+" das seções (.tp-bloco-i): gira e vira "×" ao abrir */
+  .tp-entregaveis-i {
+    flex: none; width: 26px; height: 26px; position: relative; color: var(--ouro); transition: transform .35s ease;
+  }
+  .tp-entregaveis-i::before, .tp-entregaveis-i::after {
+    content: ''; position: absolute; top: 50%; left: 50%; background: currentColor; transform: translate(-50%, -50%);
+  }
+  .tp-entregaveis-i::before { width: 20px; height: 1.5px; }
+  .tp-entregaveis-i::after { width: 1.5px; height: 20px; }
+  .tp-entregaveis[open] .tp-entregaveis-i { transform: rotate(135deg); }
+  .tp-entregaveis-corpo { padding: 6px 0 24px; }
+  .tp-entregaveis[open] .tp-entregaveis-corpo { animation: tp-entregaveis-abrir .42s ease both; }
+  @keyframes tp-entregaveis-abrir { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .tp-entregaveis-i { transition: none; }
+    .tp-entregaveis[open] .tp-entregaveis-corpo { animation: none; }
+  }
+  .tp-entregaveis-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
+  .tp-entregaveis-lista li { display: grid; grid-template-columns: 34px 1fr; column-gap: 12px; align-items: baseline; }
+  .tp-entregaveis-num {
+    font-family: 'Playfair Display', serif; font-style: italic; font-size: 17px; color: var(--ouro-t);
+  }
+  .tp-entregaveis-item {
+    font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14px; line-height: 1.5;
+    color: var(--marrom); text-wrap: pretty;
+  }
+  .tp-entregaveis-desc {
+    font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; line-height: 1.8;
+    color: var(--bordeaux); margin: 5px 0 0; text-wrap: pretty;
+  }
+  .tp-entregaveis-nota {
+    font-family: 'Montserrat', sans-serif; font-weight: 300; font-style: italic; font-size: 12px;
+    line-height: 1.7; color: var(--terracota-t); margin: 22px 0 0; text-wrap: pretty;
+  }
+  /* Celular: número acima do título, tudo numa coluna só. */
+  @media (max-width: 560px) {
+    .tp-entregaveis-lista li { grid-template-columns: 1fr; }
+    .tp-entregaveis-num { font-size: 15px; margin-bottom: 2px; }
+    .tp-entregaveis-i { width: 22px; height: 22px; }
+    .tp-entregaveis-i::before { width: 17px; }
+    .tp-entregaveis-i::after { height: 17px; }
+  }
+</style>
