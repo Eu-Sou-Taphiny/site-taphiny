@@ -197,9 +197,17 @@
       {
         "titulo": "Jornada Essência",
         "rotulo": "Reorganização e Foco",
-        "texto": "Um acompanhamento em quatro encontros semanais direcionado para a área em que você enfrenta maior insatisfação ou travamento. Revelamos o que opera no inconsciente para ajustar a sua postura e mudar os resultados na prática.\n",
+        "texto": "**Um acompanhamento em quatro encontros, um por semana,** direcionado para a área em que você enfrenta maior insatisfação ou travamento. Revelamos o que opera no inconsciente para ajustar a sua postura e mudar os resultados na prática.\n",
         "resultadoRotulo": "Resultado esperado",
         "resultado": "Clareza sobre as causas oculta dos travamentos, fortalecimento interno e direção concreta para colher novos resultados.\n",
+        "entregaveisTitulo": "4 Encontros Sistêmicos Individuais (1h a 1h30 cada)",
+        "entregaveis": [
+          {
+            "titulo": "4 Encontros Sistêmicos Individuais (1h a 1h30 cada)",
+            "descricao": "Atendimentos individuais focados no mapeamento e desatamento do nó central, identificação do perfil de reação (Racional, Emocional ou Instintivo) e restabelecimento das ordens sistêmicas.\n"
+          }
+        ],
+        "entregaveisNota": "",
         "preco": "4 Encontros",
         "precoNota": "consulte valores e disponibilidade",
         "cta": "Saber mais sobre a jornada",
@@ -283,6 +291,7 @@
         "texto": "Um acompanhamento contínuo de sete encontros semanais focado na raiz do negócio: o inconsciente do empreendedor. Mapeamos as travas invisíveis para depois reordenar os movimentos práticos e a estrutura da empresa.\n",
         "resultadoRotulo": "Resultado Esperado",
         "resultado": "Alinhamento do padrão interno do empreendedor, reorganização da postura na gestão e base firme para o negócio crescer de forma saudável e próspera.\n",
+        "entregaveisNota": "",
         "preco": "7 encontros",
         "precoNota": "consulte valores e disponibilidade",
         "cta": "Quero atendimento para o meu negócio",
