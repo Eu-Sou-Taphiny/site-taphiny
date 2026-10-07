@@ -157,12 +157,12 @@
   "jornadas": {
     "exibir": true,
     "titulo": "Atendimento Individual",
-    "subtitulo": "Cada história tem o seu tempo. Encontre a melhor jornada para o seu momento.\n",
+    "subtitulo": "**Cada história tem o seu tempo. Encontre a melhor jornada para o seu momento.**\n",
     "cards": [
       {
         "titulo": "Sessão Sistêmica",
         "rotulo": "Olhar para um tema específico",
-        "texto": "Encontro único e individual focado na questão que mais exige a sua atenção hoje: seja uma trava, um conflito ou uma decisão importante.\n",
+        "texto": "**Encontro único e individual** focado na questão que mais exige a sua atenção hoje: seja uma trava, um conflito ou uma decisão importante.\n",
         "resultadoRotulo": "Resultado esperado",
         "resultado": "Compreensão do que estava oculto, reorganização interna e decisão concreta na prática.\n",
         "entregaveisTitulo": "O que está incluído",
@@ -170,25 +170,9 @@
           {
             "titulo": "4 Encontros Sistêmicos Individuais (1h a 1h30 cada)",
             "descricao": "Atendimentos individuais focados no mapeamento e desatamento do nó central, identificação do perfil de reação (Racional, Emocional ou Instintivo) e restabelecimento das ordens sistêmicas.\n"
-          },
-          {
-            "titulo": "+1 Sessão Extra de Sustentação (check-in após 30 dias)",
-            "descricao": "Encontro focado na avaliação da assimilação prática dos movimentos, regulação da postura e ajustes de conduta no cotidiano.\n"
-          },
-          {
-            "titulo": "Mapeamento Sistêmico & Perfil de Reação",
-            "descricao": "Dossiê confidencial com a leitura do cenário atual, as lealdades ocultas identificadas e o mapeamento dos mecanismos automáticos de defesa nas tomadas de decisão.\n"
-          },
-          {
-            "titulo": "Guia de Autonomia (Direcionamento Prático)",
-            "descricao": "Manual síntese pós-jornada com frases de solução, posturas de ancoragem e o protocolo de decisão para sustentar a posição adulta no dia a dia.\n"
-          },
-          {
-            "titulo": "Exercícios de Observação & Sustentação",
-            "descricao": "Direcionamentos práticos e tarefas de atenção consciente entre as sessões para consolidar as mudanças.\n"
           }
         ],
-        "entregaveisNota": "Os documentos entregues constituem uma síntese de direcionamento prático e sistêmico de postura, não configurando laudo psicológico ou diagnóstico clínico.\n",
+        "entregaveisNota": "",
         "preco": "R$ 550,00",
         "precoNota": "investimento único",
         "cta": "Agendar minha sessão",
@@ -197,33 +181,10 @@
       {
         "titulo": "Jornada Essência",
         "rotulo": "Reorganização e Foco",
-        "texto": "**Um acompanhamento em quatro encontros, um por semana,** direcionado para a área em que você enfrenta maior insatisfação ou travamento. Revelamos o que opera no inconsciente para ajustar a sua postura e mudar os resultados na prática.\n",
+        "texto": "Um acompanhamento em quatro encontros semanais direcionado para a área em que você enfrenta maior insatisfação ou travamento. Revelamos o que opera no inconsciente para ajustar a sua postura e mudar os resultados na prática.\n",
         "resultadoRotulo": "Resultado esperado",
         "resultado": "Clareza sobre as causas oculta dos travamentos, fortalecimento interno e direção concreta para colher novos resultados.\n",
-        "entregaveisTitulo": "O que está incluído",
-        "entregaveis": [
-          {
-            "titulo": "4 Encontros Sistêmicos Individuais (1h a 1h30 cada)",
-            "descricao": "Atendimentos individuais focados no mapeamento e desatamento do nó central, identificação do perfil de reação (Racional, Emocional ou Instintivo) e restabelecimento das ordens sistêmicas.\n"
-          },
-          {
-            "titulo": "+1 Sessão Extra de Sustentação (check-in após 30 dias)",
-            "descricao": "Encontro focado na avaliação da assimilação prática dos movimentos, regulação da postura e ajustes de conduta no cotidiano.\n"
-          },
-          {
-            "titulo": "Mapeamento Sistêmico & Perfil de Reação",
-            "descricao": "Dossiê confidencial com a leitura do cenário atual, as lealdades ocultas identificadas e o mapeamento dos mecanismos automáticos de defesa nas tomadas de decisão.\n"
-          },
-          {
-            "titulo": "Guia de Autonomia (Direcionamento Prático)",
-            "descricao": "Manual síntese pós-jornada com frases de solução, posturas de ancoragem e o protocolo de decisão para sustentar a posição adulta no dia a dia.\n"
-          },
-          {
-            "titulo": "Exercícios de Observação & Sustentação",
-            "descricao": "Direcionamentos práticos e tarefas de atenção consciente entre as sessões para consolidar as mudanças.\n"
-          }
-        ],
-        "entregaveisNota": "Os documentos entregues constituem uma síntese de direcionamento prático e sistêmico de postura, ***não configurando laudo psicológico ou diagnóstico clínico***.\n",
+        "entregaveisNota": "",
         "preco": "4 Encontros",
         "precoNota": "consulte valores e disponibilidade",
         "cta": "Saber mais sobre a jornada",
