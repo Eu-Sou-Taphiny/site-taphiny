@@ -283,14 +283,20 @@
   "empresas": {
     "exibir": true,
     "titulo": "Atendimento para Empreendedores",
-    "subtitulo": "Empresas também são sistemas. Vínculos, lugares e histórias influenciam a forma como uma empresa decide, cresce e se relaciona.\n",
+    "subtitulo": "**Empresas também são sistemas.** Vínculos, lugares e histórias influenciam a forma como uma empresa decide, cresce e se relaciona.\n",
     "cards": [
       {
         "titulo": "Jornada Empreendedora",
         "rotulo": "Para quem é",
-        "texto": "Um acompanhamento contínuo de sete encontros semanais focado na raiz do negócio: o inconsciente do empreendedor. Mapeamos as travas invisíveis para depois reordenar os movimentos práticos e a estrutura da empresa.\n",
+        "texto": "**Um acompanhamento contínuo de sete encontros, um por semana,** focado na raiz do negócio: o inconsciente do empreendedor. Mapeamos as travas invisíveis para depois reordenar os movimentos práticos e a estrutura da empresa.\n",
         "resultadoRotulo": "Resultado Esperado",
         "resultado": "Alinhamento do padrão interno do empreendedor, reorganização da postura na gestão e base firme para o negócio crescer de forma saudável e próspera.\n",
+        "entregaveis": [
+          {
+            "titulo": "7 Encontros Estratégicos & Sistêmicos (1h a 1h30 cada)",
+            "descricao": "Ciclo individual focado na leitura da estrutura da empresa, pontos cegos do fundador e maturidade na gestão, atuando sobre gargalos operacionais, financeiros e de liderança (conforme a prioridade e necessidade).\n"
+          }
+        ],
         "entregaveisNota": "",
         "preco": "7 encontros",
         "precoNota": "consulte valores e disponibilidade",
