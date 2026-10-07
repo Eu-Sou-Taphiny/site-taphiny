@@ -200,11 +200,15 @@
         "texto": "**Um acompanhamento em quatro encontros, um por semana,** direcionado para a área em que você enfrenta maior insatisfação ou travamento. Revelamos o que opera no inconsciente para ajustar a sua postura e mudar os resultados na prática.\n",
         "resultadoRotulo": "Resultado esperado",
         "resultado": "Clareza sobre as causas oculta dos travamentos, fortalecimento interno e direção concreta para colher novos resultados.\n",
-        "entregaveisTitulo": "4 Encontros Sistêmicos Individuais (1h a 1h30 cada)",
+        "entregaveisTitulo": "O que está incluído",
         "entregaveis": [
           {
             "titulo": "4 Encontros Sistêmicos Individuais (1h a 1h30 cada)",
             "descricao": "Atendimentos individuais focados no mapeamento e desatamento do nó central, identificação do perfil de reação (Racional, Emocional ou Instintivo) e restabelecimento das ordens sistêmicas.\n"
+          },
+          {
+            "titulo": "+1 Sessão Extra de Sustentação (check-in após 30 dias)",
+            "descricao": "Encontro focado na avaliação da assimilação prática dos movimentos, regulação da postura e ajustes de conduta no cotidiano.\n"
           }
         ],
         "entregaveisNota": "",
