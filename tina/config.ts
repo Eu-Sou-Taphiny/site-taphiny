@@ -435,6 +435,27 @@ export default defineConfig({
               { type: "string", name: "subtitulo", label: "Subtítulo em destaque (opcional)" },
               prosa("texto", "Texto"),
               { type: "image", name: "imagem", label: "Imagem (opcional)" },
+              {
+                type: "string",
+                name: "videoUrl",
+                label: "Link do vídeo (YouTube)",
+                description: "Opcional. Aceita links youtube.com/watch, youtu.be e youtube.com/shorts. Com o link preenchido, o vídeo entra no lugar da imagem.",
+              },
+              {
+                type: "string",
+                name: "videoFormato",
+                label: "Formato do vídeo",
+                options: [
+                  { value: "horizontal", label: "Horizontal (16:9)" },
+                  { value: "vertical", label: "Vertical (9:16, gravado no celular)" },
+                ],
+              },
+              {
+                type: "boolean",
+                name: "videoAutoplay",
+                label: "Iniciar automaticamente sem som",
+                description: "Ligado: o vídeo começa sozinho, sem som, quando o pop-up abre. Desligado: a pessoa aperta o play.",
+              },
               { type: "string", name: "botaoTexto", label: "Texto do botão (opcional)" },
               { type: "string", name: "botaoLink", label: "Link do botão (opcional — ex.: link do WhatsApp)" },
             ],
