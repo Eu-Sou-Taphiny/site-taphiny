@@ -188,7 +188,7 @@
         "entregaveis": [
           {
             "titulo": "4 Encontros Sistêmicos Individuais (1h30 a 2h00 cada)",
-            "descricao": "Atendimentos individuais focados no mapeamento e desatamento do nó central, identificação do perfil de reação (Racional, Emocional ou Instintivo) e restabelecimento das ordens sistêmicas.\n"
+            "descricao": "Atendimentos individuais com **aplicação de movimentos sistêmicos e Constelação Familiar em todas as sessões**. Foco no desatamento do nó central, investigação das lealdades ocultas e reordenação da postura no presente.\n"
           },
           {
             "titulo": "+1 Sessão Extra de Sustentação (check-in após 30 dias)",
@@ -348,6 +348,8 @@
     "subtitulo": "Um convite para olhar a vida com mais consciência",
     "texto": "A Visão Sistêmica amplia a compreensão sobre o que influencia as suas escolhas e relações para que você ocupe o seu lugar e construa uma vida mais alinhada a quem realmente é.\n",
     "imagem": "",
+    "videoFormato": "horizontal",
+    "videoAutoplay": false,
     "botaoTexto": "",
     "botaoLink": "https://wa.me/5511925027759"
   }
