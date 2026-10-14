@@ -168,7 +168,7 @@
         "entregaveisTitulo": "O que está incluso",
         "entregaveis": [
           {
-            "titulo": "1 Sessão Sistêmica Individual (1h30 a 2h00)",
+            "titulo": "1 Sessão Sistêmica Individual (1h00 a 1h30)",
             "descricao": "Atendimento pontual e cirúrgico focado no mapeamento e desatamento da causa raiz (nó central) de uma questão específica e reposicionamento na postura adulta.\n"
           }
         ],
@@ -340,8 +340,6 @@
     "subtitulo": "Um convite para olhar a vida com mais consciência",
     "texto": "A Visão Sistêmica amplia a compreensão sobre o que influencia as suas escolhas e relações para que você ocupe o seu lugar e construa uma vida mais alinhada a quem realmente é.\n",
     "imagem": "",
-    "videoFormato": "horizontal",
-    "videoAutoplay": false,
     "botaoTexto": "",
     "botaoLink": "https://wa.me/5511925027759"
   }
